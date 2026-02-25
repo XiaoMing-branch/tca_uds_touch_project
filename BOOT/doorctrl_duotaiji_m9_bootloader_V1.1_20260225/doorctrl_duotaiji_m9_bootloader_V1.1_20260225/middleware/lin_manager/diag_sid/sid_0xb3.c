@@ -1,0 +1,74 @@
+/**
+ *****************************************************************************
+ * @brief   lin dianosticiii source file.
+ *
+ * @file    diagnosticiii.c
+ * @author  AE/FAE team
+ * @date    2024.01.01
+ *****************************************************************************
+ *
+ * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+ * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+ * TIME. AS A RESULT, TINYCHIP SHALL NOT BE HELD LIABLE FOR ANY
+ * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+ * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+ * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+ *
+ * <b>&copy; Copyright (c) 2024 Tinychip Microelectronics Co.,Ltd.</b>
+ *
+ *****************************************************************************
+ */
+
+#include "diagnosticIII.h"
+
+#if LIN_PROTOCOL != PROTOCOL_J2602
+/********************************************************
+** \brief   lin_diag_service_lin_conditional_change_nad
+** \param   uint8_t*                    ptr
+** \param   uint16_t                    length
+** \retval  None
+*********************************************************/
+void lin_diag_conditional_change_nad(uint8_t *ptr, uint16_t length)
+{
+    uint8_t id, byte, mask, invert;
+
+    id      = ptr[1];
+    byte    = ptr[2];
+    mask    = ptr[3];
+    invert  = ptr[4];
+
+    /* Possible positive ID */
+    if (id == 0)
+    {
+        if (byte > 0 && byte < 6)
+        {
+            /*Byte 1: Supplier ID LSB; Byte 2: Supplier ID MSB*/
+            if (byte > 0 && byte < 3)
+            {
+                byte = product_id.supplier_id >> ((byte - 1) * 8);
+            }
+            /*Byte 3: Function ID LSB; Byte 4: Function ID MSB*/
+            else if (byte > 2 && byte < 5)
+            {
+                byte = product_id.function_id >> ((byte - 3) * 8);
+            }
+            /* Byte 5: Variant */
+            else
+            {
+                byte = product_id.variant;
+            }
+
+            /* Do a bitwise XOR with Invert and Do a bitwise AND with Mask */
+            byte = (byte ^ invert)&mask;
+
+            /* If the final result is zero, then give positive response*/
+            if (byte == 0)
+            {
+                lin_diag_positive_notify(ptr[0], NULL, 0);
+                /* If the final result is zero then change the NAD to New NAD */
+                lin_configured_NAD = ptr[5];
+            }
+        }
+    }
+}
+#endif
