@@ -53,7 +53,7 @@
 ".\objects\sid_0xbd.o"
 ".\objects\pal_lin_comm.o"
 ".\objects\store_manager.o"
---library_type=microlib --strict --scatter ".\Scripts\flash_boot.sct"
+--library_type=microlib --diag_suppress 6314 --strict --scatter ".\Scripts\flash_boot.sct"
 --entry=Reset_Handler --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\doorctrl_lin.map" -o .\Objects\doorctrl_lin.axf

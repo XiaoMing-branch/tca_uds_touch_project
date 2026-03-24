@@ -1,2 +1,1 @@
-# tca_uds_touch_project
-泰矽微-带UDS的电容触摸工程
+V32电容门把手（泰稀微方案）

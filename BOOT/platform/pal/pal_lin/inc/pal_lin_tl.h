@@ -57,8 +57,11 @@ extern "C"
 #define INVALID_KEY                                 0x35u      /*invalid Key*/
 #define ENOA                                        0x36u      /*exceed Number Of Attempts*/
 #define REQUIREDTIMEDELAY_NOTEXPIRED                0x37u     
+#define DOWNLOAD_REJECTED                           0x70u      /*Upload/download request has been rejected*/
+#define TRANSFER_DATA_PAUSE                         0x71u      /*Data transmission is paused*/
 #define RCRRP                                       0x78u      /*request Correctly Received-Response Pending*/
 #define GENERAL_PROGRAM_FAILURE                     0x72u      /*general Programming Failure*/
+#define BLOCK_SEQUENCE_COUNT_ERR                    0x73u      /*block sequence counter error*/
 #define SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION    0x7Eu
 #define SERVICENOTSUPPORTED_INACTIVESESSION         0x7Fu
 

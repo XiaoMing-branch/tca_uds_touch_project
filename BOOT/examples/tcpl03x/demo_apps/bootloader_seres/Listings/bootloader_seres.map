@@ -1,0 +1,1766 @@
+Component: ARM Compiler 6.16 Tool: armlink [5dfeaa00]
+
+==============================================================================
+
+Section Cross References
+
+    app.o(.text.TcMain) refers to dfu_uds_manager.o(.text.dfu_manager_init) for dfu_manager_init
+    app.o(.text.TcMain) refers to dfu_uds_manager.o(.text.main_loops) for main_loops
+    app.o(.ARM.exidx.text.TcMain) refers to app.o(.text.TcMain) for [Anonymous Symbol]
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.extendKey) for extendKey
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.convertToIntArray) for convertToIntArray
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.addRoundKey) for addRoundKey
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.deSubBytes) for deSubBytes
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.deShiftRows) for deShiftRows
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.deMixColumns) for deMixColumns
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.text.convertArrayToStr) for convertArrayToStr
+    aes_cmac.o(.text.deAes) refers to aes_cmac.o(.bss.w) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.deAes) refers to aes_cmac.o(.text.deAes) for [Anonymous Symbol]
+    aes_cmac.o(.text.extendKey) refers to aes_cmac.o(.text.leftLoop4int) for leftLoop4int
+    aes_cmac.o(.text.extendKey) refers to aes_cmac.o(.bss.w) for [Anonymous Symbol]
+    aes_cmac.o(.text.extendKey) refers to aes_cmac.o(.rodata.S) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.extendKey) refers to aes_cmac.o(.text.extendKey) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.convertToIntArray) refers to aes_cmac.o(.text.convertToIntArray) for [Anonymous Symbol]
+    aes_cmac.o(.text.addRoundKey) refers to aes_cmac.o(.bss.w) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.addRoundKey) refers to aes_cmac.o(.text.addRoundKey) for [Anonymous Symbol]
+    aes_cmac.o(.text.deSubBytes) refers to aes_cmac.o(.rodata.S2) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.deSubBytes) refers to aes_cmac.o(.text.deSubBytes) for [Anonymous Symbol]
+    aes_cmac.o(.text.deShiftRows) refers to aes_cmac.o(.text.rightLoop4int) for rightLoop4int
+    aes_cmac.o(.ARM.exidx.text.deShiftRows) refers to aes_cmac.o(.text.deShiftRows) for [Anonymous Symbol]
+    aes_cmac.o(.text.deMixColumns) refers to aes_cmac.o(.rodata.deColM) for [Anonymous Symbol]
+    aes_cmac.o(.text.deMixColumns) refers to aes_cmac.o(.text.GFMul) for GFMul
+    aes_cmac.o(.ARM.exidx.text.deMixColumns) refers to aes_cmac.o(.text.deMixColumns) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.convertArrayToStr) refers to aes_cmac.o(.text.convertArrayToStr) for [Anonymous Symbol]
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.extendKey) for extendKey
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.convertToIntArray) for convertToIntArray
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.addRoundKey) for addRoundKey
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.subBytes) for subBytes
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.shiftRows) for shiftRows
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.convertArrayToStr) for convertArrayToStr
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.rodata.colM) for [Anonymous Symbol]
+    aes_cmac.o(.text.AES_128) refers to aes_cmac.o(.text.GFMul) for GFMul
+    aes_cmac.o(.ARM.exidx.text.AES_128) refers to aes_cmac.o(.text.AES_128) for [Anonymous Symbol]
+    aes_cmac.o(.text.subBytes) refers to aes_cmac.o(.rodata.S) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.subBytes) refers to aes_cmac.o(.text.subBytes) for [Anonymous Symbol]
+    aes_cmac.o(.text.shiftRows) refers to aes_cmac.o(.text.leftLoop4int) for leftLoop4int
+    aes_cmac.o(.ARM.exidx.text.shiftRows) refers to aes_cmac.o(.text.shiftRows) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.xor_128) refers to aes_cmac.o(.text.xor_128) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.leftshift_onebit) refers to aes_cmac.o(.text.leftshift_onebit) for [Anonymous Symbol]
+    aes_cmac.o(.text.generate_subkey) refers to aes_cmac.o(.text.AES_128) for AES_128
+    aes_cmac.o(.text.generate_subkey) refers to aes_cmac.o(.text.leftshift_onebit) for leftshift_onebit
+    aes_cmac.o(.text.generate_subkey) refers to aes_cmac.o(.text.xor_128) for xor_128
+    aes_cmac.o(.text.generate_subkey) refers to aes_cmac.o(.data.const_Rb) for const_Rb
+    aes_cmac.o(.ARM.exidx.text.generate_subkey) refers to aes_cmac.o(.text.generate_subkey) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.padding) refers to aes_cmac.o(.text.padding) for [Anonymous Symbol]
+    aes_cmac.o(.text.Gen_CMACkey) refers to aes_cmac.o(.text.AES_128) for AES_128
+    aes_cmac.o(.text.Gen_CMACkey) refers to aes_cmac.o(.text.generate_subkey) for generate_subkey
+    aes_cmac.o(.text.Gen_CMACkey) refers to aes_cmac.o(.bss..L_MergedGlobals) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.Gen_CMACkey) refers to aes_cmac.o(.text.Gen_CMACkey) for [Anonymous Symbol]
+    aes_cmac.o(.text.sha256) refers to memseta.o(.text) for __aeabi_memclr4
+    aes_cmac.o(.text.sha256) refers to memcpya.o(.text) for __aeabi_memcpy
+    aes_cmac.o(.text.sha256) refers to llushr.o(.text) for __aeabi_llsr
+    aes_cmac.o(.text.sha256) refers to aes_cmac.o(.rodata.sha256.k) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.sha256) refers to aes_cmac.o(.text.sha256) for [Anonymous Symbol]
+    aes_cmac.o(.text.aes_cmac) refers to aes_cmac.o(.text.generate_subkey) for generate_subkey
+    aes_cmac.o(.text.aes_cmac) refers to aes_cmac.o(.text.padding) for padding
+    aes_cmac.o(.text.aes_cmac) refers to aes_cmac.o(.text.xor_128) for xor_128
+    aes_cmac.o(.text.aes_cmac) refers to aes_cmac.o(.text.AES_128) for AES_128
+    aes_cmac.o(.ARM.exidx.text.aes_cmac) refers to aes_cmac.o(.text.aes_cmac) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.leftLoop4int) refers to aes_cmac.o(.text.leftLoop4int) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.rightLoop4int) refers to aes_cmac.o(.text.rightLoop4int) for [Anonymous Symbol]
+    aes_cmac.o(.text.GFMul) refers to aes_cmac.o(.text.GFMul9) for GFMul9
+    aes_cmac.o(.text.GFMul) refers to aes_cmac.o(.text.GFMul12) for GFMul12
+    aes_cmac.o(.ARM.exidx.text.GFMul) refers to aes_cmac.o(.text.GFMul) for [Anonymous Symbol]
+    aes_cmac.o(.text.GFMul9) refers to aes_cmac.o(.text.GFMul8) for GFMul8
+    aes_cmac.o(.ARM.exidx.text.GFMul9) refers to aes_cmac.o(.text.GFMul9) for [Anonymous Symbol]
+    aes_cmac.o(.text.GFMul8) refers to aes_cmac.o(.text.GFMul4) for GFMul4
+    aes_cmac.o(.ARM.exidx.text.GFMul8) refers to aes_cmac.o(.text.GFMul8) for [Anonymous Symbol]
+    aes_cmac.o(.ARM.exidx.text.GFMul4) refers to aes_cmac.o(.text.GFMul4) for [Anonymous Symbol]
+    aes_cmac.o(.text.GFMul12) refers to aes_cmac.o(.text.GFMul8) for GFMul8
+    aes_cmac.o(.text.GFMul12) refers to aes_cmac.o(.text.GFMul4) for GFMul4
+    aes_cmac.o(.ARM.exidx.text.GFMul12) refers to aes_cmac.o(.text.GFMul12) for [Anonymous Symbol]
+    logging.o(.ARM.exidx.text.logging_init) refers to logging.o(.text.logging_init) for [Anonymous Symbol]
+    logging.o(.ARM.exidx.text.logging_deinit) refers to logging.o(.text.logging_deinit) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_putc) refers to tc_printf.o(.bss..L_MergedGlobals) for [Anonymous Symbol]
+    tc_printf.o(.ARM.exidx.text.tc_putc) refers to tc_printf.o(.text.tc_putc) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_puts) refers to tc_printf.o(.text.tc_putc) for tc_putc
+    tc_printf.o(.ARM.exidx.text.tc_puts) refers to tc_printf.o(.text.tc_puts) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_fputs) refers to tc_printf.o(.text.tc_putc) for tc_putc
+    tc_printf.o(.text.tc_fputs) refers to tc_printf.o(.bss..L_MergedGlobals) for [Anonymous Symbol]
+    tc_printf.o(.ARM.exidx.text.tc_fputs) refers to tc_printf.o(.text.tc_fputs) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_printf) refers to tc_printf.o(.text.tc_vprintf) for tc_vprintf
+    tc_printf.o(.ARM.exidx.text.tc_printf) refers to tc_printf.o(.text.tc_printf) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_vprintf) refers to tc_printf.o(.text.tc_putc) for tc_putc
+    tc_printf.o(.text.tc_vprintf) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    tc_printf.o(.text.tc_vprintf) refers to tc_printf.o(.text.tc_puts) for tc_puts
+    tc_printf.o(.ARM.exidx.text.tc_vprintf) refers to tc_printf.o(.text.tc_vprintf) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_sprintf) refers to tc_printf.o(.text.tc_vprintf) for tc_vprintf
+    tc_printf.o(.text.tc_sprintf) refers to tc_printf.o(.bss..L_MergedGlobals) for [Anonymous Symbol]
+    tc_printf.o(.ARM.exidx.text.tc_sprintf) refers to tc_printf.o(.text.tc_sprintf) for [Anonymous Symbol]
+    tc_printf.o(.text.tc_fprintf) refers to tc_printf.o(.text.tc_vprintf) for tc_vprintf
+    tc_printf.o(.text.tc_fprintf) refers to tc_printf.o(.bss..L_MergedGlobals) for [Anonymous Symbol]
+    tc_printf.o(.ARM.exidx.text.tc_fprintf) refers to tc_printf.o(.text.tc_fprintf) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_session_parameter_resp) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_session_parameter_resp) refers to dfu_uds_manager.o(.text.dfu_session_parameter_resp) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_do_notify_cp) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_send) for lin_uds_send
+    dfu_uds_manager.o(.text.dfu_do_notify_cp) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_cp) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.uds_diagnostic_configword_remap_nad) refers to dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.text.uds_diag_DID_chk) for uds_diag_DID_chk
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.text.user_read_data_by_id) for user_read_data_by_id
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) for dfu_do_notify_cp_ex
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.bss.diagnosticTxBuffer) for diagnosticTxBuffer
+    dfu_uds_manager.o(.ARM.exidx.text.read_data_by_identify_handle) refers to dfu_uds_manager.o(.text.read_data_by_identify_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.uds_diag_DID_chk) refers to pal_store.o(.text.pal_store_read) for pal_store_read
+    dfu_uds_manager.o(.text.uds_diag_DID_chk) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.uds_diag_DID_chk) refers to dfu_uds_manager.o(.text.uds_diag_DID_chk) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to memseta.o(.text) for __aeabi_memset4
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to pal_store.o(.text.pal_store_read) for pal_store_read
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to dfu_uds_manager.o(.bss.diagnosticTxBuffer) for diagnosticTxBuffer
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.user_read_data_by_id) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.user_read_data_by_id) refers to dfu_uds_manager.o(.text.user_read_data_by_id) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_send) for lin_uds_send
+    dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_cp_ex) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_do_notify_response) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.text.dfu_do_notify_response) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response) for lin_uds_negative_response
+    dfu_uds_manager.o(.text.dfu_do_notify_response) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_response) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.communcation_control_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.communcation_control_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.communcation_control_handle) refers to dfu_uds_manager.o(.text.communcation_control_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dtc_control_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.dtc_control_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dtc_control_handle) refers to dfu_uds_manager.o(.text.dtc_control_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.diagnostic_session_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.ARM.exidx.text.diagnostic_session_handle) refers to dfu_uds_manager.o(.text.diagnostic_session_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.session_control_handle) refers to pal_store.o(.text.pal_store_read) for pal_store_read
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.text.dfu_session_parameter_resp) for dfu_session_parameter_resp
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.session_control_handle) refers to pal_store.o(.text.pal_store_data_get) for pal_store_data_get
+    dfu_uds_manager.o(.text.session_control_handle) refers to pal_store.o(.text.pal_store_data_set) for pal_store_data_set
+    dfu_uds_manager.o(.text.session_control_handle) refers to pal_systick.o(.text.delay_ms) for delay_ms
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.text.__NVIC_SystemReset) for __NVIC_SystemReset
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.session_control_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.session_control_handle) refers to dfu_uds_manager.o(.text.session_control_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.reset_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.reset_handle) refers to pal_systick.o(.text.delay_ms) for delay_ms
+    dfu_uds_manager.o(.text.reset_handle) refers to dfu_uds_manager.o(.text.__NVIC_SystemReset) for __NVIC_SystemReset
+    dfu_uds_manager.o(.ARM.exidx.text.reset_handle) refers to dfu_uds_manager.o(.text.reset_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.security_access_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.text.security_access_handle) refers to memcpya.o(.text) for __aeabi_memcpy
+    dfu_uds_manager.o(.text.security_access_handle) refers to aes_cmac.o(.text.aes_cmac) for aes_cmac
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.text.cpmpare_key) for cpmpare_key
+    dfu_uds_manager.o(.text.security_access_handle) refers to pal_store.o(.text.pal_store_data_get) for pal_store_data_get
+    dfu_uds_manager.o(.text.security_access_handle) refers to pal_store.o(.text.pal_store_data_set) for pal_store_data_set
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.security_access_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.security_access_handle) refers to dfu_uds_manager.o(.text.security_access_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to memcpya.o(.text) for __aeabi_memcpy
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.firmware_info_sync_handle) refers to dfu_uds_manager.o(.text.firmware_info_sync_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.routine_control_handle) refers to memseta.o(.text) for __aeabi_memclr4
+    dfu_uds_manager.o(.text.routine_control_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.routine_control_handle) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv) for ll_flash_write_drv
+    dfu_uds_manager.o(.text.routine_control_handle) refers to aes_cmac.o(.text.sha256) for sha256
+    dfu_uds_manager.o(.text.routine_control_handle) refers to aes_cmac.o(.text.aes_cmac) for aes_cmac
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.text.cpmpare_key) for cpmpare_key
+    dfu_uds_manager.o(.text.routine_control_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response) for lin_uds_negative_response
+    dfu_uds_manager.o(.text.routine_control_handle) refers to pal_systick.o(.text.delay_ms) for delay_ms
+    dfu_uds_manager.o(.text.routine_control_handle) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_drv) for ll_flash_erase_drv
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.routine_control_handle) refers to dfu_uds_manager.o(.ARM.__at_0x10000000) for flash_driver
+    dfu_uds_manager.o(.ARM.exidx.text.routine_control_handle) refers to dfu_uds_manager.o(.text.routine_control_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.request_download_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.request_download_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp) for dfu_do_notify_cp
+    dfu_uds_manager.o(.text.request_download_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.request_download_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.request_download_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.request_download_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.request_download_handle) refers to dfu_uds_manager.o(.text.request_download_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to memcpya.o(.text) for __aeabi_memcpy
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv) for ll_flash_write_drv
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.transfer_data_handle) refers to dfu_uds_manager.o(.ARM.__at_0x10000000) for flash_driver
+    dfu_uds_manager.o(.ARM.exidx.text.transfer_data_handle) refers to dfu_uds_manager.o(.text.transfer_data_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.request_transfer_exit_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.request_transfer_exit_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) for dfu_do_notify_cp_ex
+    dfu_uds_manager.o(.text.request_transfer_exit_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.request_transfer_exit_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.request_transfer_exit_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.request_transfer_exit_handle) refers to dfu_uds_manager.o(.text.request_transfer_exit_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.clear_dtc_info_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.ARM.exidx.text.clear_dtc_info_handle) refers to dfu_uds_manager.o(.text.clear_dtc_info_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to pal_store.o(.text.pal_store_data_set) for pal_store_data_set
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to pal_store.o(.text.pal_store_data_get) for pal_store_data_get
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad) for uds_diagnostic_configword_remap_nad
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config) for ll_gpio_afio_config
+    dfu_uds_manager.o(.text.assign_config_word_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.assign_config_word_handle) refers to dfu_uds_manager.o(.text.assign_config_word_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.read_by_identify_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.read_by_identify_handle) refers to pal_store.o(.text.pal_store_data_get) for pal_store_data_get
+    dfu_uds_manager.o(.text.read_by_identify_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_cp_ex) for dfu_do_notify_cp_ex
+    dfu_uds_manager.o(.text.read_by_identify_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.read_by_identify_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.read_by_identify_handle) refers to dfu_uds_manager.o(.text.read_by_identify_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_update_random_value) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_update_random_value) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_update_random_value) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.lin_update_random_value) refers to dfu_uds_manager.o(.text.lin_update_random_value) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to pal_store.o(.text.pal_store_data_set) for pal_store_data_set
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to pal_store.o(.text.pal_store_read) for pal_store_read
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to dfu_uds_manager.o(.text.__NVIC_SystemReset) for __NVIC_SystemReset
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_exception_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.lin_exception_handle) refers to dfu_uds_manager.o(.text.lin_exception_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.__NVIC_SystemReset) refers to dfu_uds_manager.o(.text.__NVIC_SystemReset) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_receive) for lin_uds_receive
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for lin_get_uds_nad
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.lin_diag_service_handle) refers to dfu_uds_manager.o(.rodata.dfu_process_ctx) for dfu_process_ctx
+    dfu_uds_manager.o(.ARM.exidx.text.lin_diag_service_handle) refers to dfu_uds_manager.o(.text.lin_diag_service_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_timeout_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.dfu_timeout_handle) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_timeout_handle) refers to dfu_uds_manager.o(.text.dfu_timeout_handle) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_store_system_data_init) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    dfu_uds_manager.o(.text.dfu_store_system_data_init) refers to dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad) for uds_diagnostic_configword_remap_nad
+    dfu_uds_manager.o(.text.dfu_store_system_data_init) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_store_system_data_init) refers to dfu_uds_manager.o(.text.dfu_store_system_data_init) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to pal_wdg.o(.text.wdg_init) for wdg_init
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to aes_cmac.o(.text.Gen_CMACkey) for Gen_CMACkey
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to logging.o(.text.logging_init) for logging_init
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to dfu_uds_manager.o(.text.dfu_store_system_data_init) for dfu_store_system_data_init
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to memseta.o(.text) for __aeabi_memclr4
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to pal_lin_comm.o(.text.pal_lin_init) for pal_lin_init
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.dfu_manager_init) refers to pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) for lin_lld_isr_callback
+    dfu_uds_manager.o(.ARM.exidx.text.dfu_manager_init) refers to dfu_uds_manager.o(.text.dfu_manager_init) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.main_loops) refers to pal_wdg.o(.text.wdg_reload) for wdg_reload
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.text.lin_diag_service_handle) for lin_diag_service_handle
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.text.lin_exception_handle) for lin_exception_handle
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.text.lin_update_random_value) for lin_update_random_value
+    dfu_uds_manager.o(.text.main_loops) refers to pal_systick.o(.text.delay_ms) for delay_ms
+    dfu_uds_manager.o(.text.main_loops) refers to pal_store.o(.text.pal_store_read) for pal_store_read
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.text.dfu_session_parameter_resp) for dfu_session_parameter_resp
+    dfu_uds_manager.o(.text.main_loops) refers to pal_store.o(.text.pal_store_data_set) for pal_store_data_set
+    dfu_uds_manager.o(.text.main_loops) refers to pal_lin_comm.o(.text.pal_lin_deinit) for pal_lin_deinit
+    dfu_uds_manager.o(.text.main_loops) refers to logging.o(.text.logging_deinit) for logging_deinit
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.main_loops) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.main_loops) refers to dfu_uds_manager.o(.text.main_loops) for [Anonymous Symbol]
+    dfu_uds_manager.o(.text.os_task_update) refers to dfu_uds_manager.o(.text.dfu_timeout_handle) for dfu_timeout_handle
+    dfu_uds_manager.o(.text.os_task_update) refers to dfu_uds_manager.o(.text.dfu_do_notify_response) for dfu_do_notify_response
+    dfu_uds_manager.o(.text.os_task_update) refers to pal_wdg.o(.text.wdg_reload) for wdg_reload
+    dfu_uds_manager.o(.text.os_task_update) refers to dfu_uds_manager.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.os_task_update) refers to dfu_uds_manager.o(.text.os_task_update) for [Anonymous Symbol]
+    dfu_uds_manager.o(.ARM.exidx.text.cpmpare_key) refers to dfu_uds_manager.o(.text.cpmpare_key) for [Anonymous Symbol]
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.session_control_handle) for session_control_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.reset_handle) for reset_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.security_access_handle) for security_access_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.firmware_info_sync_handle) for firmware_info_sync_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.routine_control_handle) for routine_control_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.request_download_handle) for request_download_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.transfer_data_handle) for transfer_data_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.request_transfer_exit_handle) for request_transfer_exit_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.clear_dtc_info_handle) for clear_dtc_info_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.assign_config_word_handle) for assign_config_word_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.read_by_identify_handle) for read_by_identify_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.read_data_by_identify_handle) for read_data_by_identify_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.communcation_control_handle) for communcation_control_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.dtc_control_handle) for dtc_control_handle
+    dfu_uds_manager.o(.rodata.dfu_process_ctx) refers to dfu_uds_manager.o(.text.diagnostic_session_handle) for diagnostic_session_handle
+    startup_tcpl03x.o(RESET) refers to startup_tcpl03x.o(STACK) for __initial_sp
+    startup_tcpl03x.o(RESET) refers to startup_tcpl03x.o(.text) for Reset_Handler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_cortex.o(.text.NMI_Handler) for NMI_Handler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_cortex.o(.text.HardFault_Handler) for HardFault_Handler
+    startup_tcpl03x.o(RESET) refers to pal_systick.o(.text.SysTick_Handler) for SysTick_Handler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler) for FLASH_IRQHandler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler) for IWDG_IRQHandler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_sci.o(.text.SCI_IRQHandler) for SCI_IRQHandler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_sys.o(.text.AON_IRQHandler) for AON_IRQHandler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler) for GPIO_IRQHandler
+    startup_tcpl03x.o(RESET) refers to tcpl03x_ll_sci.o(.text.UART_IRQHandler) for UART_IRQHandler
+    startup_tcpl03x.o(.text) refers to system_tcpl03x.o(.text.SystemInit) for SystemInit
+    startup_tcpl03x.o(.text) refers to app.o(.text.TcMain) for TcMain
+    system_tcpl03x.o(.ARM.exidx.text.data_rw_init) refers to system_tcpl03x.o(.text.data_rw_init) for [Anonymous Symbol]
+    system_tcpl03x.o(.ARM.exidx.text.sys_hclk_freq_get) refers to system_tcpl03x.o(.text.sys_hclk_freq_get) for [Anonymous Symbol]
+    system_tcpl03x.o(.text.sys_pclk_freq_get) refers to system_tcpl03x.o(.text.sys_hclk_freq_get) for sys_hclk_freq_get
+    system_tcpl03x.o(.ARM.exidx.text.sys_pclk_freq_get) refers to system_tcpl03x.o(.text.sys_pclk_freq_get) for [Anonymous Symbol]
+    system_tcpl03x.o(.text.sys_core_clock_update) refers to system_tcpl03x.o(.text.sys_hclk_freq_get) for sys_hclk_freq_get
+    system_tcpl03x.o(.text.sys_core_clock_update) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    system_tcpl03x.o(.text.sys_core_clock_update) refers to system_tcpl03x.o(.data.SystemCoreClock) for SystemCoreClock
+    system_tcpl03x.o(.ARM.exidx.text.sys_core_clock_update) refers to system_tcpl03x.o(.text.sys_core_clock_update) for [Anonymous Symbol]
+    system_tcpl03x.o(.ARM.exidx.text.sys_trimvalue_load) refers to system_tcpl03x.o(.text.sys_trimvalue_load) for [Anonymous Symbol]
+    system_tcpl03x.o(.ARM.exidx.text.sys_hclk_config) refers to system_tcpl03x.o(.text.sys_hclk_config) for [Anonymous Symbol]
+    system_tcpl03x.o(.ARM.exidx.text.sys_pclk_config) refers to system_tcpl03x.o(.text.sys_pclk_config) for [Anonymous Symbol]
+    system_tcpl03x.o(.text.SystemInit) refers to system_tcpl03x.o(.text.data_rw_init) for data_rw_init
+    system_tcpl03x.o(.text.SystemInit) refers to system_tcpl03x.o(.text.sys_hclk_config) for sys_hclk_config
+    system_tcpl03x.o(.text.SystemInit) refers to system_tcpl03x.o(.text.sys_core_clock_update) for sys_core_clock_update
+    system_tcpl03x.o(.text.SystemInit) refers to system_tcpl03x.o(.text.sys_pclk_config) for sys_pclk_config
+    system_tcpl03x.o(.text.SystemInit) refers to system_tcpl03x.o(.text.sys_trimvalue_load) for sys_trimvalue_load
+    system_tcpl03x.o(.ARM.exidx.text.SystemInit) refers to system_tcpl03x.o(.text.SystemInit) for [Anonymous Symbol]
+    system_tcpl03x.o(.ARM.exidx.text.system_remap_config) refers to system_tcpl03x.o(.text.system_remap_config) for [Anonymous Symbol]
+    tcpl03x_ll_cortex.o(.text.NMI_Handler) refers to tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset) for __NVIC_SystemReset
+    tcpl03x_ll_cortex.o(.ARM.exidx.text.NMI_Handler) refers to tcpl03x_ll_cortex.o(.text.NMI_Handler) for [Anonymous Symbol]
+    tcpl03x_ll_cortex.o(.ARM.exidx.text.__NVIC_SystemReset) refers to tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset) for [Anonymous Symbol]
+    tcpl03x_ll_cortex.o(.text.HardFault_Handler) refers to tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset) for __NVIC_SystemReset
+    tcpl03x_ll_cortex.o(.ARM.exidx.text.HardFault_Handler) refers to tcpl03x_ll_cortex.o(.text.HardFault_Handler) for [Anonymous Symbol]
+    tcpl03x_ll_cortex.o(.ARM.exidx.text.EnableNvic) refers to tcpl03x_ll_cortex.o(.text.EnableNvic) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_deinit) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_deinit) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.text.ll_gpio_init) refers to uidiv_div0.o(.text) for __aeabi_uidivmod
+    tcpl03x_ll_gpio.o(.text.ll_gpio_init) refers to tcpl03x_ll_gpio.o(.bss.gpio_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_init) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_init) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_read) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_read) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_output) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_output) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_toggle) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_toggle) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_isr_enable) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_isr_enable) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_interrupt_flag_get) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_interrupt_flag_get) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_interrupt_clear) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_interrupt_clear) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config) refers to uidiv_div0.o(.text) for __aeabi_uidivmod
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_afio_config) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_ano_lpm_config) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_ano_lpm_config) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_reset_enable) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_reset_enable) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler) refers to tcpl03x_ll_gpio.o(.bss.gpio_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_gpio.o(.ARM.exidx.text.GPIO_IRQHandler) refers to tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_state_clear) refers to tcpl03x_ll_sci.o(.text.ll_sci_state_clear) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_sci_deinit) refers to tcpl03x_ll_sci.o(.bss.sci_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_deinit) refers to tcpl03x_ll_sci.o(.text.ll_sci_deinit) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) refers to tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set) for ll_lin_rx_delay_set
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) refers to ffltui.o(.text) for __aeabi_ui2f
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) refers to fdiv.o(.text) for __aeabi_fdiv
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) refers to fmul.o(.text) for __aeabi_fmul
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) refers to ffixi.o(.text) for __aeabi_f2iz
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_enable) refers to tcpl03x_ll_sci.o(.text.ll_lin_aa_enable) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_rx_delay_set) refers to tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_lin_aa_disable) refers to tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set) for ll_lin_rx_delay_set
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_disable) refers to tcpl03x_ll_sci.o(.text.ll_lin_aa_disable) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_sci_init) refers to tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config) for ll_gpio_afio_config
+    tcpl03x_ll_sci.o(.text.ll_sci_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) for ll_sci_baudrate_config
+    tcpl03x_ll_sci.o(.text.ll_sci_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_state_clear) for ll_sci_state_clear
+    tcpl03x_ll_sci.o(.text.ll_sci_init) refers to tcpl03x_ll_sci.o(.text.__NVIC_SetPriority) for __NVIC_SetPriority
+    tcpl03x_ll_sci.o(.text.ll_sci_init) refers to tcpl03x_ll_sci.o(.bss.sci_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_init) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) refers to system_tcpl03x.o(.text.sys_hclk_freq_get) for sys_hclk_freq_get
+    tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) refers to tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set) for ll_lin_rx_delay_set
+    tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) refers to system_tcpl03x.o(.text.sys_pclk_freq_get) for sys_pclk_freq_get
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_baudrate_config) refers to tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_isr_enable) refers to tcpl03x_ll_sci.o(.text.ll_sci_isr_enable) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_lin_wakeup_enable) refers to tcpl03x_ll_sys.o(.text.ll_wakeup_init) for ll_wakeup_init
+    tcpl03x_ll_sci.o(.text.ll_lin_wakeup_enable) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_isr_enable) for ll_syscfg_isr_enable
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_wakeup_enable) refers to tcpl03x_ll_sci.o(.text.ll_lin_wakeup_enable) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.__NVIC_SetPriority) refers to tcpl03x_ll_sci.o(.text.__NVIC_SetPriority) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_ready_set) refers to tcpl03x_ll_sci.o(.text.ll_lin_aa_ready_set) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_transmit) refers to tcpl03x_ll_sci.o(.text.ll_sci_transmit) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_receive) refers to tcpl03x_ll_sci.o(.text.ll_sci_receive) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.ll_lin_transmit) refers to tcpl03x_ll_sci.o(.text.ll_sci_state_clear) for ll_sci_state_clear
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_transmit) refers to tcpl03x_ll_sci.o(.text.ll_lin_transmit) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_receive) refers to tcpl03x_ll_sci.o(.text.ll_lin_receive) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_checksum_calib_func) refers to tcpl03x_ll_sci.o(.text.ll_lin_checksum_calib_func) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_pid_read) refers to tcpl03x_ll_sci.o(.text.ll_lin_pid_read) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_read_byte) refers to tcpl03x_ll_sci.o(.text.ll_lin_read_byte) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_auto_baudrate_read) refers to tcpl03x_ll_sci.o(.text.ll_lin_auto_baudrate_read) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_baudrate_read) refers to tcpl03x_ll_sci.o(.text.ll_lin_baudrate_read) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_glben) refers to tcpl03x_ll_sci.o(.text.ll_lin_ctrl_glben) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_rx_abort) refers to tcpl03x_ll_sci.o(.text.ll_lin_ctrl_rx_abort) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_brk_tx) refers to tcpl03x_ll_sci.o(.text.ll_lin_ctrl_brk_tx) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_tx_header) refers to tcpl03x_ll_sci.o(.text.ll_lin_tx_header) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.SCI_IRQHandler) refers to tcpl03x_ll_sci.o(.bss.sci_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.SCI_IRQHandler) refers to tcpl03x_ll_sci.o(.text.SCI_IRQHandler) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.text.UART_IRQHandler) refers to tcpl03x_ll_sci.o(.bss.sci_isr_callback) for [Anonymous Symbol]
+    tcpl03x_ll_sci.o(.ARM.exidx.text.UART_IRQHandler) refers to tcpl03x_ll_sci.o(.text.UART_IRQHandler) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_info_get) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_info_get) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_wakeup_init) refers to tcpl03x_ll_sys.o(.text.ll_wakeup_init) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_enable) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_isr_enable) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_clear) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_isr_clear) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_get) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_isr_get) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_backup_reg_write) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_backup_reg_write) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_backup_reg_read) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_backup_reg_read) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.text.ll_syscfg_otp_enable) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_isr_enable) for ll_syscfg_isr_enable
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_otp_enable) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_otp_enable) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_otp_status) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_otp_status) for [Anonymous Symbol]
+    tcpl03x_ll_sys.o(.ARM.exidx.text.AON_IRQHandler) refers to tcpl03x_ll_sys.o(.text.AON_IRQHandler) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.text.ll_wdg_init) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_deinit) for ll_wdg_deinit
+    tcpl03x_ll_wdg.o(.text.ll_wdg_init) refers to tcpl03x_ll_wdg.o(.bss.wdg_callback) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_init) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_init) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.text.ll_wdg_deinit) refers to tcpl03x_ll_wdg.o(.bss.wdg_callback) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_deinit) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_deinit) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_isr_enable) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_isr_enable) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_enable) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_enable) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_reload) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_reload) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_interrupt_clear) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_interrupt_clear) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler) refers to tcpl03x_ll_wdg.o(.bss.wdg_callback) for [Anonymous Symbol]
+    tcpl03x_ll_wdg.o(.ARM.exidx.text.IWDG_IRQHandler) refers to tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_init) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_init) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_chip) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_chip) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv) for ll_flash_erase_reg_drv
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_drv) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv) refers to tcpl03x_ll_flash_cus.o(.data.g_pfFLASH_DRV_EraseSector) for g_pfFLASH_DRV_EraseSector
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_reg_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_read) refers to memcpya.o(.text) for __aeabi_memcpy
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_read) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_write) refers to memcpya.o(.text) for __aeabi_memcpy
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv) for ll_flash_write_reg_drv
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv) refers to memcpya.o(.text) for __aeabi_memcpy
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv) refers to tcpl03x_ll_flash_cus.o(.data.g_tpfFLASH_DRV_Program) for g_tpfFLASH_DRV_Program
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write_reg_drv) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv) for ll_flash_erase_reg_drv
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv) for ll_flash_write_reg_drv
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) refers to memseta.o(.text) for __aeabi_memclr
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) refers to tcpl03x_ll_flash_cus.o(.data.flash_driver_ciper) for flash_driver_ciper
+    tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) refers to dfu_uds_manager.o(.ARM.__at_0x10000000) for flash_driver
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_smart_write) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_reg_wr) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_reg_wr) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_isr_enable) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_isr_enable) for [Anonymous Symbol]
+    tcpl03x_ll_flash_cus.o(.ARM.exidx.text.FLASH_IRQHandler) refers to tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_init) for ll_sci_init
+    pal_lin_comm.o(.text.pal_lin_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_isr_enable) for ll_sci_isr_enable
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_init) refers to pal_lin_comm.o(.text.pal_lin_init) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_deinit) refers to tcpl03x_ll_sci.o(.text.ll_sci_deinit) for ll_sci_deinit
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_deinit) refers to pal_lin_comm.o(.text.pal_lin_deinit) for [Anonymous Symbol]
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_parity_calib) refers to pal_lin_comm.o(.text.pal_lin_parity_calib) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_checksum_calib) refers to utilities.o(.text.checksum_calculate_func) for checksum_calculate_func
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_checksum_calib) refers to pal_lin_comm.o(.text.pal_lin_checksum_calib) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_rx_response) refers to tcpl03x_ll_sci.o(.text.ll_lin_receive) for ll_lin_receive
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_rx_response) refers to pal_lin_comm.o(.text.pal_lin_rx_response) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_tx_4byte) refers to tcpl03x_ll_sci.o(.text.ll_sci_transmit) for ll_sci_transmit
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_tx_4byte) refers to pal_lin_comm.o(.text.pal_lin_tx_4byte) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_tx_response) refers to tcpl03x_ll_sci.o(.text.ll_lin_transmit) for ll_lin_transmit
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_tx_response) refers to pal_lin_comm.o(.text.pal_lin_tx_response) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_abort_handle) refers to tcpl03x_ll_sci.o(.text.ll_sci_state_clear) for ll_sci_state_clear
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_abort_handle) refers to pal_lin_comm.o(.text.pal_lin_abort_handle) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_read_byte) refers to tcpl03x_ll_sci.o(.text.ll_lin_read_byte) for ll_lin_read_byte
+    pal_lin_comm.o(.text.pal_lin_read_byte) refers to tcpl03x_ll_sci.o(.text.ll_lin_pid_read) for ll_lin_pid_read
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_read_byte) refers to pal_lin_comm.o(.text.pal_lin_read_byte) for [Anonymous Symbol]
+    pal_lin_comm.o(.text.pal_lin_autobaudrate_check) refers to tcpl03x_ll_sci.o(.text.ll_lin_baudrate_read) for ll_lin_baudrate_read
+    pal_lin_comm.o(.text.pal_lin_autobaudrate_check) refers to tcpl03x_ll_sci.o(.text.ll_lin_auto_baudrate_read) for ll_lin_auto_baudrate_read
+    pal_lin_comm.o(.text.pal_lin_autobaudrate_check) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    pal_lin_comm.o(.text.pal_lin_autobaudrate_check) refers to tcpl03x_ll_sci.o(.text.ll_lin_ctrl_glben) for ll_lin_ctrl_glben
+    pal_lin_comm.o(.ARM.exidx.text.pal_lin_autobaudrate_check) refers to pal_lin_comm.o(.text.pal_lin_autobaudrate_check) for [Anonymous Symbol]
+    pal_log.o(.text.pal_log_print) refers to tcpl03x_ll_sci.o(.text.ll_sci_transmit) for ll_sci_transmit
+    pal_log.o(.ARM.exidx.text.pal_log_print) refers to pal_log.o(.text.pal_log_print) for [Anonymous Symbol]
+    pal_log.o(.text.pal_log_init) refers to tcpl03x_ll_sci.o(.text.ll_sci_init) for ll_sci_init
+    pal_log.o(.ARM.exidx.text.pal_log_init) refers to pal_log.o(.text.pal_log_init) for [Anonymous Symbol]
+    pal_log.o(.text.pal_log_deinit) refers to tcpl03x_ll_sci.o(.text.ll_sci_deinit) for ll_sci_deinit
+    pal_log.o(.ARM.exidx.text.pal_log_deinit) refers to pal_log.o(.text.pal_log_deinit) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_data_set) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.text.pal_store_data_set) refers to memcmp.o(.text) for memcmp
+    pal_store.o(.text.pal_store_data_set) refers to memcpya.o(.text) for __aeabi_memcpy
+    pal_store.o(.text.pal_store_data_set) refers to utilities.o(.text.crc16_calculate_func) for crc16_calculate_func
+    pal_store.o(.text.pal_store_data_set) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) for ll_flash_smart_write
+    pal_store.o(.ARM.exidx.text.pal_store_data_set) refers to pal_store.o(.text.pal_store_data_set) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_data_get) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.text.pal_store_data_get) refers to utilities.o(.text.crc16_calculate_func) for crc16_calculate_func
+    pal_store.o(.text.pal_store_data_get) refers to memcpya.o(.text) for __aeabi_memcpy
+    pal_store.o(.ARM.exidx.text.pal_store_data_get) refers to pal_store.o(.text.pal_store_data_get) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_data_init) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.text.pal_store_data_init) refers to utilities.o(.text.crc16_calculate_func) for crc16_calculate_func
+    pal_store.o(.text.pal_store_data_init) refers to memcpya.o(.text) for __aeabi_memcpy
+    pal_store.o(.text.pal_store_data_init) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) for ll_flash_smart_write
+    pal_store.o(.ARM.exidx.text.pal_store_data_init) refers to pal_store.o(.text.pal_store_data_init) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_data_clear) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.text.pal_store_data_clear) refers to memseta.o(.text) for __aeabi_memset
+    pal_store.o(.text.pal_store_data_clear) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write) for ll_flash_smart_write
+    pal_store.o(.text.pal_store_data_clear) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase) for ll_flash_erase
+    pal_store.o(.ARM.exidx.text.pal_store_data_clear) refers to pal_store.o(.text.pal_store_data_clear) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_erase) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_erase) for ll_flash_erase
+    pal_store.o(.ARM.exidx.text.pal_store_erase) refers to pal_store.o(.text.pal_store_erase) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_write) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_write) for ll_flash_write
+    pal_store.o(.ARM.exidx.text.pal_store_write) refers to pal_store.o(.text.pal_store_write) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_read) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.ARM.exidx.text.pal_store_read) refers to pal_store.o(.text.pal_store_read) for [Anonymous Symbol]
+    pal_store.o(.ARM.exidx.text.pal_store_uid_get) refers to pal_store.o(.text.pal_store_uid_get) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_boot_ver_get) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_read) for ll_flash_read
+    pal_store.o(.ARM.exidx.text.pal_store_boot_ver_get) refers to pal_store.o(.text.pal_store_boot_ver_get) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_chip_ver_id_get) refers to tcpl03x_ll_sys.o(.text.ll_syscfg_info_get) for ll_syscfg_info_get
+    pal_store.o(.ARM.exidx.text.pal_store_chip_ver_id_get) refers to pal_store.o(.text.pal_store_chip_ver_id_get) for [Anonymous Symbol]
+    pal_store.o(.text.pal_store_reg_rw) refers to tcpl03x_ll_flash_cus.o(.text.ll_flash_reg_wr) for ll_flash_reg_wr
+    pal_store.o(.ARM.exidx.text.pal_store_reg_rw) refers to pal_store.o(.text.pal_store_reg_rw) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.os_task_update) refers to pal_systick.o(.text.os_task_update) for [Anonymous Symbol]
+    pal_systick.o(.text.SysTick_Handler) refers to dfu_uds_manager.o(.text.os_task_update) for os_task_update
+    pal_systick.o(.text.SysTick_Handler) refers to pal_systick.o(.bss.systick_count) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.SysTick_Handler) refers to pal_systick.o(.text.SysTick_Handler) for [Anonymous Symbol]
+    pal_systick.o(.text.systick_count_get) refers to pal_systick.o(.bss.systick_count) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.systick_count_get) refers to pal_systick.o(.text.systick_count_get) for [Anonymous Symbol]
+    pal_systick.o(.text.systick_diff) refers to pal_systick.o(.bss.systick_count) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.systick_diff) refers to pal_systick.o(.text.systick_diff) for [Anonymous Symbol]
+    pal_systick.o(.text.delay_ms) refers to pal_systick.o(.text.systick_diff) for systick_diff
+    pal_systick.o(.text.delay_ms) refers to pal_systick.o(.bss.systick_count) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.delay_ms) refers to pal_systick.o(.text.delay_ms) for [Anonymous Symbol]
+    pal_systick.o(.ARM.exidx.text.delay_us) refers to pal_systick.o(.text.delay_us) for [Anonymous Symbol]
+    utilities.o(.text.averge_calculate_utils) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    utilities.o(.ARM.exidx.text.averge_calculate_utils) refers to utilities.o(.text.averge_calculate_utils) for [Anonymous Symbol]
+    utilities.o(.text.crc32_calculate_func) refers to utilities.o(.text.bit_invert_swap_func) for bit_invert_swap_func
+    utilities.o(.ARM.exidx.text.crc32_calculate_func) refers to utilities.o(.text.crc32_calculate_func) for [Anonymous Symbol]
+    utilities.o(.text.bit_invert_swap_func) refers to memcpya.o(.text) for __aeabi_memcpy
+    utilities.o(.ARM.exidx.text.bit_invert_swap_func) refers to utilities.o(.text.bit_invert_swap_func) for [Anonymous Symbol]
+    utilities.o(.text.crc16_calculate_func) refers to utilities.o(.text.bit_invert_swap_func) for bit_invert_swap_func
+    utilities.o(.ARM.exidx.text.crc16_calculate_func) refers to utilities.o(.text.crc16_calculate_func) for [Anonymous Symbol]
+    utilities.o(.ARM.exidx.text.checksum_calculate_func) refers to utilities.o(.text.checksum_calculate_func) for [Anonymous Symbol]
+    utilities.o(.text.endian_swap_func) refers to memcpya.o(.text) for __aeabi_memcpy
+    utilities.o(.ARM.exidx.text.endian_swap_func) refers to utilities.o(.text.endian_swap_func) for [Anonymous Symbol]
+    pal_wdg.o(.text.wdg_init) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_init) for ll_wdg_init
+    pal_wdg.o(.text.wdg_init) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_enable) for ll_wdg_enable
+    pal_wdg.o(.ARM.exidx.text.wdg_init) refers to pal_wdg.o(.text.wdg_init) for [Anonymous Symbol]
+    pal_wdg.o(.text.wdg_reload) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_reload) for ll_wdg_reload
+    pal_wdg.o(.ARM.exidx.text.wdg_reload) refers to pal_wdg.o(.text.wdg_reload) for [Anonymous Symbol]
+    pal_wdg.o(.text.wdg_enable) refers to tcpl03x_ll_wdg.o(.text.ll_wdg_enable) for ll_wdg_enable
+    pal_wdg.o(.ARM.exidx.text.wdg_enable) refers to pal_wdg.o(.text.wdg_enable) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_sci_baudrate_update) refers to pal_lin_tl_slv_cus.o(.text.lin_sci_baudrate_update) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_tl_queue_clear) refers to pal_lin_tl_slv_cus.o(.text.lin_tl_queue_clear) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_set_uds_nad) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_set_uds_nad) refers to pal_lin_tl_slv_cus.o(.text.lin_set_uds_nad) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_get_uds_nad) refers to pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_sci_baudrate_update) for lin_sci_baudrate_update
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to memseta.o(.text) for __aeabi_memclr
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to pal_lin_comm.o(.text.pal_lin_rx_response) for pal_lin_rx_response
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to pal_lin_comm.o(.text.pal_lin_tx_response) for pal_lin_tx_response
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to dfu_uds_manager.o(.data..L_MergedGlobals) for lin_configured_NAD
+    pal_lin_tl_slv_cus.o(.text.lin_callback_handle) refers to dfu_uds_manager.o(.bss.dfu_ctx) for dfu_ctx
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_callback_handle) refers to pal_lin_tl_slv_cus.o(.text.lin_callback_handle) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_tl_init) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_tl_init) refers to pal_lin_tl_slv_cus.o(.text.lin_tl_init) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_uds_send) refers to memcpya.o(.text) for __aeabi_memcpy
+    pal_lin_tl_slv_cus.o(.text.lin_uds_send) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_send) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_send) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_negative_response) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_uds_receive) refers to memcpya.o(.text) for __aeabi_memcpy
+    pal_lin_tl_slv_cus.o(.text.lin_uds_receive) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_uds_receive) refers to pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_receive) refers to pal_lin_tl_slv_cus.o(.text.lin_uds_receive) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_comm.o(.text.pal_lin_read_byte) for pal_lin_read_byte
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_comm.o(.text.pal_lin_parity_calib) for pal_lin_parity_calib
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_tl_slv_cus.o(.text.lin_callback_handle) for lin_callback_handle
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_comm.o(.text.pal_lin_checksum_calib) for pal_lin_checksum_calib
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_comm.o(.text.pal_lin_abort_handle) for pal_lin_abort_handle
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_comm.o(.text.pal_lin_tx_4byte) for pal_lin_tx_4byte
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) refers to pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_lld_isr_callback) refers to pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback) for [Anonymous Symbol]
+    pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) refers to pal_lin_tl_slv_cus.o(.bss.rx_queue_data) for rx_queue_data
+    pal_lin_tl_slv_cus.o(.data..L_MergedGlobals) refers to pal_lin_tl_slv_cus.o(.bss.tx_queue_data) for tx_queue_data
+    fmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fdiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fdiv.o(.text) refers to fepilogue.o(.text) for _float_round
+    ffltui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ffltui.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffixi.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    idiv_div0.o(.text) refers to uidiv_div0.o(.text) for __aeabi_uidivmod
+    fepilogue.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing app.o(.text), (0 bytes).
+    Removing app.o(.ARM.exidx.text.TcMain), (8 bytes).
+    Removing aes_cmac.o(.text), (0 bytes).
+    Removing aes_cmac.o(.text.deAes), (312 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.deAes), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.extendKey), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.convertToIntArray), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.addRoundKey), (8 bytes).
+    Removing aes_cmac.o(.text.deSubBytes), (52 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.deSubBytes), (8 bytes).
+    Removing aes_cmac.o(.text.deShiftRows), (108 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.deShiftRows), (8 bytes).
+    Removing aes_cmac.o(.text.deMixColumns), (156 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.deMixColumns), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.convertArrayToStr), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.AES_128), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.subBytes), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.shiftRows), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.xor_128), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.leftshift_onebit), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.generate_subkey), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.padding), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.Gen_CMACkey), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.sha256), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.aes_cmac), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.leftLoop4int), (8 bytes).
+    Removing aes_cmac.o(.text.rightLoop4int), (80 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.rightLoop4int), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.GFMul), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.GFMul9), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.GFMul8), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.GFMul4), (8 bytes).
+    Removing aes_cmac.o(.ARM.exidx.text.GFMul12), (8 bytes).
+    Removing aes_cmac.o(.data.gs_aKey), (16 bytes).
+    Removing aes_cmac.o(.bss.gX), (16 bytes).
+    Removing aes_cmac.o(.rodata.S2), (1024 bytes).
+    Removing aes_cmac.o(.rodata.deColM), (64 bytes).
+    Removing logging.o(.text), (0 bytes).
+    Removing logging.o(.ARM.exidx.text.logging_init), (8 bytes).
+    Removing logging.o(.ARM.exidx.text.logging_deinit), (8 bytes).
+    Removing tc_printf.o(.text), (0 bytes).
+    Removing tc_printf.o(.text.tc_putc), (48 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_putc), (8 bytes).
+    Removing tc_printf.o(.text.tc_puts), (22 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_puts), (8 bytes).
+    Removing tc_printf.o(.text.tc_fputs), (36 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_fputs), (8 bytes).
+    Removing tc_printf.o(.text.tc_printf), (24 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_printf), (8 bytes).
+    Removing tc_printf.o(.text.tc_vprintf), (456 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_vprintf), (8 bytes).
+    Removing tc_printf.o(.text.tc_sprintf), (44 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_sprintf), (8 bytes).
+    Removing tc_printf.o(.text.tc_fprintf), (40 bytes).
+    Removing tc_printf.o(.ARM.exidx.text.tc_fprintf), (8 bytes).
+    Removing tc_printf.o(.bss..L_MergedGlobals), (8 bytes).
+    Removing dfu_uds_manager.o(.text), (0 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_session_parameter_resp), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_cp), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.uds_diagnostic_configword_remap_nad), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.read_data_by_identify_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.uds_diag_DID_chk), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.user_read_data_by_id), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_cp_ex), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_do_notify_response), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.communcation_control_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dtc_control_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.diagnostic_session_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.session_control_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.reset_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.security_access_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.firmware_info_sync_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.routine_control_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.request_download_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.transfer_data_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.request_transfer_exit_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.clear_dtc_info_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.assign_config_word_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.read_by_identify_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.lin_update_random_value), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.lin_exception_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.__NVIC_SystemReset), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.lin_diag_service_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_timeout_handle), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_store_system_data_init), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.dfu_manager_init), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.main_loops), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.os_task_update), (8 bytes).
+    Removing dfu_uds_manager.o(.ARM.exidx.text.cpmpare_key), (8 bytes).
+    Removing dfu_uds_manager.o(.bss.g_negResponseCode), (1 bytes).
+    Removing startup_tcpl03x.o(HEAP), (0 bytes).
+    Removing system_tcpl03x.o(.text), (0 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.data_rw_init), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_hclk_freq_get), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_pclk_freq_get), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_core_clock_update), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_trimvalue_load), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_hclk_config), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.sys_pclk_config), (8 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.SystemInit), (8 bytes).
+    Removing system_tcpl03x.o(.text.system_remap_config), (52 bytes).
+    Removing system_tcpl03x.o(.ARM.exidx.text.system_remap_config), (8 bytes).
+    Removing tcpl03x_ll_cortex.o(.text), (0 bytes).
+    Removing tcpl03x_ll_cortex.o(.ARM.exidx.text.NMI_Handler), (8 bytes).
+    Removing tcpl03x_ll_cortex.o(.ARM.exidx.text.__NVIC_SystemReset), (8 bytes).
+    Removing tcpl03x_ll_cortex.o(.ARM.exidx.text.HardFault_Handler), (8 bytes).
+    Removing tcpl03x_ll_cortex.o(.text.EnableNvic), (132 bytes).
+    Removing tcpl03x_ll_cortex.o(.ARM.exidx.text.EnableNvic), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text), (0 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_deinit), (52 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_deinit), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_init), (428 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_init), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_read), (28 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_read), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_output), (48 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_output), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_toggle), (40 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_toggle), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_isr_enable), (92 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_isr_enable), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_interrupt_flag_get), (28 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_interrupt_flag_get), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_interrupt_clear), (40 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_interrupt_clear), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_afio_config), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_ano_lpm_config), (60 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_ano_lpm_config), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.text.ll_gpio_reset_enable), (28 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.ll_gpio_reset_enable), (8 bytes).
+    Removing tcpl03x_ll_gpio.o(.ARM.exidx.text.GPIO_IRQHandler), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text), (0 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_state_clear), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_deinit), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_aa_enable), (388 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_enable), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_rx_delay_set), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_aa_disable), (64 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_disable), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_init), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_baudrate_config), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_isr_enable), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_wakeup_enable), (68 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_wakeup_enable), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.__NVIC_SetPriority), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_aa_ready_set), (36 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_aa_ready_set), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_transmit), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_sci_receive), (56 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_sci_receive), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_transmit), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_receive), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_checksum_calib_func), (46 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_checksum_calib_func), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_pid_read), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_read_byte), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_auto_baudrate_read), (48 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_auto_baudrate_read), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_baudrate_read), (48 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_baudrate_read), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_ctrl_glben), (44 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_glben), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_ctrl_rx_abort), (64 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_rx_abort), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_ctrl_brk_tx), (56 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_ctrl_brk_tx), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.text.ll_lin_tx_header), (64 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.ll_lin_tx_header), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.SCI_IRQHandler), (8 bytes).
+    Removing tcpl03x_ll_sci.o(.ARM.exidx.text.UART_IRQHandler), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text), (0 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_info_get), (26 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_info_get), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_wakeup_init), (64 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_wakeup_init), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_isr_enable), (32 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_enable), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_isr_clear), (16 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_clear), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_isr_get), (12 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_isr_get), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_backup_reg_write), (20 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_backup_reg_write), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_backup_reg_read), (20 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_backup_reg_read), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_otp_enable), (96 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_otp_enable), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.text.ll_syscfg_otp_status), (16 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.ll_syscfg_otp_status), (8 bytes).
+    Removing tcpl03x_ll_sys.o(.ARM.exidx.text.AON_IRQHandler), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.text), (0 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_init), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_deinit), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.text.ll_wdg_isr_enable), (44 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_isr_enable), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_enable), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_reload), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.text.ll_wdg_interrupt_clear), (36 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.ll_wdg_interrupt_clear), (8 bytes).
+    Removing tcpl03x_ll_wdg.o(.ARM.exidx.text.IWDG_IRQHandler), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text), (0 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_init), (76 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_init), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_chip), (68 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_chip), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_erase), (140 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_drv), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_erase_reg_drv), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_read), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_write), (240 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write_drv), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_write_reg_drv), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_smart_write), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_reg_wr), (30 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_reg_wr), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.text.ll_flash_isr_enable), (48 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.ll_flash_isr_enable), (8 bytes).
+    Removing tcpl03x_ll_flash_cus.o(.ARM.exidx.text.FLASH_IRQHandler), (8 bytes).
+    Removing pal_lin_comm.o(.text), (0 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_init), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_deinit), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_parity_calib), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_checksum_calib), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_rx_response), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_tx_4byte), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_tx_response), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_abort_handle), (8 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_read_byte), (8 bytes).
+    Removing pal_lin_comm.o(.text.pal_lin_autobaudrate_check), (64 bytes).
+    Removing pal_lin_comm.o(.ARM.exidx.text.pal_lin_autobaudrate_check), (8 bytes).
+    Removing pal_log.o(.text), (0 bytes).
+    Removing pal_log.o(.text.pal_log_print), (16 bytes).
+    Removing pal_log.o(.ARM.exidx.text.pal_log_print), (8 bytes).
+    Removing pal_log.o(.text.pal_log_init), (30 bytes).
+    Removing pal_log.o(.ARM.exidx.text.pal_log_init), (8 bytes).
+    Removing pal_log.o(.text.pal_log_deinit), (10 bytes).
+    Removing pal_log.o(.ARM.exidx.text.pal_log_deinit), (8 bytes).
+    Removing pal_store.o(.text), (0 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_data_set), (8 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_data_get), (8 bytes).
+    Removing pal_store.o(.text.pal_store_data_init), (172 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_data_init), (8 bytes).
+    Removing pal_store.o(.text.pal_store_data_clear), (96 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_data_clear), (8 bytes).
+    Removing pal_store.o(.text.pal_store_erase), (12 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_erase), (8 bytes).
+    Removing pal_store.o(.text.pal_store_write), (12 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_write), (8 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_read), (8 bytes).
+    Removing pal_store.o(.text.pal_store_uid_get), (2 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_uid_get), (8 bytes).
+    Removing pal_store.o(.text.pal_store_boot_ver_get), (64 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_boot_ver_get), (8 bytes).
+    Removing pal_store.o(.text.pal_store_chip_ver_id_get), (8 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_chip_ver_id_get), (8 bytes).
+    Removing pal_store.o(.text.pal_store_reg_rw), (8 bytes).
+    Removing pal_store.o(.ARM.exidx.text.pal_store_reg_rw), (8 bytes).
+    Removing pal_systick.o(.text), (0 bytes).
+    Removing pal_systick.o(.text.os_task_update), (2 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.os_task_update), (8 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
+    Removing pal_systick.o(.text.systick_count_get), (12 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.systick_count_get), (8 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.systick_diff), (8 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.delay_ms), (8 bytes).
+    Removing pal_systick.o(.text.delay_us), (44 bytes).
+    Removing pal_systick.o(.ARM.exidx.text.delay_us), (8 bytes).
+    Removing utilities.o(.text), (0 bytes).
+    Removing utilities.o(.text.averge_calculate_utils), (72 bytes).
+    Removing utilities.o(.ARM.exidx.text.averge_calculate_utils), (8 bytes).
+    Removing utilities.o(.text.crc32_calculate_func), (68 bytes).
+    Removing utilities.o(.ARM.exidx.text.crc32_calculate_func), (8 bytes).
+    Removing utilities.o(.ARM.exidx.text.bit_invert_swap_func), (8 bytes).
+    Removing utilities.o(.ARM.exidx.text.crc16_calculate_func), (8 bytes).
+    Removing utilities.o(.ARM.exidx.text.checksum_calculate_func), (8 bytes).
+    Removing utilities.o(.text.endian_swap_func), (40 bytes).
+    Removing utilities.o(.ARM.exidx.text.endian_swap_func), (8 bytes).
+    Removing pal_wdg.o(.text), (0 bytes).
+    Removing pal_wdg.o(.ARM.exidx.text.wdg_init), (8 bytes).
+    Removing pal_wdg.o(.ARM.exidx.text.wdg_reload), (8 bytes).
+    Removing pal_wdg.o(.text.wdg_enable), (8 bytes).
+    Removing pal_wdg.o(.ARM.exidx.text.wdg_enable), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.text), (0 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_sci_baudrate_update), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.text.lin_tl_queue_clear), (10 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_tl_queue_clear), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.text.lin_set_uds_nad), (12 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_set_uds_nad), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_get_uds_nad), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_callback_handle), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.text.lin_tl_init), (24 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_tl_init), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_send), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_negative_response), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_uds_receive), (8 bytes).
+    Removing pal_lin_tl_slv_cus.o(.ARM.exidx.text.lin_lld_isr_callback), (8 bytes).
+    Removing fmul.o(.text), (122 bytes).
+    Removing fdiv.o(.text), (124 bytes).
+    Removing ffltui.o(.text), (14 bytes).
+    Removing ffixi.o(.text), (50 bytes).
+    Removing fepilogue.o(.text), (130 bytes).
+
+303 unused section(s) (total 8303 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv.o ABSOLUTE
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv0.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/string/memcmp.c         0x00000000   Number         0  memcmp.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
+    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixi.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
+    ../fplib/microlib/fpmul.c                0x00000000   Number         0  fmul.o ABSOLUTE
+    ..\..\..\..\platform\devices\tcpl03x\armcc\startup_tcpl03x.s 0x00000000   Number         0  startup_tcpl03x.o ABSOLUTE
+    aes_cmac.c                               0x00000000   Number         0  aes_cmac.o ABSOLUTE
+    app.c                                    0x00000000   Number         0  app.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    dfu_uds_manager.c                        0x00000000   Number         0  dfu_uds_manager.o ABSOLUTE
+    logging.c                                0x00000000   Number         0  logging.o ABSOLUTE
+    pal_lin_comm.c                           0x00000000   Number         0  pal_lin_comm.o ABSOLUTE
+    pal_lin_tl_slv_cus.c                     0x00000000   Number         0  pal_lin_tl_slv_cus.o ABSOLUTE
+    pal_log.c                                0x00000000   Number         0  pal_log.o ABSOLUTE
+    pal_store.c                              0x00000000   Number         0  pal_store.o ABSOLUTE
+    pal_systick.c                            0x00000000   Number         0  pal_systick.o ABSOLUTE
+    pal_wdg.c                                0x00000000   Number         0  pal_wdg.o ABSOLUTE
+    system_tcpl03x.c                         0x00000000   Number         0  system_tcpl03x.o ABSOLUTE
+    tc_printf.c                              0x00000000   Number         0  tc_printf.o ABSOLUTE
+    tcpl03x_ll_cortex.c                      0x00000000   Number         0  tcpl03x_ll_cortex.o ABSOLUTE
+    tcpl03x_ll_flash_cus.c                   0x00000000   Number         0  tcpl03x_ll_flash_cus.o ABSOLUTE
+    tcpl03x_ll_gpio.c                        0x00000000   Number         0  tcpl03x_ll_gpio.o ABSOLUTE
+    tcpl03x_ll_sci.c                         0x00000000   Number         0  tcpl03x_ll_sci.o ABSOLUTE
+    tcpl03x_ll_sys.c                         0x00000000   Number         0  tcpl03x_ll_sys.o ABSOLUTE
+    tcpl03x_ll_wdg.c                         0x00000000   Number         0  tcpl03x_ll_wdg.o ABSOLUTE
+    utilities.c                              0x00000000   Number         0  utilities.o ABSOLUTE
+    RESET                                    0x00000000   Section      192  startup_tcpl03x.o(RESET)
+    .text                                    0x000000c0   Section       68  startup_tcpl03x.o(.text)
+    .text                                    0x00000104   Section        0  llushr.o(.text)
+    .text                                    0x00000126   Section        0  memcpya.o(.text)
+    .text                                    0x0000014a   Section        0  memseta.o(.text)
+    .text                                    0x0000016e   Section        0  memcmp.o(.text)
+    .text                                    0x00000188   Section        0  uidiv_div0.o(.text)
+    [Anonymous Symbol]                       0x000001c8   Section        0  aes_cmac.o(.text.AES_128)
+    __arm_cp.8_0                             0x000002c8   Number         4  aes_cmac.o(.text.AES_128)
+    __arm_cp.8_1                             0x000002cc   Number         4  aes_cmac.o(.text.AES_128)
+    [Anonymous Symbol]                       0x000002d0   Section        0  tcpl03x_ll_sys.o(.text.AON_IRQHandler)
+    __arm_cp.9_0                             0x000002dc   Number         4  tcpl03x_ll_sys.o(.text.AON_IRQHandler)
+    [Anonymous Symbol]                       0x000002e0   Section        0  tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler)
+    __arm_cp.12_0                            0x000002f4   Number         4  tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler)
+    __arm_cp.12_1                            0x000002f8   Number         4  tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler)
+    __arm_cp.12_2                            0x000002fc   Number         4  tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler)
+    GFMul                                    0x00000301   Thumb Code   126  aes_cmac.o(.text.GFMul)
+    [Anonymous Symbol]                       0x00000300   Section        0  aes_cmac.o(.text.GFMul)
+    GFMul12                                  0x0000037f   Thumb Code    20  aes_cmac.o(.text.GFMul12)
+    [Anonymous Symbol]                       0x0000037e   Section        0  aes_cmac.o(.text.GFMul12)
+    GFMul4                                   0x00000393   Thumb Code    24  aes_cmac.o(.text.GFMul4)
+    [Anonymous Symbol]                       0x00000392   Section        0  aes_cmac.o(.text.GFMul4)
+    GFMul8                                   0x000003ab   Thumb Code    22  aes_cmac.o(.text.GFMul8)
+    [Anonymous Symbol]                       0x000003aa   Section        0  aes_cmac.o(.text.GFMul8)
+    GFMul9                                   0x000003c1   Thumb Code    12  aes_cmac.o(.text.GFMul9)
+    [Anonymous Symbol]                       0x000003c0   Section        0  aes_cmac.o(.text.GFMul9)
+    [Anonymous Symbol]                       0x000003cc   Section        0  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    __arm_cp.11_0                            0x000003f4   Number         4  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    __arm_cp.11_1                            0x000003f8   Number         4  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    __arm_cp.11_2                            0x000003fc   Number         4  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    __arm_cp.11_3                            0x00000400   Number         4  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    [Anonymous Symbol]                       0x00000404   Section        0  aes_cmac.o(.text.Gen_CMACkey)
+    __arm_cp.15_0                            0x00000450   Number         4  aes_cmac.o(.text.Gen_CMACkey)
+    [Anonymous Symbol]                       0x00000454   Section        0  tcpl03x_ll_cortex.o(.text.HardFault_Handler)
+    [Anonymous Symbol]                       0x00000458   Section        0  tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler)
+    __arm_cp.6_0                             0x00000488   Number         4  tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler)
+    __arm_cp.6_3                             0x0000048c   Number         4  tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler)
+    [Anonymous Symbol]                       0x00000490   Section        0  tcpl03x_ll_cortex.o(.text.NMI_Handler)
+    [Anonymous Symbol]                       0x00000494   Section        0  tcpl03x_ll_sci.o(.text.SCI_IRQHandler)
+    __arm_cp.24_0                            0x000004c8   Number         4  tcpl03x_ll_sci.o(.text.SCI_IRQHandler)
+    [Anonymous Symbol]                       0x000004cc   Section        0  pal_systick.o(.text.SysTick_Handler)
+    __arm_cp.1_0                             0x000004dc   Number         4  pal_systick.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x000004e0   Section        0  system_tcpl03x.o(.text.SystemInit)
+    __arm_cp.7_0                             0x0000053c   Number         4  system_tcpl03x.o(.text.SystemInit)
+    __arm_cp.7_1                             0x00000540   Number         4  system_tcpl03x.o(.text.SystemInit)
+    __arm_cp.7_2                             0x00000544   Number         4  system_tcpl03x.o(.text.SystemInit)
+    __arm_cp.7_3                             0x00000548   Number         4  system_tcpl03x.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x0000054c   Section        0  app.o(.text.TcMain)
+    [Anonymous Symbol]                       0x00000560   Section        0  tcpl03x_ll_sci.o(.text.UART_IRQHandler)
+    __arm_cp.25_0                            0x00000580   Number         4  tcpl03x_ll_sci.o(.text.UART_IRQHandler)
+    __arm_cp.25_1                            0x00000584   Number         4  tcpl03x_ll_sci.o(.text.UART_IRQHandler)
+    __arm_cp.25_2                            0x00000588   Number         4  tcpl03x_ll_sci.o(.text.UART_IRQHandler)
+    __NVIC_SetPriority                       0x0000058d   Thumb Code    36  tcpl03x_ll_sci.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x0000058c   Section        0  tcpl03x_ll_sci.o(.text.__NVIC_SetPriority)
+    __arm_cp.9_0                             0x000005b0   Number         4  tcpl03x_ll_sci.o(.text.__NVIC_SetPriority)
+    __NVIC_SystemReset                       0x000005b5   Thumb Code    20  dfu_uds_manager.o(.text.__NVIC_SystemReset)
+    [Anonymous Symbol]                       0x000005b4   Section        0  dfu_uds_manager.o(.text.__NVIC_SystemReset)
+    __NVIC_SystemReset                       0x000005c9   Thumb Code    20  tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset)
+    [Anonymous Symbol]                       0x000005c8   Section        0  tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset)
+    __arm_cp.1_0                             0x000005dc   Number         4  tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset)
+    __arm_cp.1_1                             0x000005e0   Number         4  tcpl03x_ll_cortex.o(.text.__NVIC_SystemReset)
+    addRoundKey                              0x000005e5   Thumb Code    72  aes_cmac.o(.text.addRoundKey)
+    [Anonymous Symbol]                       0x000005e4   Section        0  aes_cmac.o(.text.addRoundKey)
+    __arm_cp.3_0                             0x0000062c   Number         4  aes_cmac.o(.text.addRoundKey)
+    [Anonymous Symbol]                       0x00000630   Section        0  aes_cmac.o(.text.aes_cmac)
+    assign_config_word_handle                0x000006e5   Thumb Code   220  dfu_uds_manager.o(.text.assign_config_word_handle)
+    [Anonymous Symbol]                       0x000006e4   Section        0  dfu_uds_manager.o(.text.assign_config_word_handle)
+    [Anonymous Symbol]                       0x000007c0   Section        0  utilities.o(.text.bit_invert_swap_func)
+    __arm_cp.2_0                             0x00000818   Number         4  utilities.o(.text.bit_invert_swap_func)
+    [Anonymous Symbol]                       0x0000081c   Section        0  utilities.o(.text.checksum_calculate_func)
+    clear_dtc_info_handle                    0x0000083b   Thumb Code    14  dfu_uds_manager.o(.text.clear_dtc_info_handle)
+    [Anonymous Symbol]                       0x0000083a   Section        0  dfu_uds_manager.o(.text.clear_dtc_info_handle)
+    [Anonymous Symbol]                       0x00000848   Section        0  dfu_uds_manager.o(.text.communcation_control_handle)
+    convertArrayToStr                        0x000008a5   Thumb Code    32  aes_cmac.o(.text.convertArrayToStr)
+    [Anonymous Symbol]                       0x000008a4   Section        0  aes_cmac.o(.text.convertArrayToStr)
+    convertToIntArray                        0x000008c5   Thumb Code    34  aes_cmac.o(.text.convertToIntArray)
+    [Anonymous Symbol]                       0x000008c4   Section        0  aes_cmac.o(.text.convertToIntArray)
+    cpmpare_key                              0x000008e7   Thumb Code    32  dfu_uds_manager.o(.text.cpmpare_key)
+    [Anonymous Symbol]                       0x000008e6   Section        0  dfu_uds_manager.o(.text.cpmpare_key)
+    [Anonymous Symbol]                       0x00000908   Section        0  utilities.o(.text.crc16_calculate_func)
+    __arm_cp.3_0                             0x0000094c   Number         4  utilities.o(.text.crc16_calculate_func)
+    __arm_cp.3_1                             0x00000950   Number         4  utilities.o(.text.crc16_calculate_func)
+    [Anonymous Symbol]                       0x00000954   Section        0  system_tcpl03x.o(.text.data_rw_init)
+    __arm_cp.0_0                             0x00000980   Number         4  system_tcpl03x.o(.text.data_rw_init)
+    __arm_cp.0_1                             0x00000984   Number         4  system_tcpl03x.o(.text.data_rw_init)
+    __arm_cp.0_2                             0x00000988   Number         4  system_tcpl03x.o(.text.data_rw_init)
+    [Anonymous Symbol]                       0x0000098c   Section        0  pal_systick.o(.text.delay_ms)
+    __arm_cp.4_0                             0x000009a8   Number         4  pal_systick.o(.text.delay_ms)
+    dfu_do_notify_cp                         0x000009ad   Thumb Code    52  dfu_uds_manager.o(.text.dfu_do_notify_cp)
+    [Anonymous Symbol]                       0x000009ac   Section        0  dfu_uds_manager.o(.text.dfu_do_notify_cp)
+    dfu_do_notify_cp_ex                      0x000009e1   Thumb Code    48  dfu_uds_manager.o(.text.dfu_do_notify_cp_ex)
+    [Anonymous Symbol]                       0x000009e0   Section        0  dfu_uds_manager.o(.text.dfu_do_notify_cp_ex)
+    dfu_do_notify_response                   0x00000a11   Thumb Code    32  dfu_uds_manager.o(.text.dfu_do_notify_response)
+    [Anonymous Symbol]                       0x00000a10   Section        0  dfu_uds_manager.o(.text.dfu_do_notify_response)
+    [Anonymous Symbol]                       0x00000a30   Section        0  dfu_uds_manager.o(.text.dfu_manager_init)
+    __arm_cp.28_0                            0x00000a60   Number         4  dfu_uds_manager.o(.text.dfu_manager_init)
+    __arm_cp.28_3                            0x00000a64   Number         4  dfu_uds_manager.o(.text.dfu_manager_init)
+    __arm_cp.28_4                            0x00000a68   Number         4  dfu_uds_manager.o(.text.dfu_manager_init)
+    [Anonymous Symbol]                       0x00000a6c   Section        0  dfu_uds_manager.o(.text.dfu_session_parameter_resp)
+    [Anonymous Symbol]                       0x00000a8c   Section        0  dfu_uds_manager.o(.text.dfu_store_system_data_init)
+    [Anonymous Symbol]                       0x00000ab8   Section        0  dfu_uds_manager.o(.text.dfu_timeout_handle)
+    __arm_cp.26_1                            0x00000ad4   Number         4  dfu_uds_manager.o(.text.dfu_timeout_handle)
+    __arm_cp.26_2                            0x00000ad8   Number         4  dfu_uds_manager.o(.text.dfu_timeout_handle)
+    [Anonymous Symbol]                       0x00000adc   Section        0  dfu_uds_manager.o(.text.diagnostic_session_handle)
+    [Anonymous Symbol]                       0x00000b08   Section        0  dfu_uds_manager.o(.text.dtc_control_handle)
+    __arm_cp.9_0                             0x00000b54   Number         4  dfu_uds_manager.o(.text.dtc_control_handle)
+    extendKey                                0x00000b59   Thumb Code   192  aes_cmac.o(.text.extendKey)
+    [Anonymous Symbol]                       0x00000b58   Section        0  aes_cmac.o(.text.extendKey)
+    __arm_cp.1_0                             0x00000c18   Number         4  aes_cmac.o(.text.extendKey)
+    __arm_cp.1_1                             0x00000c1c   Number         4  aes_cmac.o(.text.extendKey)
+    Rcon                                     0x00000c20   Number         0  aes_cmac.o(.text.extendKey)
+    firmware_info_sync_handle                0x00000c49   Thumb Code   132  dfu_uds_manager.o(.text.firmware_info_sync_handle)
+    [Anonymous Symbol]                       0x00000c48   Section        0  dfu_uds_manager.o(.text.firmware_info_sync_handle)
+    __arm_cp.14_0                            0x00000ccc   Number         4  dfu_uds_manager.o(.text.firmware_info_sync_handle)
+    __arm_cp.14_1                            0x00000cd0   Number         4  dfu_uds_manager.o(.text.firmware_info_sync_handle)
+    __arm_cp.14_2                            0x00000cd4   Number         4  dfu_uds_manager.o(.text.firmware_info_sync_handle)
+    [Anonymous Symbol]                       0x00000cd8   Section        0  aes_cmac.o(.text.generate_subkey)
+    __arm_cp.13_0                            0x00000d4c   Number         4  aes_cmac.o(.text.generate_subkey)
+    leftLoop4int                             0x00000d51   Thumb Code    44  aes_cmac.o(.text.leftLoop4int)
+    [Anonymous Symbol]                       0x00000d50   Section        0  aes_cmac.o(.text.leftLoop4int)
+    [Anonymous Symbol]                       0x00000d7c   Section        0  aes_cmac.o(.text.leftshift_onebit)
+    [Anonymous Symbol]                       0x00000da0   Section        0  pal_lin_tl_slv_cus.o(.text.lin_callback_handle)
+    __arm_cp.4_0                             0x00000ff0   Number         4  pal_lin_tl_slv_cus.o(.text.lin_callback_handle)
+    __arm_cp.4_2                             0x00000ff4   Number         4  pal_lin_tl_slv_cus.o(.text.lin_callback_handle)
+    [Anonymous Symbol]                       0x00000ff8   Section        0  dfu_uds_manager.o(.text.lin_diag_service_handle)
+    __arm_cp.25_0                            0x00001064   Number         4  dfu_uds_manager.o(.text.lin_diag_service_handle)
+    __arm_cp.25_1                            0x00001068   Number         4  dfu_uds_manager.o(.text.lin_diag_service_handle)
+    __arm_cp.25_3                            0x0000106c   Number         4  dfu_uds_manager.o(.text.lin_diag_service_handle)
+    [Anonymous Symbol]                       0x00001070   Section        0  dfu_uds_manager.o(.text.lin_exception_handle)
+    __arm_cp.23_0                            0x000010bc   Number         4  dfu_uds_manager.o(.text.lin_exception_handle)
+    __arm_cp.23_1                            0x000010c0   Number         4  dfu_uds_manager.o(.text.lin_exception_handle)
+    __arm_cp.23_2                            0x000010c4   Number         4  dfu_uds_manager.o(.text.lin_exception_handle)
+    __arm_cp.23_3                            0x000010c8   Number         4  dfu_uds_manager.o(.text.lin_exception_handle)
+    [Anonymous Symbol]                       0x000010cc   Section        0  pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad)
+    __arm_cp.3_0                             0x000010d4   Number         4  pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad)
+    [Anonymous Symbol]                       0x000010d8   Section        0  pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback)
+    __arm_cp.9_1                             0x00001234   Number         4  pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback)
+    [Anonymous Symbol]                       0x00001238   Section        0  pal_lin_tl_slv_cus.o(.text.lin_sci_baudrate_update)
+    [Anonymous Symbol]                       0x0000123c   Section        0  pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response)
+    __arm_cp.7_0                             0x0000129c   Number         4  pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response)
+    [Anonymous Symbol]                       0x000012a0   Section        0  pal_lin_tl_slv_cus.o(.text.lin_uds_receive)
+    __arm_cp.8_0                             0x000013e4   Number         4  pal_lin_tl_slv_cus.o(.text.lin_uds_receive)
+    __arm_cp.8_1                             0x000013e8   Number         4  pal_lin_tl_slv_cus.o(.text.lin_uds_receive)
+    [Anonymous Symbol]                       0x000013ec   Section        0  pal_lin_tl_slv_cus.o(.text.lin_uds_send)
+    __arm_cp.6_0                             0x000014fc   Number         4  pal_lin_tl_slv_cus.o(.text.lin_uds_send)
+    __arm_cp.6_1                             0x00001500   Number         4  pal_lin_tl_slv_cus.o(.text.lin_uds_send)
+    [Anonymous Symbol]                       0x00001504   Section        0  dfu_uds_manager.o(.text.lin_update_random_value)
+    __arm_cp.22_0                            0x00001534   Number         4  dfu_uds_manager.o(.text.lin_update_random_value)
+    __arm_cp.22_1                            0x00001538   Number         4  dfu_uds_manager.o(.text.lin_update_random_value)
+    __arm_cp.22_2                            0x0000153c   Number         4  dfu_uds_manager.o(.text.lin_update_random_value)
+    [Anonymous Symbol]                       0x00001540   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_drv)
+    ll_flash_erase_reg_drv                   0x00001579   Thumb Code    76  tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv)
+    [Anonymous Symbol]                       0x00001578   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv)
+    __arm_cp.4_1                             0x000015c4   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_reg_drv)
+    [Anonymous Symbol]                       0x000015c8   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_read)
+    [Anonymous Symbol]                       0x0000168c   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write)
+    __arm_cp.9_0                             0x000016f8   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write)
+    __arm_cp.9_1                             0x000016fc   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write)
+    [Anonymous Symbol]                       0x00001700   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    __arm_cp.7_0                             0x00001744   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    __arm_cp.7_1                             0x00001748   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    __arm_cp.7_2                             0x0000174c   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    __arm_cp.7_3                             0x00001750   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    ll_flash_write_reg_drv                   0x00001755   Thumb Code   184  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv)
+    [Anonymous Symbol]                       0x00001754   Section        0  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv)
+    __arm_cp.8_0                             0x0000180c   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv)
+    __arm_cp.8_1                             0x00001810   Number         4  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_reg_drv)
+    [Anonymous Symbol]                       0x00001814   Section        0  tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config)
+    __arm_cp.8_0                             0x00001834   Number         4  tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config)
+    [Anonymous Symbol]                       0x00001838   Section        0  tcpl03x_ll_sci.o(.text.ll_lin_pid_read)
+    __arm_cp.16_0                            0x0000185c   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_pid_read)
+    __arm_cp.16_1                            0x00001860   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_pid_read)
+    [Anonymous Symbol]                       0x00001864   Section        0  tcpl03x_ll_sci.o(.text.ll_lin_read_byte)
+    __arm_cp.17_0                            0x0000188c   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_read_byte)
+    __arm_cp.17_1                            0x00001890   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_read_byte)
+    [Anonymous Symbol]                       0x00001894   Section        0  tcpl03x_ll_sci.o(.text.ll_lin_receive)
+    __arm_cp.14_0                            0x000018d0   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_receive)
+    __arm_cp.14_1                            0x000018d4   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_receive)
+    [Anonymous Symbol]                       0x000018d8   Section        0  tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set)
+    [Anonymous Symbol]                       0x00001900   Section        0  tcpl03x_ll_sci.o(.text.ll_lin_transmit)
+    __arm_cp.13_0                            0x000019b4   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_transmit)
+    __arm_cp.13_1                            0x000019b8   Number         4  tcpl03x_ll_sci.o(.text.ll_lin_transmit)
+    [Anonymous Symbol]                       0x000019bc   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_1                             0x00001a90   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_2                             0x00001a94   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_3                             0x00001a98   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_4                             0x00001a9c   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_5                             0x00001aa0   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_7                             0x00001aa4   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_8                             0x00001aa8   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    __arm_cp.6_9                             0x00001aac   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    [Anonymous Symbol]                       0x00001ab0   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_deinit)
+    __arm_cp.1_2                             0x00001b10   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_deinit)
+    __arm_cp.1_6                             0x00001b14   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_deinit)
+    [Anonymous Symbol]                       0x00001b18   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_2                             0x00001cd0   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_6                             0x00001cd4   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_7                             0x00001cd8   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_8                             0x00001cdc   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_9                             0x00001ce0   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    __arm_cp.5_10                            0x00001ce4   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    [Anonymous Symbol]                       0x00001ce8   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_isr_enable)
+    __arm_cp.7_0                             0x00001d20   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_isr_enable)
+    __arm_cp.7_2                             0x00001d24   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_isr_enable)
+    [Anonymous Symbol]                       0x00001d28   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_state_clear)
+    __arm_cp.0_0                             0x00001d90   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_state_clear)
+    __arm_cp.0_1                             0x00001d94   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_state_clear)
+    [Anonymous Symbol]                       0x00001d98   Section        0  tcpl03x_ll_sci.o(.text.ll_sci_transmit)
+    __arm_cp.11_0                            0x00001e14   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_transmit)
+    __arm_cp.11_1                            0x00001e18   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_transmit)
+    __arm_cp.11_2                            0x00001e1c   Number         4  tcpl03x_ll_sci.o(.text.ll_sci_transmit)
+    [Anonymous Symbol]                       0x00001e20   Section        0  tcpl03x_ll_wdg.o(.text.ll_wdg_deinit)
+    __arm_cp.1_0                             0x00001e60   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_deinit)
+    __arm_cp.1_6                             0x00001e64   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_deinit)
+    __arm_cp.1_7                             0x00001e68   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_deinit)
+    [Anonymous Symbol]                       0x00001e6c   Section        0  tcpl03x_ll_wdg.o(.text.ll_wdg_enable)
+    __arm_cp.3_2                             0x00001e84   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_enable)
+    [Anonymous Symbol]                       0x00001e88   Section        0  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_0                             0x00001f0c   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_1                             0x00001f10   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_2                             0x00001f14   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_4                             0x00001f18   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_6                             0x00001f1c   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_7                             0x00001f20   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_8                             0x00001f24   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_9                             0x00001f28   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    __arm_cp.0_10                            0x00001f2c   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    [Anonymous Symbol]                       0x00001f30   Section        0  tcpl03x_ll_wdg.o(.text.ll_wdg_reload)
+    __arm_cp.4_0                             0x00001f44   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_reload)
+    __arm_cp.4_1                             0x00001f48   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_reload)
+    __arm_cp.4_2                             0x00001f4c   Number         4  tcpl03x_ll_wdg.o(.text.ll_wdg_reload)
+    [Anonymous Symbol]                       0x00001f50   Section        0  logging.o(.text.logging_deinit)
+    [Anonymous Symbol]                       0x00001f52   Section        0  logging.o(.text.logging_init)
+    [Anonymous Symbol]                       0x00001f54   Section        0  dfu_uds_manager.o(.text.main_loops)
+    __arm_cp.29_0                            0x00002014   Number         4  dfu_uds_manager.o(.text.main_loops)
+    __arm_cp.29_1                            0x00002018   Number         4  dfu_uds_manager.o(.text.main_loops)
+    __arm_cp.29_3                            0x0000201c   Number         4  dfu_uds_manager.o(.text.main_loops)
+    __arm_cp.29_4                            0x00002020   Number         4  dfu_uds_manager.o(.text.main_loops)
+    [Anonymous Symbol]                       0x00002024   Section        0  dfu_uds_manager.o(.text.os_task_update)
+    __arm_cp.30_1                            0x00002084   Number         4  dfu_uds_manager.o(.text.os_task_update)
+    __arm_cp.30_2                            0x00002088   Number         4  dfu_uds_manager.o(.text.os_task_update)
+    [Anonymous Symbol]                       0x0000208c   Section        0  aes_cmac.o(.text.padding)
+    [Anonymous Symbol]                       0x000020b0   Section        0  pal_lin_comm.o(.text.pal_lin_abort_handle)
+    [Anonymous Symbol]                       0x000020ca   Section        0  pal_lin_comm.o(.text.pal_lin_checksum_calib)
+    [Anonymous Symbol]                       0x000020e2   Section        0  pal_lin_comm.o(.text.pal_lin_deinit)
+    [Anonymous Symbol]                       0x000020ec   Section        0  pal_lin_comm.o(.text.pal_lin_init)
+    __arm_cp.0_0                             0x00002120   Number         4  pal_lin_comm.o(.text.pal_lin_init)
+    [Anonymous Symbol]                       0x00002124   Section        0  pal_lin_comm.o(.text.pal_lin_parity_calib)
+    [Anonymous Symbol]                       0x00002170   Section        0  pal_lin_comm.o(.text.pal_lin_read_byte)
+    [Anonymous Symbol]                       0x00002186   Section        0  pal_lin_comm.o(.text.pal_lin_rx_response)
+    [Anonymous Symbol]                       0x0000218e   Section        0  pal_lin_comm.o(.text.pal_lin_tx_4byte)
+    [Anonymous Symbol]                       0x00002196   Section        0  pal_lin_comm.o(.text.pal_lin_tx_response)
+    [Anonymous Symbol]                       0x000021a4   Section        0  pal_store.o(.text.pal_store_data_get)
+    [Anonymous Symbol]                       0x00002204   Section        0  pal_store.o(.text.pal_store_data_set)
+    __arm_cp.0_0                             0x00002278   Number         4  pal_store.o(.text.pal_store_data_set)
+    __arm_cp.0_1                             0x0000227c   Number         4  pal_store.o(.text.pal_store_data_set)
+    __arm_cp.0_2                             0x00002280   Number         4  pal_store.o(.text.pal_store_data_set)
+    [Anonymous Symbol]                       0x00002284   Section        0  pal_store.o(.text.pal_store_read)
+    read_by_identify_handle                  0x00002291   Thumb Code   136  dfu_uds_manager.o(.text.read_by_identify_handle)
+    [Anonymous Symbol]                       0x00002290   Section        0  dfu_uds_manager.o(.text.read_by_identify_handle)
+    __arm_cp.21_0                            0x00002318   Number         4  dfu_uds_manager.o(.text.read_by_identify_handle)
+    [Anonymous Symbol]                       0x0000231c   Section        0  dfu_uds_manager.o(.text.read_data_by_identify_handle)
+    __arm_cp.3_0                             0x00002438   Number         4  dfu_uds_manager.o(.text.read_data_by_identify_handle)
+    request_download_handle                  0x0000243d   Thumb Code   264  dfu_uds_manager.o(.text.request_download_handle)
+    [Anonymous Symbol]                       0x0000243c   Section        0  dfu_uds_manager.o(.text.request_download_handle)
+    __arm_cp.16_1                            0x00002544   Number         4  dfu_uds_manager.o(.text.request_download_handle)
+    __arm_cp.16_3                            0x00002548   Number         4  dfu_uds_manager.o(.text.request_download_handle)
+    request_transfer_exit_handle             0x0000254d   Thumb Code    96  dfu_uds_manager.o(.text.request_transfer_exit_handle)
+    [Anonymous Symbol]                       0x0000254c   Section        0  dfu_uds_manager.o(.text.request_transfer_exit_handle)
+    reset_handle                             0x000025ad   Thumb Code    78  dfu_uds_manager.o(.text.reset_handle)
+    [Anonymous Symbol]                       0x000025ac   Section        0  dfu_uds_manager.o(.text.reset_handle)
+    routine_control_handle                   0x000025fd   Thumb Code   564  dfu_uds_manager.o(.text.routine_control_handle)
+    [Anonymous Symbol]                       0x000025fc   Section        0  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_0                            0x00002830   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_1                            0x00002834   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_2                            0x00002838   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_3                            0x0000283c   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_4                            0x00002840   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_5                            0x00002844   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_6                            0x00002848   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    __arm_cp.15_7                            0x0000284c   Number         4  dfu_uds_manager.o(.text.routine_control_handle)
+    security_access_handle                   0x00002851   Thumb Code   508  dfu_uds_manager.o(.text.security_access_handle)
+    [Anonymous Symbol]                       0x00002850   Section        0  dfu_uds_manager.o(.text.security_access_handle)
+    __arm_cp.13_0                            0x00002a4c   Number         4  dfu_uds_manager.o(.text.security_access_handle)
+    __arm_cp.13_1                            0x00002a50   Number         4  dfu_uds_manager.o(.text.security_access_handle)
+    __arm_cp.13_2                            0x00002a54   Number         4  dfu_uds_manager.o(.text.security_access_handle)
+    session_control_handle                   0x00002a99   Thumb Code   256  dfu_uds_manager.o(.text.session_control_handle)
+    [Anonymous Symbol]                       0x00002a98   Section        0  dfu_uds_manager.o(.text.session_control_handle)
+    __arm_cp.11_0                            0x00002b98   Number         4  dfu_uds_manager.o(.text.session_control_handle)
+    __arm_cp.11_1                            0x00002b9c   Number         4  dfu_uds_manager.o(.text.session_control_handle)
+    __arm_cp.11_2                            0x00002ba0   Number         4  dfu_uds_manager.o(.text.session_control_handle)
+    __arm_cp.11_3                            0x00002ba4   Number         4  dfu_uds_manager.o(.text.session_control_handle)
+    [Anonymous Symbol]                       0x00002ba8   Section        0  aes_cmac.o(.text.sha256)
+    __arm_cp.16_0                            0x00002e04   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_1                            0x00002e08   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_2                            0x00002e0c   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_3                            0x00002e10   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_4                            0x00002e14   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_5                            0x00002e18   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_6                            0x00002e1c   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_7                            0x00002e20   Number         4  aes_cmac.o(.text.sha256)
+    __arm_cp.16_8                            0x00002e24   Number         4  aes_cmac.o(.text.sha256)
+    shiftRows                                0x00002e29   Thumb Code   104  aes_cmac.o(.text.shiftRows)
+    [Anonymous Symbol]                       0x00002e28   Section        0  aes_cmac.o(.text.shiftRows)
+    __arm_cp.10_0                            0x00002e90   Number         4  aes_cmac.o(.text.shiftRows)
+    subBytes                                 0x00002e95   Thumb Code    48  aes_cmac.o(.text.subBytes)
+    [Anonymous Symbol]                       0x00002e94   Section        0  aes_cmac.o(.text.subBytes)
+    __arm_cp.9_0                             0x00002ec4   Number         4  aes_cmac.o(.text.subBytes)
+    [Anonymous Symbol]                       0x00002ec8   Section        0  system_tcpl03x.o(.text.sys_core_clock_update)
+    __arm_cp.3_0                             0x00002f00   Number         4  system_tcpl03x.o(.text.sys_core_clock_update)
+    __arm_cp.3_1                             0x00002f04   Number         4  system_tcpl03x.o(.text.sys_core_clock_update)
+    __arm_cp.3_2                             0x00002f08   Number         4  system_tcpl03x.o(.text.sys_core_clock_update)
+    __arm_cp.3_3                             0x00002f0c   Number         4  system_tcpl03x.o(.text.sys_core_clock_update)
+    [Anonymous Symbol]                       0x00002f10   Section        0  system_tcpl03x.o(.text.sys_hclk_config)
+    [Anonymous Symbol]                       0x00002f50   Section        0  system_tcpl03x.o(.text.sys_hclk_freq_get)
+    __arm_cp.1_0                             0x00002f6c   Number         4  system_tcpl03x.o(.text.sys_hclk_freq_get)
+    __arm_cp.1_1                             0x00002f70   Number         4  system_tcpl03x.o(.text.sys_hclk_freq_get)
+    [Anonymous Symbol]                       0x00002f74   Section        0  system_tcpl03x.o(.text.sys_pclk_config)
+    __arm_cp.6_0                             0x00002fd4   Number         4  system_tcpl03x.o(.text.sys_pclk_config)
+    __arm_cp.6_1                             0x00002fd8   Number         4  system_tcpl03x.o(.text.sys_pclk_config)
+    __arm_cp.6_3                             0x00002fdc   Number         4  system_tcpl03x.o(.text.sys_pclk_config)
+    [Anonymous Symbol]                       0x00002fe0   Section        0  system_tcpl03x.o(.text.sys_pclk_freq_get)
+    __arm_cp.2_0                             0x00002ff4   Number         4  system_tcpl03x.o(.text.sys_pclk_freq_get)
+    [Anonymous Symbol]                       0x00002ff8   Section        0  system_tcpl03x.o(.text.sys_trimvalue_load)
+    __arm_cp.4_0                             0x00003094   Number         4  system_tcpl03x.o(.text.sys_trimvalue_load)
+    __arm_cp.4_1                             0x00003098   Number         4  system_tcpl03x.o(.text.sys_trimvalue_load)
+    __arm_cp.4_2                             0x0000309c   Number         4  system_tcpl03x.o(.text.sys_trimvalue_load)
+    __arm_cp.4_3                             0x000030a0   Number         4  system_tcpl03x.o(.text.sys_trimvalue_load)
+    [Anonymous Symbol]                       0x000030a4   Section        0  pal_systick.o(.text.systick_diff)
+    __arm_cp.3_0                             0x000030bc   Number         4  pal_systick.o(.text.systick_diff)
+    transfer_data_handle                     0x000030c1   Thumb Code   304  dfu_uds_manager.o(.text.transfer_data_handle)
+    [Anonymous Symbol]                       0x000030c0   Section        0  dfu_uds_manager.o(.text.transfer_data_handle)
+    __arm_cp.17_1                            0x000031f0   Number         4  dfu_uds_manager.o(.text.transfer_data_handle)
+    __arm_cp.17_3                            0x000031f4   Number         4  dfu_uds_manager.o(.text.transfer_data_handle)
+    __arm_cp.17_4                            0x000031f8   Number         4  dfu_uds_manager.o(.text.transfer_data_handle)
+    uds_diag_DID_chk                         0x000031fd   Thumb Code    72  dfu_uds_manager.o(.text.uds_diag_DID_chk)
+    [Anonymous Symbol]                       0x000031fc   Section        0  dfu_uds_manager.o(.text.uds_diag_DID_chk)
+    __arm_cp.4_1                             0x00003244   Number         4  dfu_uds_manager.o(.text.uds_diag_DID_chk)
+    __arm_cp.4_5                             0x00003248   Number         4  dfu_uds_manager.o(.text.uds_diag_DID_chk)
+    [Anonymous Symbol]                       0x0000324c   Section        0  dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad)
+    __arm_cp.2_1                             0x0000326c   Number         4  dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad)
+    user_read_data_by_id                     0x00003271   Thumb Code   476  dfu_uds_manager.o(.text.user_read_data_by_id)
+    [Anonymous Symbol]                       0x00003270   Section        0  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_1                             0x00003458   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_2                             0x0000345c   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_3                             0x00003460   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_4                             0x00003464   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_5                             0x00003468   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_6                             0x0000346c   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_7                             0x00003470   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_8                             0x00003474   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_9                             0x00003478   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    __arm_cp.5_10                            0x0000347c   Number         4  dfu_uds_manager.o(.text.user_read_data_by_id)
+    [Anonymous Symbol]                       0x0000349c   Section        0  pal_wdg.o(.text.wdg_init)
+    [Anonymous Symbol]                       0x000034c4   Section        0  pal_wdg.o(.text.wdg_reload)
+    [Anonymous Symbol]                       0x000034cc   Section        0  aes_cmac.o(.text.xor_128)
+    colM                                     0x000034e4   Data          64  aes_cmac.o(.rodata.colM)
+    [Anonymous Symbol]                       0x000034e4   Section        0  aes_cmac.o(.rodata.colM)
+    sha256.k                                 0x0000359c   Data         256  aes_cmac.o(.rodata.sha256.k)
+    [Anonymous Symbol]                       0x0000359c   Section        0  aes_cmac.o(.rodata.sha256.k)
+    S                                        0x00003910   Data        1024  aes_cmac.o(.rodata.S)
+    [Anonymous Symbol]                       0x00003910   Section        0  aes_cmac.o(.rodata.S)
+    [Anonymous Symbol]                       0x10000042   Section        0  dfu_uds_manager.o(.data..L_MergedGlobals)
+    current_rcvd_nad                         0x10000064   Data           1  pal_lin_tl_slv_cus.o(.data..L_MergedGlobals)
+    [Anonymous Symbol]                       0x10000064   Section        0  pal_lin_tl_slv_cus.o(.data..L_MergedGlobals)
+    lin_rx_queue                             0x10000068   Data          12  pal_lin_tl_slv_cus.o(.data..L_MergedGlobals)
+    lin_tx_queue                             0x10000074   Data          12  pal_lin_tl_slv_cus.o(.data..L_MergedGlobals)
+    [Anonymous Symbol]                       0x100000d8   Section        0  aes_cmac.o(.bss..L_MergedGlobals)
+    [Anonymous Symbol]                       0x10000148   Section        0  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    lin_update_random_value.random_i         0x1000014f   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    lin_update_random_value.auto_add_cnt     0x10000150   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    main_loops.LoopCnt                       0x10000160   Data           4  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    lin_bus_state                            0x10000194   Data           1  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    [Anonymous Symbol]                       0x10000194   Section        0  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    lin_recv_ctx.0                           0x10000196   Data           1  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    g_uds_length                             0x10000198   Data           2  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    lin_recv_ctx.3                           0x1000019a   Data           2  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    lin_recv_ctx.4                           0x1000019c   Data           2  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    lin_frame                                0x1000019e   Data          10  pal_lin_tl_slv_cus.o(.bss..L_MergedGlobals.1)
+    gpio_isr_callback                        0x10000628   Data           4  tcpl03x_ll_gpio.o(.bss.gpio_isr_callback)
+    [Anonymous Symbol]                       0x10000628   Section        0  tcpl03x_ll_gpio.o(.bss.gpio_isr_callback)
+    sci_isr_callback                         0x100008e4   Data           8  tcpl03x_ll_sci.o(.bss.sci_isr_callback)
+    [Anonymous Symbol]                       0x100008e4   Section        0  tcpl03x_ll_sci.o(.bss.sci_isr_callback)
+    systick_count                            0x100008ec   Data           4  pal_systick.o(.bss.systick_count)
+    [Anonymous Symbol]                       0x100008ec   Section        0  pal_systick.o(.bss.systick_count)
+    w                                        0x10000930   Data         176  aes_cmac.o(.bss.w)
+    [Anonymous Symbol]                       0x10000930   Section        0  aes_cmac.o(.bss.w)
+    wdg_callback                             0x100009e0   Data           4  tcpl03x_ll_wdg.o(.bss.wdg_callback)
+    [Anonymous Symbol]                       0x100009e0   Section        0  tcpl03x_ll_wdg.o(.bss.wdg_callback)
+    STACK                                    0x100009e8   Section     1024  startup_tcpl03x.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __Vectors                                0x00000000   Data           4  startup_tcpl03x.o(RESET)
+    Reset_Handler                            0x000000c1   Thumb Code    30  startup_tcpl03x.o(.text)
+    __Vectors_End                            0x000000c0   Data           0  startup_tcpl03x.o(RESET)
+    __Vectors_Size                           0x000000c0   Number         0  startup_tcpl03x.o ABSOLUTE
+    Image$$RW_IRAM1$$Length                  0x000000d8   Number         0  anon$$obj.o ABSOLUTE
+    SVC_Handler                              0x000000e3   Thumb Code     2  startup_tcpl03x.o(.text)
+    PendSV_Handler                           0x000000e5   Thumb Code     2  startup_tcpl03x.o(.text)
+    ADC_IRQHandler                           0x000000e9   Thumb Code     0  startup_tcpl03x.o(.text)
+    PWM_IRQHandler                           0x000000e9   Thumb Code     0  startup_tcpl03x.o(.text)
+    RESERVED_S_IRQHandler                    0x000000e9   Thumb Code     0  startup_tcpl03x.o(.text)
+    RESERVED_T_IRQHandler                    0x000000e9   Thumb Code     0  startup_tcpl03x.o(.text)
+    TIMER_IRQHandler                         0x000000e9   Thumb Code     0  startup_tcpl03x.o(.text)
+    __aeabi_llsr                             0x00000105   Thumb Code    34  llushr.o(.text)
+    _ll_ushift_r                             0x00000105   Thumb Code     0  llushr.o(.text)
+    __aeabi_memcpy                           0x00000127   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x00000127   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x00000127   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memset                           0x0000014b   Thumb Code    14  memseta.o(.text)
+    __aeabi_memset4                          0x0000014b   Thumb Code     0  memseta.o(.text)
+    __aeabi_memset8                          0x0000014b   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr                           0x00000159   Thumb Code     4  memseta.o(.text)
+    __aeabi_memclr4                          0x00000159   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr8                          0x00000159   Thumb Code     0  memseta.o(.text)
+    _memset$wrapper                          0x0000015d   Thumb Code    18  memseta.o(.text)
+    memcmp                                   0x0000016f   Thumb Code    26  memcmp.o(.text)
+    __aeabi_uidiv                            0x00000189   Thumb Code     0  uidiv_div0.o(.text)
+    __aeabi_uidivmod                         0x00000189   Thumb Code    62  uidiv_div0.o(.text)
+    AES_128                                  0x000001c9   Thumb Code   256  aes_cmac.o(.text.AES_128)
+    AON_IRQHandler                           0x000002d1   Thumb Code    12  tcpl03x_ll_sys.o(.text.AON_IRQHandler)
+    FLASH_IRQHandler                         0x000002e1   Thumb Code    20  tcpl03x_ll_flash_cus.o(.text.FLASH_IRQHandler)
+    GPIO_IRQHandler                          0x000003cd   Thumb Code    40  tcpl03x_ll_gpio.o(.text.GPIO_IRQHandler)
+    Gen_CMACkey                              0x00000405   Thumb Code    76  aes_cmac.o(.text.Gen_CMACkey)
+    HardFault_Handler                        0x00000455   Thumb Code     4  tcpl03x_ll_cortex.o(.text.HardFault_Handler)
+    IWDG_IRQHandler                          0x00000459   Thumb Code    48  tcpl03x_ll_wdg.o(.text.IWDG_IRQHandler)
+    NMI_Handler                              0x00000491   Thumb Code     4  tcpl03x_ll_cortex.o(.text.NMI_Handler)
+    SCI_IRQHandler                           0x00000495   Thumb Code    52  tcpl03x_ll_sci.o(.text.SCI_IRQHandler)
+    SysTick_Handler                          0x000004cd   Thumb Code    16  pal_systick.o(.text.SysTick_Handler)
+    SystemInit                               0x000004e1   Thumb Code    92  system_tcpl03x.o(.text.SystemInit)
+    TcMain                                   0x0000054d   Thumb Code    18  app.o(.text.TcMain)
+    UART_IRQHandler                          0x00000561   Thumb Code    32  tcpl03x_ll_sci.o(.text.UART_IRQHandler)
+    aes_cmac                                 0x00000631   Thumb Code   178  aes_cmac.o(.text.aes_cmac)
+    bit_invert_swap_func                     0x000007c1   Thumb Code    88  utilities.o(.text.bit_invert_swap_func)
+    checksum_calculate_func                  0x0000081d   Thumb Code    30  utilities.o(.text.checksum_calculate_func)
+    communcation_control_handle              0x00000849   Thumb Code    92  dfu_uds_manager.o(.text.communcation_control_handle)
+    crc16_calculate_func                     0x00000909   Thumb Code    68  utilities.o(.text.crc16_calculate_func)
+    data_rw_init                             0x00000955   Thumb Code    44  system_tcpl03x.o(.text.data_rw_init)
+    delay_ms                                 0x0000098d   Thumb Code    28  pal_systick.o(.text.delay_ms)
+    dfu_manager_init                         0x00000a31   Thumb Code    48  dfu_uds_manager.o(.text.dfu_manager_init)
+    dfu_session_parameter_resp               0x00000a6d   Thumb Code    32  dfu_uds_manager.o(.text.dfu_session_parameter_resp)
+    dfu_store_system_data_init               0x00000a8d   Thumb Code    44  dfu_uds_manager.o(.text.dfu_store_system_data_init)
+    dfu_timeout_handle                       0x00000ab9   Thumb Code    28  dfu_uds_manager.o(.text.dfu_timeout_handle)
+    diagnostic_session_handle                0x00000add   Thumb Code    44  dfu_uds_manager.o(.text.diagnostic_session_handle)
+    dtc_control_handle                       0x00000b09   Thumb Code    76  dfu_uds_manager.o(.text.dtc_control_handle)
+    generate_subkey                          0x00000cd9   Thumb Code   116  aes_cmac.o(.text.generate_subkey)
+    leftshift_onebit                         0x00000d7d   Thumb Code    36  aes_cmac.o(.text.leftshift_onebit)
+    lin_callback_handle                      0x00000da1   Thumb Code   592  pal_lin_tl_slv_cus.o(.text.lin_callback_handle)
+    lin_diag_service_handle                  0x00000ff9   Thumb Code   108  dfu_uds_manager.o(.text.lin_diag_service_handle)
+    lin_exception_handle                     0x00001071   Thumb Code    76  dfu_uds_manager.o(.text.lin_exception_handle)
+    lin_get_uds_nad                          0x000010cd   Thumb Code     8  pal_lin_tl_slv_cus.o(.text.lin_get_uds_nad)
+    lin_lld_isr_callback                     0x000010d9   Thumb Code   348  pal_lin_tl_slv_cus.o(.text.lin_lld_isr_callback)
+    lin_sci_baudrate_update                  0x00001239   Thumb Code     2  pal_lin_tl_slv_cus.o(.text.lin_sci_baudrate_update)
+    lin_uds_negative_response                0x0000123d   Thumb Code    96  pal_lin_tl_slv_cus.o(.text.lin_uds_negative_response)
+    lin_uds_receive                          0x000012a1   Thumb Code   324  pal_lin_tl_slv_cus.o(.text.lin_uds_receive)
+    lin_uds_send                             0x000013ed   Thumb Code   272  pal_lin_tl_slv_cus.o(.text.lin_uds_send)
+    lin_update_random_value                  0x00001505   Thumb Code    48  dfu_uds_manager.o(.text.lin_update_random_value)
+    ll_flash_erase_drv                       0x00001541   Thumb Code    56  tcpl03x_ll_flash_cus.o(.text.ll_flash_erase_drv)
+    ll_flash_read                            0x000015c9   Thumb Code   194  tcpl03x_ll_flash_cus.o(.text.ll_flash_read)
+    ll_flash_smart_write                     0x0000168d   Thumb Code   108  tcpl03x_ll_flash_cus.o(.text.ll_flash_smart_write)
+    ll_flash_write_drv                       0x00001701   Thumb Code    68  tcpl03x_ll_flash_cus.o(.text.ll_flash_write_drv)
+    ll_gpio_afio_config                      0x00001815   Thumb Code    32  tcpl03x_ll_gpio.o(.text.ll_gpio_afio_config)
+    ll_lin_pid_read                          0x00001839   Thumb Code    36  tcpl03x_ll_sci.o(.text.ll_lin_pid_read)
+    ll_lin_read_byte                         0x00001865   Thumb Code    40  tcpl03x_ll_sci.o(.text.ll_lin_read_byte)
+    ll_lin_receive                           0x00001895   Thumb Code    60  tcpl03x_ll_sci.o(.text.ll_lin_receive)
+    ll_lin_rx_delay_set                      0x000018d9   Thumb Code    40  tcpl03x_ll_sci.o(.text.ll_lin_rx_delay_set)
+    ll_lin_transmit                          0x00001901   Thumb Code   180  tcpl03x_ll_sci.o(.text.ll_lin_transmit)
+    ll_sci_baudrate_config                   0x000019bd   Thumb Code   212  tcpl03x_ll_sci.o(.text.ll_sci_baudrate_config)
+    ll_sci_deinit                            0x00001ab1   Thumb Code    96  tcpl03x_ll_sci.o(.text.ll_sci_deinit)
+    ll_sci_init                              0x00001b19   Thumb Code   440  tcpl03x_ll_sci.o(.text.ll_sci_init)
+    ll_sci_isr_enable                        0x00001ce9   Thumb Code    56  tcpl03x_ll_sci.o(.text.ll_sci_isr_enable)
+    ll_sci_state_clear                       0x00001d29   Thumb Code   104  tcpl03x_ll_sci.o(.text.ll_sci_state_clear)
+    ll_sci_transmit                          0x00001d99   Thumb Code   124  tcpl03x_ll_sci.o(.text.ll_sci_transmit)
+    ll_wdg_deinit                            0x00001e21   Thumb Code    64  tcpl03x_ll_wdg.o(.text.ll_wdg_deinit)
+    ll_wdg_enable                            0x00001e6d   Thumb Code    24  tcpl03x_ll_wdg.o(.text.ll_wdg_enable)
+    ll_wdg_init                              0x00001e89   Thumb Code   132  tcpl03x_ll_wdg.o(.text.ll_wdg_init)
+    ll_wdg_reload                            0x00001f31   Thumb Code    20  tcpl03x_ll_wdg.o(.text.ll_wdg_reload)
+    logging_deinit                           0x00001f51   Thumb Code     2  logging.o(.text.logging_deinit)
+    logging_init                             0x00001f53   Thumb Code     2  logging.o(.text.logging_init)
+    main_loops                               0x00001f55   Thumb Code   192  dfu_uds_manager.o(.text.main_loops)
+    os_task_update                           0x00002025   Thumb Code    96  dfu_uds_manager.o(.text.os_task_update)
+    padding                                  0x0000208d   Thumb Code    36  aes_cmac.o(.text.padding)
+    pal_lin_abort_handle                     0x000020b1   Thumb Code    26  pal_lin_comm.o(.text.pal_lin_abort_handle)
+    pal_lin_checksum_calib                   0x000020cb   Thumb Code    24  pal_lin_comm.o(.text.pal_lin_checksum_calib)
+    pal_lin_deinit                           0x000020e3   Thumb Code     8  pal_lin_comm.o(.text.pal_lin_deinit)
+    pal_lin_init                             0x000020ed   Thumb Code    52  pal_lin_comm.o(.text.pal_lin_init)
+    pal_lin_parity_calib                     0x00002125   Thumb Code    76  pal_lin_comm.o(.text.pal_lin_parity_calib)
+    pal_lin_read_byte                        0x00002171   Thumb Code    22  pal_lin_comm.o(.text.pal_lin_read_byte)
+    pal_lin_rx_response                      0x00002187   Thumb Code     8  pal_lin_comm.o(.text.pal_lin_rx_response)
+    pal_lin_tx_4byte                         0x0000218f   Thumb Code     8  pal_lin_comm.o(.text.pal_lin_tx_4byte)
+    pal_lin_tx_response                      0x00002197   Thumb Code    12  pal_lin_comm.o(.text.pal_lin_tx_response)
+    pal_store_data_get                       0x000021a5   Thumb Code    96  pal_store.o(.text.pal_store_data_get)
+    pal_store_data_set                       0x00002205   Thumb Code   116  pal_store.o(.text.pal_store_data_set)
+    pal_store_read                           0x00002285   Thumb Code    12  pal_store.o(.text.pal_store_read)
+    read_data_by_identify_handle             0x0000231d   Thumb Code   284  dfu_uds_manager.o(.text.read_data_by_identify_handle)
+    sha256                                   0x00002ba9   Thumb Code   604  aes_cmac.o(.text.sha256)
+    sys_core_clock_update                    0x00002ec9   Thumb Code    56  system_tcpl03x.o(.text.sys_core_clock_update)
+    sys_hclk_config                          0x00002f11   Thumb Code    64  system_tcpl03x.o(.text.sys_hclk_config)
+    sys_hclk_freq_get                        0x00002f51   Thumb Code    28  system_tcpl03x.o(.text.sys_hclk_freq_get)
+    sys_pclk_config                          0x00002f75   Thumb Code    96  system_tcpl03x.o(.text.sys_pclk_config)
+    sys_pclk_freq_get                        0x00002fe1   Thumb Code    20  system_tcpl03x.o(.text.sys_pclk_freq_get)
+    sys_trimvalue_load                       0x00002ff9   Thumb Code   156  system_tcpl03x.o(.text.sys_trimvalue_load)
+    systick_diff                             0x000030a5   Thumb Code    24  pal_systick.o(.text.systick_diff)
+    uds_diagnostic_configword_remap_nad      0x0000324d   Thumb Code    32  dfu_uds_manager.o(.text.uds_diagnostic_configword_remap_nad)
+    wdg_init                                 0x0000349d   Thumb Code    40  pal_wdg.o(.text.wdg_init)
+    wdg_reload                               0x000034c5   Thumb Code     8  pal_wdg.o(.text.wdg_reload)
+    xor_128                                  0x000034cd   Thumb Code    22  aes_cmac.o(.text.xor_128)
+    dfu_process_ctx                          0x00003524   Data         120  dfu_uds_manager.o(.rodata.dfu_process_ctx)
+    boot_version                             0x00003900   Data           8  dfu_uds_manager.o(.ARM.__at_0x00003900)
+    hardware_version                         0x00003908   Data           8  dfu_uds_manager.o(.ARM.__at_0x00003908)
+    Load$$RW_IRAM1$$Base                     0x00003d10   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RW_IRAM1$$Base                    0x10000000   Number         0  anon$$obj.o ABSOLUTE
+    flash_driver                             0x10000000   Data          66  dfu_uds_manager.o(.ARM.__at_0x10000000)
+    lin_configured_NAD                       0x10000042   Data           1  dfu_uds_manager.o(.data..L_MergedGlobals)
+    uds_request_info                         0x10000043   Data           1  dfu_uds_manager.o(.data..L_MergedGlobals)
+    seed                                     0x10000044   Data          16  dfu_uds_manager.o(.data..L_MergedGlobals)
+    key                                      0x10000054   Data          16  dfu_uds_manager.o(.data..L_MergedGlobals)
+    SystemCoreClock                          0x10000080   Data           4  system_tcpl03x.o(.data.SystemCoreClock)
+    const_Rb                                 0x10000084   Data          16  aes_cmac.o(.data.const_Rb)
+    flash_driver_ciper                       0x10000094   Data          56  tcpl03x_ll_flash_cus.o(.data.flash_driver_ciper)
+    g_pfFLASH_DRV_EraseSector                0x100000cc   Data           4  tcpl03x_ll_flash_cus.o(.data.g_pfFLASH_DRV_EraseSector)
+    g_tpfFLASH_DRV_Program                   0x100000d0   Data           4  tcpl03x_ll_flash_cus.o(.data.g_tpfFLASH_DRV_Program)
+    Image$$RW_IRAM1$$ZI$$Base                0x100000d8   Number         0  anon$$obj.o ABSOLUTE
+    const_Zero                               0x100000d8   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gL                                       0x100000e8   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gK1                                      0x100000f8   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gK2                                      0x10000108   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gY                                       0x10000118   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gM_last                                  0x10000128   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    gPadded                                  0x10000138   Data          16  aes_cmac.o(.bss..L_MergedGlobals)
+    seed_cmac_succ                           0x10000148   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    flashdrv_cmac_succ                       0x10000149   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    app_cmac_succ                            0x1000014a   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    seed_00_ret                              0x1000014b   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    app_cmac_start                           0x1000014c   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    unlock_failed_store_flag                 0x1000014d   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    diagnostic_session_overtime_flag         0x1000014e   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    clear_wdg_cnt                            0x10000151   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    g_config_word_state                      0x10000152   Data           1  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    g_user_info                              0x10000153   Data           2  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    timer_1s_cnt                             0x10000156   Data           2  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    lock_failed_cnt                          0x10000158   Data           2  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    g_ota_info                               0x1000015a   Data           3  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    seed_use                                 0x10000164   Data          16  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    flash_driver_cmac                        0x10000174   Data          16  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    app_cmac                                 0x10000184   Data          16  dfu_uds_manager.o(.bss..L_MergedGlobals.1)
+    dfu_ctx                                  0x100001a8   Data        1084  dfu_uds_manager.o(.bss.dfu_ctx)
+    diagnosticTxBuffer                       0x100005e4   Data          66  dfu_uds_manager.o(.bss.diagnosticTxBuffer)
+    rx_queue_data                            0x1000062c   Data         696  pal_lin_tl_slv_cus.o(.bss.rx_queue_data)
+    tx_queue_data                            0x100008f0   Data          64  pal_lin_tl_slv_cus.o(.bss.tx_queue_data)
+    Image$$RW_IRAM1$$ZI$$Limit               0x10000de8   Number         0  anon$$obj.o ABSOLUTE
+    __initial_sp                             0x10000de8   Data           0  startup_tcpl03x.o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x000000c1
+
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00003de8, Max: 0x00003dff, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00003d10, Max: 0x00003dff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x000000c0   Data   RO          194    RESET               startup_tcpl03x.o
+    0x000000c0   0x000000c0   0x00000044   Code   RO          195  * .text               startup_tcpl03x.o
+    0x00000104   0x00000104   0x00000022   Code   RO          591    .text               mc_p.l(llushr.o)
+    0x00000126   0x00000126   0x00000024   Code   RO          593    .text               mc_p.l(memcpya.o)
+    0x0000014a   0x0000014a   0x00000024   Code   RO          595    .text               mc_p.l(memseta.o)
+    0x0000016e   0x0000016e   0x0000001a   Code   RO          597    .text               mc_p.l(memcmp.o)
+    0x00000188   0x00000188   0x0000003e   Code   RO          611    .text               mc_p.l(uidiv_div0.o)
+    0x000001c6   0x000001c6   0x00000002   PAD
+    0x000001c8   0x000001c8   0x00000108   Code   RO           26    .text.AES_128       aes_cmac.o
+    0x000002d0   0x000002d0   0x00000010   Code   RO          357    .text.AON_IRQHandler  tcpl03x_ll_sys.o
+    0x000002e0   0x000002e0   0x00000020   Code   RO          414    .text.FLASH_IRQHandler  tcpl03x_ll_flash_cus.o
+    0x00000300   0x00000300   0x0000007e   Code   RO           50    .text.GFMul         aes_cmac.o
+    0x0000037e   0x0000037e   0x00000014   Code   RO           58    .text.GFMul12       aes_cmac.o
+    0x00000392   0x00000392   0x00000018   Code   RO           56    .text.GFMul4        aes_cmac.o
+    0x000003aa   0x000003aa   0x00000016   Code   RO           54    .text.GFMul8        aes_cmac.o
+    0x000003c0   0x000003c0   0x0000000c   Code   RO           52    .text.GFMul9        aes_cmac.o
+    0x000003cc   0x000003cc   0x00000038   Code   RO          267    .text.GPIO_IRQHandler  tcpl03x_ll_gpio.o
+    0x00000404   0x00000404   0x00000050   Code   RO           40    .text.Gen_CMACkey   aes_cmac.o
+    0x00000454   0x00000454   0x00000004   Code   RO          233    .text.HardFault_Handler  tcpl03x_ll_cortex.o
+    0x00000458   0x00000458   0x00000038   Code   RO          379    .text.IWDG_IRQHandler  tcpl03x_ll_wdg.o
+    0x00000490   0x00000490   0x00000004   Code   RO          229    .text.NMI_Handler   tcpl03x_ll_cortex.o
+    0x00000494   0x00000494   0x00000038   Code   RO          326    .text.SCI_IRQHandler  tcpl03x_ll_sci.o
+    0x000004cc   0x000004cc   0x00000014   Code   RO          501    .text.SysTick_Handler  pal_systick.o
+    0x000004e0   0x000004e0   0x0000006c   Code   RO          216    .text.SystemInit    system_tcpl03x.o
+    0x0000054c   0x0000054c   0x00000012   Code   RO            2    .text.TcMain        app.o
+    0x0000055e   0x0000055e   0x00000002   PAD
+    0x00000560   0x00000560   0x0000002c   Code   RO          328    .text.UART_IRQHandler  tcpl03x_ll_sci.o
+    0x0000058c   0x0000058c   0x00000028   Code   RO          296    .text.__NVIC_SetPriority  tcpl03x_ll_sci.o
+    0x000005b4   0x000005b4   0x00000014   Code   RO          160    .text.__NVIC_SystemReset  dfu_uds_manager.o
+    0x000005c8   0x000005c8   0x0000001c   Code   RO          231    .text.__NVIC_SystemReset  tcpl03x_ll_cortex.o
+    0x000005e4   0x000005e4   0x0000004c   Code   RO           16    .text.addRoundKey   aes_cmac.o
+    0x00000630   0x00000630   0x000000b2   Code   RO           44    .text.aes_cmac      aes_cmac.o
+    0x000006e2   0x000006e2   0x00000002   PAD
+    0x000006e4   0x000006e4   0x000000dc   Code   RO          152    .text.assign_config_word_handle  dfu_uds_manager.o
+    0x000007c0   0x000007c0   0x0000005c   Code   RO          524    .text.bit_invert_swap_func  utilities.o
+    0x0000081c   0x0000081c   0x0000001e   Code   RO          528    .text.checksum_calculate_func  utilities.o
+    0x0000083a   0x0000083a   0x0000000e   Code   RO          150    .text.clear_dtc_info_handle  dfu_uds_manager.o
+    0x00000848   0x00000848   0x0000005c   Code   RO          128    .text.communcation_control_handle  dfu_uds_manager.o
+    0x000008a4   0x000008a4   0x00000020   Code   RO           24    .text.convertArrayToStr  aes_cmac.o
+    0x000008c4   0x000008c4   0x00000022   Code   RO           14    .text.convertToIntArray  aes_cmac.o
+    0x000008e6   0x000008e6   0x00000020   Code   RO          174    .text.cpmpare_key   dfu_uds_manager.o
+    0x00000906   0x00000906   0x00000002   PAD
+    0x00000908   0x00000908   0x0000004c   Code   RO          526    .text.crc16_calculate_func  utilities.o
+    0x00000954   0x00000954   0x00000038   Code   RO          202    .text.data_rw_init  system_tcpl03x.o
+    0x0000098c   0x0000098c   0x00000020   Code   RO          507    .text.delay_ms      pal_systick.o
+    0x000009ac   0x000009ac   0x00000034   Code   RO          114    .text.dfu_do_notify_cp  dfu_uds_manager.o
+    0x000009e0   0x000009e0   0x00000030   Code   RO          124    .text.dfu_do_notify_cp_ex  dfu_uds_manager.o
+    0x00000a10   0x00000a10   0x00000020   Code   RO          126    .text.dfu_do_notify_response  dfu_uds_manager.o
+    0x00000a30   0x00000a30   0x0000003c   Code   RO          168    .text.dfu_manager_init  dfu_uds_manager.o
+    0x00000a6c   0x00000a6c   0x00000020   Code   RO          112    .text.dfu_session_parameter_resp  dfu_uds_manager.o
+    0x00000a8c   0x00000a8c   0x0000002c   Code   RO          166    .text.dfu_store_system_data_init  dfu_uds_manager.o
+    0x00000ab8   0x00000ab8   0x00000024   Code   RO          164    .text.dfu_timeout_handle  dfu_uds_manager.o
+    0x00000adc   0x00000adc   0x0000002c   Code   RO          132    .text.diagnostic_session_handle  dfu_uds_manager.o
+    0x00000b08   0x00000b08   0x00000050   Code   RO          130    .text.dtc_control_handle  dfu_uds_manager.o
+    0x00000b58   0x00000b58   0x000000f0   Code   RO           12    .text.extendKey     aes_cmac.o
+    0x00000c48   0x00000c48   0x00000090   Code   RO          140    .text.firmware_info_sync_handle  dfu_uds_manager.o
+    0x00000cd8   0x00000cd8   0x00000078   Code   RO           36    .text.generate_subkey  aes_cmac.o
+    0x00000d50   0x00000d50   0x0000002c   Code   RO           46    .text.leftLoop4int  aes_cmac.o
+    0x00000d7c   0x00000d7c   0x00000024   Code   RO           34    .text.leftshift_onebit  aes_cmac.o
+    0x00000da0   0x00000da0   0x00000258   Code   RO          562    .text.lin_callback_handle  pal_lin_tl_slv_cus.o
+    0x00000ff8   0x00000ff8   0x00000078   Code   RO          162    .text.lin_diag_service_handle  dfu_uds_manager.o
+    0x00001070   0x00001070   0x0000005c   Code   RO          158    .text.lin_exception_handle  dfu_uds_manager.o
+    0x000010cc   0x000010cc   0x0000000c   Code   RO          560    .text.lin_get_uds_nad  pal_lin_tl_slv_cus.o
+    0x000010d8   0x000010d8   0x00000160   Code   RO          572    .text.lin_lld_isr_callback  pal_lin_tl_slv_cus.o
+    0x00001238   0x00001238   0x00000002   Code   RO          554    .text.lin_sci_baudrate_update  pal_lin_tl_slv_cus.o
+    0x0000123a   0x0000123a   0x00000002   PAD
+    0x0000123c   0x0000123c   0x00000064   Code   RO          568    .text.lin_uds_negative_response  pal_lin_tl_slv_cus.o
+    0x000012a0   0x000012a0   0x0000014c   Code   RO          570    .text.lin_uds_receive  pal_lin_tl_slv_cus.o
+    0x000013ec   0x000013ec   0x00000118   Code   RO          566    .text.lin_uds_send  pal_lin_tl_slv_cus.o
+    0x00001504   0x00001504   0x0000003c   Code   RO          156    .text.lin_update_random_value  dfu_uds_manager.o
+    0x00001540   0x00001540   0x00000038   Code   RO          396    .text.ll_flash_erase_drv  tcpl03x_ll_flash_cus.o
+    0x00001578   0x00001578   0x00000050   Code   RO          398    .text.ll_flash_erase_reg_drv  tcpl03x_ll_flash_cus.o
+    0x000015c8   0x000015c8   0x000000c2   Code   RO          400    .text.ll_flash_read  tcpl03x_ll_flash_cus.o
+    0x0000168a   0x0000168a   0x00000002   PAD
+    0x0000168c   0x0000168c   0x00000074   Code   RO          408    .text.ll_flash_smart_write  tcpl03x_ll_flash_cus.o
+    0x00001700   0x00001700   0x00000054   Code   RO          404    .text.ll_flash_write_drv  tcpl03x_ll_flash_cus.o
+    0x00001754   0x00001754   0x000000c0   Code   RO          406    .text.ll_flash_write_reg_drv  tcpl03x_ll_flash_cus.o
+    0x00001814   0x00001814   0x00000024   Code   RO          261    .text.ll_gpio_afio_config  tcpl03x_ll_gpio.o
+    0x00001838   0x00001838   0x0000002c   Code   RO          310    .text.ll_lin_pid_read  tcpl03x_ll_sci.o
+    0x00001864   0x00001864   0x00000030   Code   RO          312    .text.ll_lin_read_byte  tcpl03x_ll_sci.o
+    0x00001894   0x00001894   0x00000044   Code   RO          306    .text.ll_lin_receive  tcpl03x_ll_sci.o
+    0x000018d8   0x000018d8   0x00000028   Code   RO          284    .text.ll_lin_rx_delay_set  tcpl03x_ll_sci.o
+    0x00001900   0x00001900   0x000000bc   Code   RO          304    .text.ll_lin_transmit  tcpl03x_ll_sci.o
+    0x000019bc   0x000019bc   0x000000f4   Code   RO          290    .text.ll_sci_baudrate_config  tcpl03x_ll_sci.o
+    0x00001ab0   0x00001ab0   0x00000068   Code   RO          280    .text.ll_sci_deinit  tcpl03x_ll_sci.o
+    0x00001b18   0x00001b18   0x000001d0   Code   RO          288    .text.ll_sci_init   tcpl03x_ll_sci.o
+    0x00001ce8   0x00001ce8   0x00000040   Code   RO          292    .text.ll_sci_isr_enable  tcpl03x_ll_sci.o
+    0x00001d28   0x00001d28   0x00000070   Code   RO          278    .text.ll_sci_state_clear  tcpl03x_ll_sci.o
+    0x00001d98   0x00001d98   0x00000088   Code   RO          300    .text.ll_sci_transmit  tcpl03x_ll_sci.o
+    0x00001e20   0x00001e20   0x0000004c   Code   RO          369    .text.ll_wdg_deinit  tcpl03x_ll_wdg.o
+    0x00001e6c   0x00001e6c   0x0000001c   Code   RO          373    .text.ll_wdg_enable  tcpl03x_ll_wdg.o
+    0x00001e88   0x00001e88   0x000000a8   Code   RO          367    .text.ll_wdg_init   tcpl03x_ll_wdg.o
+    0x00001f30   0x00001f30   0x00000020   Code   RO          375    .text.ll_wdg_reload  tcpl03x_ll_wdg.o
+    0x00001f50   0x00001f50   0x00000002   Code   RO           80    .text.logging_deinit  logging.o
+    0x00001f52   0x00001f52   0x00000002   Code   RO           78    .text.logging_init  logging.o
+    0x00001f54   0x00001f54   0x000000d0   Code   RO          170    .text.main_loops    dfu_uds_manager.o
+    0x00002024   0x00002024   0x00000068   Code   RO          172    .text.os_task_update  dfu_uds_manager.o
+    0x0000208c   0x0000208c   0x00000024   Code   RO           38    .text.padding       aes_cmac.o
+    0x000020b0   0x000020b0   0x0000001a   Code   RO          441    .text.pal_lin_abort_handle  pal_lin_comm.o
+    0x000020ca   0x000020ca   0x00000018   Code   RO          433    .text.pal_lin_checksum_calib  pal_lin_comm.o
+    0x000020e2   0x000020e2   0x00000008   Code   RO          429    .text.pal_lin_deinit  pal_lin_comm.o
+    0x000020ea   0x000020ea   0x00000002   PAD
+    0x000020ec   0x000020ec   0x00000038   Code   RO          427    .text.pal_lin_init  pal_lin_comm.o
+    0x00002124   0x00002124   0x0000004c   Code   RO          431    .text.pal_lin_parity_calib  pal_lin_comm.o
+    0x00002170   0x00002170   0x00000016   Code   RO          443    .text.pal_lin_read_byte  pal_lin_comm.o
+    0x00002186   0x00002186   0x00000008   Code   RO          435    .text.pal_lin_rx_response  pal_lin_comm.o
+    0x0000218e   0x0000218e   0x00000008   Code   RO          437    .text.pal_lin_tx_4byte  pal_lin_comm.o
+    0x00002196   0x00002196   0x0000000c   Code   RO          439    .text.pal_lin_tx_response  pal_lin_comm.o
+    0x000021a2   0x000021a2   0x00000002   PAD
+    0x000021a4   0x000021a4   0x00000060   Code   RO          471    .text.pal_store_data_get  pal_store.o
+    0x00002204   0x00002204   0x00000080   Code   RO          469    .text.pal_store_data_set  pal_store.o
+    0x00002284   0x00002284   0x0000000c   Code   RO          481    .text.pal_store_read  pal_store.o
+    0x00002290   0x00002290   0x0000008c   Code   RO          154    .text.read_by_identify_handle  dfu_uds_manager.o
+    0x0000231c   0x0000231c   0x00000120   Code   RO          118    .text.read_data_by_identify_handle  dfu_uds_manager.o
+    0x0000243c   0x0000243c   0x00000110   Code   RO          144    .text.request_download_handle  dfu_uds_manager.o
+    0x0000254c   0x0000254c   0x00000060   Code   RO          148    .text.request_transfer_exit_handle  dfu_uds_manager.o
+    0x000025ac   0x000025ac   0x0000004e   Code   RO          136    .text.reset_handle  dfu_uds_manager.o
+    0x000025fa   0x000025fa   0x00000002   PAD
+    0x000025fc   0x000025fc   0x00000254   Code   RO          142    .text.routine_control_handle  dfu_uds_manager.o
+    0x00002850   0x00002850   0x00000248   Code   RO          138    .text.security_access_handle  dfu_uds_manager.o
+    0x00002a98   0x00002a98   0x00000110   Code   RO          134    .text.session_control_handle  dfu_uds_manager.o
+    0x00002ba8   0x00002ba8   0x00000280   Code   RO           42    .text.sha256        aes_cmac.o
+    0x00002e28   0x00002e28   0x0000006c   Code   RO           30    .text.shiftRows     aes_cmac.o
+    0x00002e94   0x00002e94   0x00000034   Code   RO           28    .text.subBytes      aes_cmac.o
+    0x00002ec8   0x00002ec8   0x00000048   Code   RO          208    .text.sys_core_clock_update  system_tcpl03x.o
+    0x00002f10   0x00002f10   0x00000040   Code   RO          212    .text.sys_hclk_config  system_tcpl03x.o
+    0x00002f50   0x00002f50   0x00000024   Code   RO          204    .text.sys_hclk_freq_get  system_tcpl03x.o
+    0x00002f74   0x00002f74   0x0000006c   Code   RO          214    .text.sys_pclk_config  system_tcpl03x.o
+    0x00002fe0   0x00002fe0   0x00000018   Code   RO          206    .text.sys_pclk_freq_get  system_tcpl03x.o
+    0x00002ff8   0x00002ff8   0x000000ac   Code   RO          210    .text.sys_trimvalue_load  system_tcpl03x.o
+    0x000030a4   0x000030a4   0x0000001c   Code   RO          505    .text.systick_diff  pal_systick.o
+    0x000030c0   0x000030c0   0x0000013c   Code   RO          146    .text.transfer_data_handle  dfu_uds_manager.o
+    0x000031fc   0x000031fc   0x00000050   Code   RO          120    .text.uds_diag_DID_chk  dfu_uds_manager.o
+    0x0000324c   0x0000324c   0x00000024   Code   RO          116    .text.uds_diagnostic_configword_remap_nad  dfu_uds_manager.o
+    0x00003270   0x00003270   0x0000022c   Code   RO          122    .text.user_read_data_by_id  dfu_uds_manager.o
+    0x0000349c   0x0000349c   0x00000028   Code   RO          540    .text.wdg_init      pal_wdg.o
+    0x000034c4   0x000034c4   0x00000008   Code   RO          542    .text.wdg_reload    pal_wdg.o
+    0x000034cc   0x000034cc   0x00000016   Code   RO           32    .text.xor_128       aes_cmac.o
+    0x000034e2   0x000034e2   0x00000002   PAD
+    0x000034e4   0x000034e4   0x00000040   Data   RO           68    .rodata.colM        aes_cmac.o
+    0x00003524   0x00003524   0x00000078   Data   RO          181    .rodata.dfu_process_ctx  dfu_uds_manager.o
+    0x0000359c   0x0000359c   0x00000100   Data   RO           62    .rodata.sha256.k    aes_cmac.o
+    0x0000369c   0x0000369c   0x00000264   PAD
+    0x00003900   0x00003900   0x00000008   Data   RO          176    .ARM.__at_0x00003900  dfu_uds_manager.o
+    0x00003908   0x00003908   0x00000008   Data   RO          177    .ARM.__at_0x00003908  dfu_uds_manager.o
+    0x00003910   0x00003910   0x00000400   Data   RO           65    .rodata.S           aes_cmac.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x00003d10, Size: 0x00000de8, Max: 0x00001000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x10000000   0x00003d10   0x00000042   Data   RW          178    .ARM.__at_0x10000000  dfu_uds_manager.o
+    0x10000042   0x00003d52   0x00000022   Data   RW          183    .data..L_MergedGlobals  dfu_uds_manager.o
+    0x10000064   0x00003d74   0x0000001c   Data   RW          576    .data..L_MergedGlobals  pal_lin_tl_slv_cus.o
+    0x10000080   0x00003d90   0x00000004   Data   RW          220    .data.SystemCoreClock  system_tcpl03x.o
+    0x10000084   0x00003d94   0x00000010   Data   RW           60    .data.const_Rb      aes_cmac.o
+    0x10000094   0x00003da4   0x00000038   Data   RW          416    .data.flash_driver_ciper  tcpl03x_ll_flash_cus.o
+    0x100000cc   0x00003ddc   0x00000004   Data   RW          417    .data.g_pfFLASH_DRV_EraseSector  tcpl03x_ll_flash_cus.o
+    0x100000d0   0x00003de0   0x00000004   Data   RW          418    .data.g_tpfFLASH_DRV_Program  tcpl03x_ll_flash_cus.o
+    0x100000d4   0x00003de4   0x00000004   PAD
+    0x100000d8        -       0x00000070   Zero   RW           69    .bss..L_MergedGlobals  aes_cmac.o
+    0x10000148        -       0x0000004c   Zero   RW          184    .bss..L_MergedGlobals.1  dfu_uds_manager.o
+    0x10000194        -       0x00000014   Zero   RW          577    .bss..L_MergedGlobals.1  pal_lin_tl_slv_cus.o
+    0x100001a8        -       0x0000043c   Zero   RW          179    .bss.dfu_ctx        dfu_uds_manager.o
+    0x100005e4        -       0x00000042   Zero   RW          180    .bss.diagnosticTxBuffer  dfu_uds_manager.o
+    0x10000626   0x00003de4   0x00000002   PAD
+    0x10000628        -       0x00000004   Zero   RW          269    .bss.gpio_isr_callback  tcpl03x_ll_gpio.o
+    0x1000062c        -       0x000002b8   Zero   RW          575    .bss.rx_queue_data  pal_lin_tl_slv_cus.o
+    0x100008e4        -       0x00000008   Zero   RW          330    .bss.sci_isr_callback  tcpl03x_ll_sci.o
+    0x100008ec        -       0x00000004   Zero   RW          511    .bss.systick_count  pal_systick.o
+    0x100008f0        -       0x00000040   Zero   RW          574    .bss.tx_queue_data  pal_lin_tl_slv_cus.o
+    0x10000930        -       0x000000b0   Zero   RW           64    .bss.w              aes_cmac.o
+    0x100009e0        -       0x00000004   Zero   RW          381    .bss.wdg_callback   tcpl03x_ll_wdg.o
+    0x100009e4   0x00003de4   0x00000004   PAD
+    0x100009e8        -       0x00000400   Zero   RW          192    STACK               startup_tcpl03x.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+      2166        126       1344         16        288      17011   aes_cmac.o
+        18          0          0          0          0        414   app.o
+      4848        364        136        100       1226      20717   dfu_uds_manager.o
+         4          0          0          0          0        539   logging.o
+       240          4          0          0          0       5480   pal_lin_comm.o
+      1678         72          0         28        780       7127   pal_lin_tl_slv_cus.o
+       236         12          0          0          0       4564   pal_store.o
+        80         12          0          0          4       2272   pal_systick.o
+        48          0          0          0          0       1584   pal_wdg.o
+        68         26        192          0       1024        740   startup_tcpl03x.o
+       640         96          0          4          0      23909   system_tcpl03x.o
+        36          8          0          0          0       3037   tcpl03x_ll_cortex.o
+       754         48          0         64          0      14343   tcpl03x_ll_flash_cus.o
+        92         20          0          0          4      17997   tcpl03x_ll_gpio.o
+      1652        144          0          0          8      40485   tcpl03x_ll_sci.o
+        16          4          0          0          0      11734   tcpl03x_ll_sys.o
+       360         72          0          0          4       9682   tcpl03x_ll_wdg.o
+       198         12          0          0          0       3836   utilities.o
+
+    ----------------------------------------------------------------------
+     13152       1020       2284        212       3348     185471   Object Totals
+         0          0          0          0          0          0   (incl. Generated)
+        18          0        612          0         10          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+        34          0          0          0          0         68   llushr.o
+        26          0          0          0          0         72   memcmp.o
+        36          0          0          0          0         60   memcpya.o
+        36          0          0          0          0        100   memseta.o
+        62          0          0          0          0         72   uidiv_div0.o
+
+    ----------------------------------------------------------------------
+       196          0          0          0          0        372   Library Totals
+         2          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       194          0          0          0          0        372   mc_p.l
+
+    ----------------------------------------------------------------------
+       196          0          0          0          0        372   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     13348       1020       2284        212       3348     185391   Grand Totals
+     13348       1020       2284        212       3348     185391   ELF Image Totals
+     13348       1020       2284        212          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                15632 (  15.27kB)
+    Total RW  Size (RW Data + ZI Data)              3560 (   3.48kB)
+    Total ROM Size (Code + RO Data + RW Data)      15844 (  15.47kB)
+
+==============================================================================
+

@@ -62,7 +62,7 @@ void lin_lld_sci_int_disable(void);
 void lin_lld_sci_set_low_power_mode(void);
 void lin_lld_sci_tx_response(void);
 void lin_lld_sci_rx_response(l_u8 msg_length);
-void lin_lld_sci_timeout(void);
+void lin_lld_sci_timeout(l_u16 cnt_tick);
 void lin_lld_slave_wakeup(void);
 l_u16 lin_lld_sci_rcv_break_cnt(void);
 

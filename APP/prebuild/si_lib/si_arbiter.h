@@ -1968,6 +1968,186 @@ typedef struct
 T_SiErrRt SiArbiterFreq10DoorctrlNodeInit(T_SiArbiterFreq10Doorctrl *nd, const T_SiArbiterParaFreq10Doorctrl *para, T_SiArbiterKeyValueChangedCallback valueChangedCallback);
 
 /**
+ * @defgroup ArbiterFreqShapeDoorctrl 跳频门把手判决器
+ * @ingroup arbiter
+ * 判决器原理：当滤波值和基线值的差值超过设置的按压阈值一定的消抖时间及其它一些条件，认为按键被按下，当差值低于设置的释放阈值一定的消抖时间，认为按键被松开，每个按键阈值独立可调
+ * @{
+ */
+//******支持操作：单击
+
+/**
+* @brief        跳频门把手判决器算法参数
+*/
+typedef struct
+{
+    uint8_t detectChannelNo;                         /*!< 检测通道编号--需要用户指定 */
+    uint8_t freqChannelNo;                           /*!< 跳频通道编号--需要用户指定 */
+    uint8_t pressEliminate;                          /*!< 按压消抖次数--需要用户指定 */
+    uint8_t releaseEliminate;                        /*!< 释放消抖次数--需要用户指定 */
+    struct
+    {
+        T_SiData pressThreshold1;                    /*!< 1阶按压阈值--需要用户指定 */
+        T_SiData pressThreshold2;                    /*!< 2阶按压阈值--需要用户指定 */
+        T_SiData forceValidThreshold;
+        uint16_t forceValidCalcTimeout;
+        uint16_t doubleForceValidTimeMs;
+
+        uint16_t threshold12TimeLow;                 /*!< 从1阶按压阈值到2阶按压阈值的最短时间，单位是采样个数，1到2阶时间范围在[threshold12TimeLow,threshold12TimeHigh]有效--需要用户指定 */
+        uint16_t threshold12TimeHigh;                /*!< 从1阶按压阈值到2阶按压阈值的最长时间，单位是采样个数，1到2阶时间范围在[threshold12TimeLow,threshold12TimeHigh]有效--需要用户指定 */
+        uint16_t threshold2KeepTime;                 /*!< 2阶按压检测保持时间，在这段时间内检测到符合2阶按压条件，即认为按压有效--需要用户指定 */
+
+        T_SiData maxDiffLowThreshold;                /*!< 最大diff阈值下边界--需要用户指定 */
+        T_SiData maxDiffHighThreshold;               /*!< 最大diff阈值上边界--需要用户指定 */
+
+        uint8_t releaseThreshold;                    /*!< 释放阈值，范围3-9，表示：1阶按压阈值的0.3-0.9--需要用户指定 */
+    } detectChannel;      /*!< 按压检测，1.按压信号达到一二阶阈值，2.从一阶到二阶时间满足阈值范围，3.满足最大阈值范围，都满足后才认为按压有效 */
+    struct
+    {
+        uint32_t forceReleaseBaselineTimeMs;
+        T_SiData lockBaselineThreshold;
+        uint8_t releaseThreshold;
+        uint8_t alwaysUpdataUnlockValue;
+        uint8_t unlockBaselineReInit;
+        uint16_t unlockBaselineSampNum;
+        T_SiNoiseData unlockBaselineThreshold;
+        uint16_t unlockBaselineEliminateMs;
+        uint16_t unlockBaselineLockKeyMs;
+
+        T_SiData lowThreshold;                       /*!< 2阶信号稳定时跳频通道的diff低阈值--需要用户指定 */
+        T_SiData highThreshold;                      /*!< 2阶信号稳定时跳频通道的diff高阈值--需要用户指定 */
+
+        struct
+        {
+            uint8_t enable;
+            uint16_t preDetectMs;
+            uint16_t postDetectMs;
+            uint16_t postSampNum;
+            T_SiNoiseData postSampThreshold;
+        } quickUnlockBaseline;
+    } freqChannel;                                   /*!< 跳频通道参数--需要用户指定 */
+    struct
+    {
+        T_SiData lowThreshold;
+        T_SiData highThreshold;
+        T_SiData forceValidLowThreshold;
+        T_SiData forceValidHighThreshold;
+    } mergeChannel;
+    struct
+    {
+        uint16_t lowThreshold;
+        uint16_t highThreshold;
+        uint16_t cycleThreshold;
+        uint8_t marginRatio;
+        uint8_t enterCount;
+        uint8_t exitCount;
+
+        uint8_t staticExitEnable;
+        uint8_t staticExitChannelNo;
+        uint8_t staticExitReset;
+        uint16_t staticExitWindowLen;
+        uint16_t staticExitEliminateTimeMs;
+        T_SiNoiseData staticExitThreshold;
+    } shape;
+    uint16_t releaseLockBaselineMs;                  /*!< 释放后锁定baseline一段时间不更新，单位Ms--需要用户指定 */
+    uint16_t threshold1ForceReleaseTimeS;            /*!< 阈值1强制释放时间，单位为秒，设为0时表示永不释放--需要用户指定 */
+    uint16_t threshold2ForceReleaseTimeS;            /*!< 阈值2强制释放时间，单位为秒，设为0时表示永不释放--需要用户指定 */
+} T_SiArbiterParaFreqShapeDoorctrl;
+
+/**
+* @brief        跳频门把手判决器数据类型
+* @attention    不要直接操作本结构体内容
+*/
+typedef struct
+{
+    //! @cond
+    uint8_t status;                 /*!< 按键状态 */
+    uint8_t eliminateCnt;           /*!< 消抖计数器 */
+    uint8_t lockBaseline;
+    uint8_t keyPressed;
+    uint32_t pressingMs;
+    uint32_t lockBaselineBeginTimeMs;
+    struct
+    {
+        uint16_t threshold12TimeCnt;
+        uint16_t threshold2KeepTimeCnt;
+        uint16_t forceValidCalcCnt;
+        T_SiData maxDiff;
+        uint8_t lastForceValidFlag;
+        uint32_t lastForceValidTime;
+    } detectChannel;
+    struct
+    {
+        uint8_t status;
+        uint8_t lockBaseline;
+        uint8_t lockKeyFlag;
+        uint32_t beginLockBaselineMs;
+        T_SiFastNoise fn;
+        float unlockValue;
+        uint32_t unlockBaselineBeginTimeMs;
+        uint32_t unlockBaselineBeginLockKeyMs;
+
+        struct
+        {
+            uint8_t status;
+            uint8_t preValid;
+            T_SiNoiseData postValue;
+            uint32_t beginTimeMs;
+            T_SiFastNoise fn;
+        } quickUnlockBaseline;
+
+        T_SiData diff2Stage;
+    } freqChannel;
+    struct
+    {
+        T_SiData value;
+        T_SiData validValue;
+        T_SiData forceValidValue;
+    } mergeChannel;
+    struct
+    {
+        uint8_t noiseStatus;
+        uint8_t noiseDetect;
+        T_SiNoiseData noiseValue;
+
+        uint8_t valid;
+        uint8_t status;
+        uint8_t count;
+        uint16_t detectTimeMs;
+        uint16_t detectIntvalTimeMs;
+        uint32_t beginDetectTimeMs;
+
+        uint32_t noiseBeginExitMs;
+        T_SiFastNoise fn;
+    } shape;
+    //! @endcond       //doxygen中隐藏
+} T_SiArbiterDataFreqShapeDoorctrl;
+
+/**
+* @brief        跳频门把手判决器描述符
+* @details      判决器原理：当滤波值和基线值的差值超过设置的按压阈值一定的消抖时间，认为按键被按下，当差值低于设置的释放阈值一定的消抖时间，认为按键被松开，每个按键阈值独立可调
+* @attention    不要直接操作本结构体内容
+*/
+typedef struct
+{
+    T_SiArbiterBase base;            /*!< 判决器基类，必须放在开头 */
+    T_SiArbiterParaFreqShapeDoorctrl para;    /*!< 判决器算法参数 */
+    T_SiArbiterDataFreqShapeDoorctrl data;  /*!< 判决器数据 */
+    T_SiArbiterKeyValueChangedCallback valueChangedCallback; /*!< 值改变回调接口，keyNo按键编号，status按键状态 */
+} T_SiArbiterFreqShapeDoorctrl;
+
+/**
+* @brief    跳频门把手判决器节点描述符初始化
+* @param[in]   nd 判决器节点
+* @param[in]   para 判决器参数
+* @param[in]   dataLen 判决器缓冲区长度
+* @param[in]   pdata 判决器缓冲区
+* @param[in]   valueChangedCallback 按键值改变回调接口
+* @retval      SI_RT_OK 初始化成功
+* @retval      other 初始化失败
+*/
+T_SiErrRt SiArbiterFreqShapeDoorctrlNodeInit(T_SiArbiterFreqShapeDoorctrl *nd, const T_SiArbiterParaFreqShapeDoorctrl *para, T_SiArbiterKeyValueChangedCallback valueChangedCallback);
+
+/**
  * @defgroup ArbiterWaterProofDoorctrl 防水门把手判决器
  * @ingroup arbiter
  * 判决器原理：当滤波值和基线值的差值超过设置的按压阈值一定的消抖时间及其它一些条件，认为按键被按下，当差值低于设置的释放阈值一定的消抖时间，认为按键被松开，每个按键阈值独立可调

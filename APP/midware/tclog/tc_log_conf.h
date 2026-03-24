@@ -29,7 +29,7 @@
 #define LOG_INTERFACE_UART              0                       /*!< UART日志接口*/
 #define LOG_INTERFACE_LIN               1                       /*!< LIN日志接口 */
 #define LOG_INTERFACE_LIN_UART          2                       /*!< LIN UART日志接口 */
-#define LOG_INTERFACE_TYPE              LOG_INTERFACE_UART  /*!< 选择当前打印的日志输出接口，当选择LOG_INTERFACE_LIN打印时，需要将lin_hw_cfg.h中的LIN_DEBUG_EN宏打开 */
+#define LOG_INTERFACE_TYPE              LOG_INTERFACE_LIN  /*!< 选择当前打印的日志输出接口，当选择LOG_INTERFACE_LIN打印时，需要将lin_hw_cfg.h中的LIN_DEBUG_EN宏打开 */
 
 #define LOG_FAST_MODE                   1                       /*!< 当用AT3000作为上位机时，设置为1，否则为0 */
 

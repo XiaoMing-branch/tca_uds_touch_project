@@ -111,8 +111,8 @@ void TcTaskExec(void)
 
     if (lastTick != TcSystick)      //运行定时消息
     {
-        TcTimerExec();
         lastTick = TcSystick;
+        TcTimerExec();
     }
 
     for (int i = 0; i < TC_TASK_NUM; ++i)

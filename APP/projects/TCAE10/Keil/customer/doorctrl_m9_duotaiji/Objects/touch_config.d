@@ -85,4 +85,5 @@
   ..\..\..\..\..\midware\touch\touch_tool.h \
   ..\..\..\..\..\midware\tclog\tc_log.h \
   ..\..\..\..\..\midware\tclog\tc_log_conf.h Source\app.h \
-  ..\..\..\..\..\driver\inc\tcae10_ll_uart.h
+  ..\..\..\..\..\driver\inc\tcae10_ll_uart.h \
+  Source\custom_diagnosticIII.h

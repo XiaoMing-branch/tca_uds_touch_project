@@ -120,6 +120,8 @@ extern "C" {
 #define CONFIGURE_WORD_STATE_END         4u
 #define CUS_UDS_SEND_BUFFER_SIZE         66u
 
+#define MULT_DID_MAX                    5
+
 /**
  * @brief dfu msg error code enumeration
  */
@@ -269,6 +271,14 @@ typedef struct
     uint8_t sid;
     dfu_func func;
 } dfu_process_context_t;
+
+typedef struct
+{
+    uint8_t did_num;
+    uint16_t data_len;
+    uint16_t did_valid_flag;
+    uint16_t did_array[MULT_DID_MAX];
+} mult_did_data_t;
 
 void dfu_manager_init(void);
 void dfu_timeout_handle(void);

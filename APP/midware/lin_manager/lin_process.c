@@ -365,13 +365,13 @@ l_u8 lin_lld_sci_get_state(void)
 **
 ** \retval  None
 *********************************************************/
-void lin_lld_sci_timeout(void)
+void lin_lld_sci_timeout(l_u16 cnt_tick)
 {
     /* Multi frame support */
 #if (_TL_FRAME_SUPPORT_ == _TL_MULTI_FRAME_)
     if (LD_CHECK_N_CR_TIMEOUT == tl_check_timeout_type)
     {
-        if (0 == --tl_check_timeout)
+        if (0 == tl_check_timeout)
         {
             /* update status of transport layer */
             tl_service_status = LD_SERVICE_ERROR;
@@ -380,17 +380,25 @@ void lin_lld_sci_timeout(void)
             tl_check_timeout_type = LD_NO_CHECK_TIMEOUT;
             tl_diag_state = LD_DIAG_IDLE;
         }
+        else
+        {
+            tl_check_timeout = ((tl_check_timeout > cnt_tick) ? (tl_check_timeout - cnt_tick) : 0);
+        }
     }
 
     if (LD_CHECK_N_AS_TIMEOUT == tl_check_timeout_type)
     {
-        if (0 == --tl_check_timeout)
+        if (0 == tl_check_timeout)
         {
             /* update status of transport layer */
             tl_service_status = LD_SERVICE_ERROR;
             tl_tx_msg_status = LD_N_AS_TIMEOUT;
             tl_check_timeout_type = LD_NO_CHECK_TIMEOUT;
             tl_diag_state = LD_DIAG_IDLE;
+        }
+        else
+        {
+            tl_check_timeout = ((tl_check_timeout > cnt_tick) ? (tl_check_timeout - cnt_tick) : 0);
         }
     }
 
@@ -399,11 +407,15 @@ void lin_lld_sci_timeout(void)
     /* Single Frame */
     if (LD_CHECK_N_AS_TIMEOUT == tl_check_timeout_type)
     {
-        if (0 == --tl_check_timeout)
+        if (0 == tl_check_timeout)
         {
             /* update status of transport layer */
             tl_service_status = LD_SERVICE_ERROR;
             tl_check_timeout_type = LD_NO_CHECK_TIMEOUT;
+        }
+        else
+        {
+            tl_check_timeout = ((tl_check_timeout > cnt_tick) ? (tl_check_timeout - cnt_tick) : 0);
         }
     }
 
@@ -411,74 +423,74 @@ void lin_lld_sci_timeout(void)
 
     switch (state)
     {
-        case IDLE:
-            if (idle_timeout_cnt == 0)
+    case IDLE:
+        if (idle_timeout_cnt == 0)
+        {
+            /* Trigger callback */
+            CALLBACK_HANDLER(ifc, LIN_LLD_BUS_ACTIVITY_TIMEOUT, 0xFF);
+            /* goback to IDLE, reset max idle timeout */
+            idle_timeout_cnt = lin_cfg.max_idle_timeout;
+            /* Set state to sleep mode */
+            state = LIN_SLEEP_MODE;
+        }
+        else
+        {
+            idle_timeout_cnt = ((idle_timeout_cnt > cnt_tick) ? (idle_timeout_cnt - cnt_tick) : 0);
+        }
+
+        break;
+
+    case SEND_PID:        /* Master */
+    case RECV_SYN:
+    case RECV_PID:
+    case SEND_DATA:
+    case SEND_DATA_COMPLETED:
+
+        /* timeout send has occurred - change state of the node and inform core */
+        if (0 == frame_timeout_cnt)
+        {
+            lin_goto_idle_state();
+        }
+        else
+        {
+            frame_timeout_cnt = ((frame_timeout_cnt > cnt_tick) ? (frame_timeout_cnt - cnt_tick) : 0);
+        }
+
+        break;
+
+    case RECV_DATA:
+
+        /* timeout receive has occurred - change state of the node and inform core */
+        if (res_frame_timeout_cnt == 0)
+        {
+            if (cnt_byte > 0)
             {
+                lin_error = errRXTIMEOUT;
+                /* set lin status: error_in_response */
+                l_status.byte |= LIN_STA_ERROR_RESP;
                 /* Trigger callback */
-                CALLBACK_HANDLER(ifc, LIN_LLD_BUS_ACTIVITY_TIMEOUT, 0xFF);
-                /* goback to IDLE, reset max idle timeout */
-                idle_timeout_cnt = lin_cfg.max_idle_timeout;
-                /* Set state to sleep mode */
-                state = LIN_SLEEP_MODE;
+                CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_NODATA_TIMEOUT, current_id);
+
             }
-            else
+
             {
-                idle_timeout_cnt--;
+                pal_lin_abort_handle(LIN_BUS_0, LIN_ABORT_TYPE_RX);
             }
 
-            break;
+            lin_goto_idle_state();
+        }
+        else
+        {
+            res_frame_timeout_cnt = ((res_frame_timeout_cnt > cnt_tick) ? (res_frame_timeout_cnt - cnt_tick) : 0);
+        }
 
-        case SEND_PID:        /* Master */
-        case RECV_SYN:
-        case RECV_PID:
-        case SEND_DATA:
-        case SEND_DATA_COMPLETED:
+        break;
 
-            /* timeout send has occurred - change state of the node and inform core */
-            if (0 == frame_timeout_cnt)
-            {
-                lin_goto_idle_state();
-            }
-            else
-            {
-                frame_timeout_cnt--;
-            }
+    case PROC_CALLBACK:
+        break;
 
-            break;
-
-        case RECV_DATA:
-
-            /* timeout receive has occurred - change state of the node and inform core */
-            if (res_frame_timeout_cnt == 0)
-            {
-                if (cnt_byte > 0)
-                {
-                    lin_error = errRXTIMEOUT;
-                    /* set lin status: error_in_response */
-                    l_status.byte |= LIN_STA_ERROR_RESP;
-                    /* Trigger callback */
-                    CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_NODATA_TIMEOUT, current_id);
-
-                }
-
-                {
-                    pal_lin_abort_handle(LIN_BUS_0, LIN_ABORT_TYPE_RX);
-                }
-
-                lin_goto_idle_state();
-            }
-            else
-            {
-                res_frame_timeout_cnt--;
-            }
-
-            break;
-
-        case PROC_CALLBACK:
-            break;
-
-        default:
-            break;
+    default:
+        break;
     }
 }
 
@@ -652,69 +664,69 @@ void lin_lld_isr_callback(uint32_t isr)
 
         switch (state)
         {
-            case RECV_DATA:
-                ptr++;
-                *(ptr) = tmp_byte;
+        case RECV_DATA:
+            ptr++;
+            *(ptr) = tmp_byte;
 
-                /* Check bytes received fully */
+            /* Check bytes received fully */
 #ifdef RX_BYTE_PRINT_DEBUG
-                LOG_LIN(" %02x", tmp_byte);
+            LOG_LIN(" %02x", tmp_byte);
 #endif
 
-                if (cnt_byte == (response_buffer[0]))
+            if (cnt_byte == (response_buffer[0]))
+            {
+#ifdef RX_BYTE_PRINT_DEBUG
+                LOG_LIN("\r\n");
+#endif
+                /* rx_abort */
+                pal_lin_abort_handle(LIN_BUS_0, LIN_ABORT_TYPE_RX);
+
+                /* checksum checking */
+                if (lin_checksum(response_buffer, pid) == tmp_byte)
                 {
-#ifdef RX_BYTE_PRINT_DEBUG
-                    LOG_LIN("\r\n");
-#endif
-                    /* rx_abort */
-                    pal_lin_abort_handle(LIN_BUS_0, LIN_ABORT_TYPE_RX);
+                    /*******************************************/
+                    /***  RX Buffer Full - Checksum OK       ***/
+                    /*******************************************/
+                    /* set lin status: successful_transfer */
+                    l_status.byte |= LIN_STA_SUCC_TRANSFER;
+                    /* disable RX interrupt */
+                    state = PROC_CALLBACK;
+                    /* trigger callback */
+                    CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_RX_COMPLETED, current_id);
 
-                    /* checksum checking */
-                    if (lin_checksum(response_buffer, pid) == tmp_byte)
+                    /* enable RX interrupt */
+                    if (LIN_SLEEP_MODE != state)
                     {
-                        /*******************************************/
-                        /***  RX Buffer Full - Checksum OK       ***/
-                        /*******************************************/
-                        /* set lin status: successful_transfer */
-                        l_status.byte |= LIN_STA_SUCC_TRANSFER;
-                        /* disable RX interrupt */
-                        state = PROC_CALLBACK;
-                        /* trigger callback */
-                        CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_RX_COMPLETED, current_id);
-
-                        /* enable RX interrupt */
-                        if (LIN_SLEEP_MODE != state)
-                        {
-                            lin_goto_idle_state();
-                        }
-                    }
-                    else
-                    {
-                        lin_error = errCHECKSUM;
-                        /* set lin status: error_in_response, checksum_error */
-                        l_status.byte |= (LIN_STA_ERROR_RESP | LIN_STA_CHECKSUM_ERR);
-                        LOG_LIN("err no = %x\r\n", l_status.byte);
-                        /* trigger callback */
-                        CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_CHECKSUM_ERR, current_id);
                         lin_goto_idle_state();
                     }
-
                 }
-
-                cnt_byte++;
-                break;
-
-            case LIN_SLEEP_MODE:
-                if ((tmp_byte == 0xF0) || (tmp_byte == 0xE0) || (tmp_byte == 0xC0) || (tmp_byte == 0x80) || (tmp_byte == 0x00))
+                else
                 {
-                    /* Set idle timeout again */
+                    lin_error = errCHECKSUM;
+                    /* set lin status: error_in_response, checksum_error */
+                    l_status.byte |= (LIN_STA_ERROR_RESP | LIN_STA_CHECKSUM_ERR);
+                    LOG_LIN("err no = %x\r\n", l_status.byte);
+                    /* trigger callback */
+                    CALLBACK_HANDLER((l_ifc_handle)ifc, LIN_LLD_CHECKSUM_ERR, current_id);
                     lin_goto_idle_state();
                 }
 
-                break;
+            }
 
-            default:
-                break;
+            cnt_byte++;
+            break;
+
+        case LIN_SLEEP_MODE:
+            if ((tmp_byte == 0xF0) || (tmp_byte == 0xE0) || (tmp_byte == 0xC0) || (tmp_byte == 0x80) || (tmp_byte == 0x00))
+            {
+                /* Set idle timeout again */
+                lin_goto_idle_state();
+            }
+
+            break;
+
+        default:
+            break;
         }
     }
 

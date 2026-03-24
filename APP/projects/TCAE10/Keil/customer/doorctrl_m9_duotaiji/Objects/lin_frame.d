@@ -36,4 +36,5 @@
   Source\app.h Source\custom_diagnosticIII.h \
   ..\..\..\..\..\midware\tclog\tc_log.h \
   ..\..\..\..\..\midware\tclog\tc_log_conf.h Source\app.h \
-  ..\..\..\..\..\driver\inc\tcae10_ll_uart.h
+  ..\..\..\..\..\driver\inc\tcae10_ll_uart.h \
+  ..\..\..\..\..\midware\lin_manager\inc\lin_process.h

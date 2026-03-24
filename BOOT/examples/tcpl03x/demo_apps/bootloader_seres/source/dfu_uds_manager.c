@@ -41,8 +41,8 @@
 #define LOG_DFU(...)
 #endif
 
-__attribute__((section(".ARM.__at_0x00003900"))) const uint8_t boot_version[8u] = {'B', 'T', ':', 'B', '.', '0', '1', 0x20u};
-__attribute__((section(".ARM.__at_0x00003908"))) const uint8_t hardware_version[8u] = {'H', 'W', ':', 'B', '.', '1', '.', '0'};
+__attribute__((section(".ARM.__at_0x00003900"))) const uint8_t boot_version[8u] = {'B', 'T', ':', 'B', '.', '0', '4', 0x20u};
+__attribute__((section(".ARM.__at_0x00003908"))) const uint8_t hardware_version[8u] = {'H', 'W', ':', 'B', '.', '2', '.', '0'};
 __attribute__((section(".ARM.__at_0x10000000"))) uint8_t flash_driver[66u] = {0u};
 
 uint8_t seed[16u] = {0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96, 0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a};
@@ -62,8 +62,8 @@ volatile uint16_t timer_1s_cnt = 0u;
 uint16_t lock_failed_cnt = 0u;
 
 ServiceUDS_TypeDef uds_request_info =
-{
-    .sessionMode = DEFALUT_SESSION,
+    {
+        .sessionMode = DEFALUT_SESSION,
 };
 
 uint8_t seed_cmac_succ = AS_FALSE;
@@ -273,6 +273,7 @@ static uint8_t uds_diag_DID_chk(uint16_t ucSess)
     case 0xF089u:
     case 0xF180u:
     case 0xF184u:
+    case 0xF190u:
         ucRet = 1u;
         break;
     case 0xF189u:
@@ -296,7 +297,7 @@ void uds_diagnostic_configword_remap_nad(void)
     uint8_t nad_temp = g_user_info.nad_info;
 
     if ((nad_temp == 0x68u) || (nad_temp == 0x6Au) ||
-            (nad_temp == 0x69u) || (nad_temp == 0x6Bu))
+        (nad_temp == 0x69u) || (nad_temp == 0x6Bu))
     {
         lin_configured_NAD = nad_temp;
     }
@@ -361,7 +362,7 @@ static void session_control_handle(uint8_t *param, uint16_t length)
                 pal_store_read(FLASH_TYPE_NVM, FLASH_DFU_INFO_ADDR, (uint8_t *)&dfu_ctx.dfu_info, sizeof(last_dfu_info_t));
                 if (DFU_INFO_MAGIC == dfu_ctx.dfu_info.magic) // APP标志位有效的情况下，才允许复位，否则就停留在BootLoader
                 {
-                    if ((param[1] == 0x81u) || (lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu)) // 抑制正响应或功能寻址直接复位
+                    if (param[1] == 0x81u) // 抑制正响应或功能寻址直接复位
                     {
                         NVIC_SystemReset();
                     }
@@ -394,13 +395,7 @@ static void session_control_handle(uint8_t *param, uint16_t length)
             }
             if ((uds_request_info.sessionMode == DEFALUT_SESSION) && (param[1u] == 0x01u))
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_session_parameter_resp(param[1u]);
-                }
+                dfu_session_parameter_resp(param[1u]);
             }
             break;
         case 0x03u:
@@ -408,23 +403,11 @@ static void session_control_handle(uint8_t *param, uint16_t length)
             {
                 uds_request_info.sessionMode = EXTEND_SESSION;
                 dfu_ctx.op_code = DFU_CMD_EXTEND_SESSION;
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_session_parameter_resp(param[1u]);
-                }
+                dfu_session_parameter_resp(param[1u]);
             }
             else
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
-                }
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
             }
             seed_cmac_succ = AS_FALSE;
             seed_00_ret = AS_FALSE;
@@ -442,29 +425,17 @@ static void session_control_handle(uint8_t *param, uint16_t length)
                 dfu_ctx.op_code = DFU_CMD_PROGRAM_SESSION;
                 uds_request_info.sessionMode = PROGRAM_SESSION;
                 dfu_ctx.boot_state = BOOT_STATE_UPGRADE;
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_session_parameter_resp(0x02u);
-                }
+                dfu_session_parameter_resp(0x02u);
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
             }
             seed_cmac_succ = AS_FALSE;
             seed_00_ret = AS_FALSE;
             break;
         default:
-            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-            {
-            }
-            else
-            {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
-            }
+            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
             break;
         }
     }
@@ -561,6 +532,7 @@ static void security_access_handle(uint8_t *param, uint16_t length)
         {
             switch (param[1u])
             {
+            case 0x89u:
             case 0x09u:
                 if (length == BOOT_Frame_length_2)
                 {
@@ -842,7 +814,7 @@ static void request_download_handle(uint8_t *param, uint16_t length)
                         }
                         else
                         {
-                            dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
+                            dfu_do_notify_response(NEGATIVE, param[0u], DOWNLOAD_REJECTED); // NRC70
                         }
                     }
                     else
@@ -887,7 +859,15 @@ static void transfer_data_handle(uint8_t *param, uint16_t length)
     }
     if (uds_request_info.sessionMode == PROGRAM_SESSION)
     {
-        if (length <= 0x202u)
+        if (length < 0x3u)
+        {
+            dfu_do_notify_response(NEGATIVE, param[0u], IMLOIF); // NRC13
+        }
+        else if (length > 0x202u)
+        {
+            dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+        }
+        else
         {
             if ((dfu_ctx.op_code == DFU_CMD_FLASH_DRIVER_REQUEST) || (dfu_ctx.op_code == DFU_CMD_FLASH_DRIVER_TRANSFER))
             {
@@ -899,6 +879,11 @@ static void transfer_data_handle(uint8_t *param, uint16_t length)
             else if ((dfu_ctx.op_code == DFU_CMD_APP_REQUEST) || (dfu_ctx.op_code == DFU_CMD_APP_TRANSFER))
             {
                 dfu_ctx.op_code = DFU_CMD_APP_TRANSFER;
+                if ((param[1u] == 0) || (param[1u] != (dfu_ctx.write_index + 1)))
+                {
+                    dfu_do_notify_response(NEGATIVE, param[0u], BLOCK_SEQUENCE_COUNT_ERR); // NRC73
+                    return;
+                }
                 dfu_ctx.recevice_index = param[1u];
                 dfu_ctx.receive_length += (length - 2u);
                 dfu_ctx.program_flag = 1u;
@@ -924,13 +909,18 @@ static void transfer_data_handle(uint8_t *param, uint16_t length)
                 }
 
                 if ((dfu_ctx.receive_length >= DFU_PROGRAM_LENGTH) ||
-                        ((dfu_ctx.receive_length + dfu_ctx.write_length) == dfu_ctx.dfu_info.image_size))
+                    ((dfu_ctx.receive_length + dfu_ctx.write_length) == dfu_ctx.dfu_info.image_size))
                 {
                     if ((++(dfu_ctx.queue_list.tail)) >= QUEUE_LIN_LEN)
                     {
                         dfu_ctx.queue_list.tail = 0u;
                     }
                 }
+                else
+                {
+                    dfu_do_notify_response(NEGATIVE, param[0u], TRANSFER_DATA_PAUSE); // NRC71
+                }
+
                 if (dfu_ctx.write_length == dfu_ctx.dfu_info.image_size) // 避免多发
                 {
                     dfu_ctx.queue_list.tail = 0u; // 队列清空
@@ -940,12 +930,8 @@ static void transfer_data_handle(uint8_t *param, uint16_t length)
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
+                dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_SEQUEENCE_ERROR); // NRC24
             }
-        }
-        else
-        {
-            dfu_do_notify_response(NEGATIVE, param[0u], IMLOIF); // NRC13
         }
     }
     else
@@ -1058,7 +1044,7 @@ static void routine_control_handle(uint8_t *param, uint16_t length)
                     {
                         sha256(flash_driver, dfu_ctx.flashdrv_write_size, data_tmp);
                         aes_cmac(key, data_tmp, 32, (uint8_t *)flash_driver_cmac);
-
+                        
                         if (cpmpare_key(flash_driver_cmac, &param[4u], 16u) == 1u)
                         {
                             dfu_ctx.op_code = DFU_CMD_FLASH_DRIVER_CMAC_CHECK;
@@ -1073,7 +1059,7 @@ static void routine_control_handle(uint8_t *param, uint16_t length)
                             flashdrv_cmac_succ = AS_FALSE;
                             pre_program_resp[0u] = param[2u];
                             pre_program_resp[1u] = param[3u];
-                            pre_program_resp[2u] = 1u;
+                            pre_program_resp[2u] = 0x2u;
                             dfu_do_notify_cp(param[0u], param[1u], (uint8_t *)pre_program_resp, sizeof(pre_program_resp));
                         }
                     }
@@ -1100,13 +1086,17 @@ static void routine_control_handle(uint8_t *param, uint16_t length)
                             app_cmac_succ = AS_FALSE;
                             pre_program_resp[0u] = param[2u];
                             pre_program_resp[1u] = param[3u];
-                            pre_program_resp[2u] = 1u;
+                            pre_program_resp[2u] = 0x2u;
                             dfu_do_notify_cp(param[0u], param[1u], (uint8_t *)pre_program_resp, sizeof(pre_program_resp));
                         }
                     }
                     else
                     {
-                        dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
+                        pre_program_resp[0u] = param[2u];
+                        pre_program_resp[1u] = param[3u];
+                        pre_program_resp[2u] = 0x2u;
+                        dfu_do_notify_cp(param[0u], param[1u], (uint8_t *)pre_program_resp, sizeof(pre_program_resp));
+                        //dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
                     }
                 }
                 else
@@ -1196,13 +1186,7 @@ static void reset_handle(uint8_t *param, uint16_t length)
     {
         if (param[1] == 0x01u)
         {
-            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-            {
-            }
-            else
-            {
-                dfu_do_notify_response(POSITIVE, param[0], param[1]);
-            }
+            dfu_do_notify_response(POSITIVE, param[0], param[1]);
 
             delay_ms(50u);
             NVIC_SystemReset();
@@ -1211,15 +1195,16 @@ static void reset_handle(uint8_t *param, uint16_t length)
         {
             NVIC_SystemReset();
         }
+        else if ((param[1] == 0x03u) || (param[1] == 0x02u))
+        {
+            dfu_do_notify_response(POSITIVE, param[0], param[1]);
+        }
+        else if ((param[1] == 0x83u) || (param[1] == 0x82u)) // 禁止肯定响应
+        {
+        }
         else
         {
-            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-            {
-            }
-            else
-            {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
-            }
+            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
         }
     }
     else
@@ -1230,13 +1215,7 @@ static void reset_handle(uint8_t *param, uint16_t length)
 
 static void clear_dtc_info_handle(uint8_t *param, uint16_t length)
 {
-    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-    {
-    }
-    else
-    {
-        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
-    }
+    dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
 }
 
 static void enable_swd(void) // 使能swd接口
@@ -1270,8 +1249,8 @@ static void assign_config_word_handle(uint8_t *param, uint16_t length)
                 /* assign */
                 if (g_config_word_state == CONFIGURE_WORD_STATE_START)
                 {
-                    if ((param[5u] == LEFT_FRONT_DOOR) || (param[5u] == LEFT_REAR_DOOR) ||
-                            (param[5u] == RIGHT_FRONT_DOOR) || (param[5u] == RIGHT_REAR_DOOR))
+                    if ((param[5u] == LEFT_FRONT_DOOR) || (param[5u] == LEFT_REAR_DOOR) || 
+                        (param[5u] == RIGHT_FRONT_DOOR) || (param[5u] == RIGHT_REAR_DOOR))
                     {
                         g_user_info.config_word = param[5u];
 
@@ -1289,7 +1268,7 @@ static void assign_config_word_handle(uint8_t *param, uint16_t length)
                     pal_store_data_get(CFG_WORD_BASE_ADDR, (uint8_t *)&g_user_info, sizeof(g_user_info));
                     uds_diagnostic_configword_remap_nad();
                     if ((lin_get_uds_nad() == 0x68u) || (lin_get_uds_nad() == 0x6Au) ||
-                            (lin_get_uds_nad() == 0x69u) || (lin_get_uds_nad() == 0x6Bu))
+                        (lin_get_uds_nad() == 0x69u) || (lin_get_uds_nad() == 0x6Bu))
                     {
                         enable_swd(); // 使能swd功能
                     }
@@ -1330,8 +1309,8 @@ static void read_by_identify_handle(uint8_t *param, uint16_t length)
     {
         if ((param[1u] == 0xF3u) && (param[2u] == 0x3Fu) && (param[3u] == 0xFFu) && (param[4u] == 0x02u))
         {
-            if ((param[5u] == LEFT_FRONT_DOOR) || (param[5u] == LEFT_REAR_DOOR) ||
-                    (param[5u] == RIGHT_FRONT_DOOR) || (param[5u] == RIGHT_REAR_DOOR))
+            if ((param[5u] == LEFT_FRONT_DOOR) || (param[5u] == LEFT_REAR_DOOR) || 
+                (param[5u] == RIGHT_FRONT_DOOR) || (param[5u] == RIGHT_REAR_DOOR))
             {
                 pal_store_data_get(CFG_WORD_BASE_ADDR, (uint8_t *)&g_user_info, sizeof(g_user_info));
                 if (g_user_info.config_word == param[5u])
@@ -1364,7 +1343,7 @@ static void read_by_identify_handle(uint8_t *param, uint16_t length)
     }
 }
 
-static void user_read_data_by_id(uint16_t did, uint16_t *len)
+static void user_read_data_by_id(uint8_t mul_flag, uint8_t mul_len, uint16_t did, uint16_t *len)
 {
     uint8_t loc;
     static const char *seres_part_numbers[] = {"4280310-RW02"};
@@ -1380,7 +1359,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         *len = 12u;
         for (loc = 0u; loc < 12u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_part_numbers[0][loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_part_numbers[0][loc]); /*mult did*/
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_part_numbers[0][loc]); /*single did*/
+            }
         }
 
         break;
@@ -1389,7 +1375,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         *len = 10u;
         for (loc = 0u; loc < 10u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_supplier_code[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_supplier_code[loc]); /*mult did*/
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_supplier_code[loc]); /*single did*/
+            }
         }
         break;
     /* Seres ECU name:EHIS_FL */
@@ -1418,44 +1411,64 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         }
         for (loc = 0u; loc < 10u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_ecu_name[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_ecu_name[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_ecu_name[loc]);
+            }
         }
         break;
     /* Seres LIN slave sequence num:SW:1.01.A_250606_3233_00 */
     case 0xF189u:
         *len = 24u;
-        ll_flash_read(FLASH_TYPE_NVM, FLASH_SEQ_NUM_ADDR, (uint8_t *)&diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN], 24u);
-
+        if (mul_flag)
+        {
+            ll_flash_read(FLASH_TYPE_NVM, FLASH_SEQ_NUM_ADDR, (uint8_t *)&diagnosticTxBuffer[mul_len], 24u);
+        }
+        else
+        {
+            ll_flash_read(FLASH_TYPE_NVM, FLASH_SEQ_NUM_ADDR, (uint8_t *)&diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN], 24u);
+        }
         break;
     /* Seres software version*/
     case 0x0216u:
         *len = 21u;
         /* copy seres_software_version[] */
         ll_flash_read(FLASH_TYPE_NVM, FLASH_SERES_APP_SOFTVER_ADDR, (uint8_t *)&seres_software_version[0u], 21u);
-        for (loc = 0u; loc < 21u; loc++)
-        {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_software_version[loc]);
-        }
-
         if (g_user_info.config_word == LEFT_FRONT_DOOR) // 左前门把手
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
+            seres_software_version[7] = 'F';
+            seres_software_version[8] = 'L';
         }
         else if (g_user_info.config_word == LEFT_REAR_DOOR) // 左后门把手
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
+            seres_software_version[7] = 'R';
+            seres_software_version[8] = 'L';
         }
         else if (g_user_info.config_word == RIGHT_FRONT_DOOR) // 右前门把手
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
+            seres_software_version[7] = 'F';
+            seres_software_version[8] = 'R';
         }
         else if (g_user_info.config_word == RIGHT_REAR_DOOR) // 右后门把手
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
+            seres_software_version[7] = 'R';
+            seres_software_version[8] = 'R';
+        }
+
+        for (loc = 0u; loc < 21u; loc++)
+        {
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_software_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_software_version[loc]);
+            }
         }
         break;
     /* Seres fingerprint info*/
@@ -1464,7 +1477,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         pal_store_read(FLASH_TYPE_NVM, FLASH_DFU_INFO_ADDR, (uint8_t *)&dfu_ctx.dfu_info, sizeof(last_dfu_info_t));
         for (loc = 0u; loc < 10u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(dfu_ctx.dfu_info.fingerprint[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(dfu_ctx.dfu_info.fingerprint[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(dfu_ctx.dfu_info.fingerprint[loc]);
+            }
         }
         break;
     /* hardware verison info */
@@ -1473,7 +1493,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         ll_flash_read(FLASH_TYPE_NVM, FLASH_HW_VERSION_ADDR, (uint8_t *)hardware_version, sizeof(hardware_version));
         for (loc = 0u; loc < 8u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(hardware_version[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(hardware_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(hardware_version[loc]);
+            }
         }
         break;
     /* bootloader verison info */
@@ -1482,7 +1509,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         ll_flash_read(FLASH_TYPE_NVM, FLASH_BOOT_VERSION_ADDR, (uint8_t *)boot_version, sizeof(boot_version));
         for (loc = 0u; loc < 8u; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(boot_version[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(boot_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(boot_version[loc]);
+            }
         }
         break;
     default:
@@ -1496,7 +1530,10 @@ void read_data_by_identify_handle(uint8_t *param, uint16_t length)
     uint8_t positresp = NEGATIVE;
     uint16_t msglen = 0u, datalen;
     uint16_t locdid = 0xFFFFu;
+    mult_did_data_t mult_did;
+
     msglen = length;
+
     if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
     {
         return;
@@ -1510,29 +1547,59 @@ void read_data_by_identify_handle(uint8_t *param, uint16_t length)
         if (result)
         {
             /*call the user function to process the service after all checks are correct*/
-            user_read_data_by_id(locdid, &datalen);
-            positresp = POSITIVE;
+            user_read_data_by_id(0, 0, locdid, &datalen);
             msglen = (datalen + UDS_READ_BY_DID_MIN_RESP_LEN);
+
+            diagnosticTxBuffer[1u] = (uint8_t)(locdid >> 8u);
+            diagnosticTxBuffer[2u] = (uint8_t)locdid;
+            dfu_do_notify_cp_ex(param[0u], &diagnosticTxBuffer[1u], msglen - 1u);
         }
         else
         {
-            g_negResponseCode = REQUEST_OUT_RANGE; // NRC31
+            dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+        }
+    }
+    else if ((msglen > UDS_READ_BY_DID_REQ_LEN) && (msglen <= ((MULT_DID_MAX * 2) + 1)) && (((msglen - 1) % 2) == 0))  // 最多5个did
+    {
+        memset(&mult_did, 0, sizeof(mult_did_data_t));
+        mult_did.did_num = (msglen - 1) / 2;
+
+        for (uint8_t i = 0; i < mult_did.did_num; i++)
+        {
+            mult_did.did_array[i] = ((uint16_t)param[2 * i + 1u] << 8u) + param[2 * i + 2u];
+            result = uds_diag_DID_chk(mult_did.did_array[i]);
+            /* DID supported */
+            if (result)
+            {
+                mult_did.did_valid_flag |= 1 << i;
+            }
+        }
+        /*if any did is valid, response true*/
+        if (mult_did.did_valid_flag)
+        {
+            for (uint8_t i = 0; i < mult_did.did_num; i++)
+            {
+                /*this did is valid and read data*/
+                if (mult_did.did_valid_flag & (1 << i))
+                {
+                    diagnosticTxBuffer[mult_did.data_len + 1u] = (uint8_t)(mult_did.did_array[i] >> 8u);
+                    diagnosticTxBuffer[mult_did.data_len + 2u] = (uint8_t)mult_did.did_array[i];
+                    /*call the user function to process the service after all checks are correct*/
+                    user_read_data_by_id(1, (mult_did.data_len + 3u), mult_did.did_array[i], &datalen);
+                    mult_did.data_len += (datalen + 2); /*data and 2 byte did*/
+                }
+            }
+            msglen = (mult_did.data_len + 1);
+            dfu_do_notify_cp_ex(param[0u], &diagnosticTxBuffer[1u], msglen - 1u);
+        }
+        else
+        {
+            dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
         }
     }
     else
     {
-        g_negResponseCode = IMLOIF; // NRC13
-    }
-
-    if (POSITIVE == positresp) /*positive response*/
-    {
-        diagnosticTxBuffer[1u] = (uint8_t)(locdid >> 8u);
-        diagnosticTxBuffer[2u] = (uint8_t)locdid;
-        dfu_do_notify_cp_ex(param[0u], &diagnosticTxBuffer[1u], msglen - 1u);
-    }
-    else /*negative response*/
-    {
-        dfu_do_notify_response(NEGATIVE, param[0u], g_negResponseCode);
+        dfu_do_notify_response(NEGATIVE, param[0u], IMLOIF); // NRC13
     }
 }
 
@@ -1542,54 +1609,32 @@ void communcation_control_handle(uint8_t *param, uint16_t length)
     {
         if (length == BOOT_Frame_length_3)
         {
-            if ((param[1u] == 0x00u) || (param[1u] == 0x03u))
+            if ((param[1u] == 0x00u) || (param[1u] == 0x01u) ||
+                (param[1u] == 0x02u) || (param[1u] == 0x03u))
             {
                 if ((param[2u] == 0x01u) || (param[2u] == 0x03u))
                 {
-                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                    {
-                    }
-                    else
-                    {
-                        dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
-                    }
+                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
                 }
                 else
                 {
-                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                    {
-                    }
-                    else
-                    {
-                        dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
-                    }
+                    dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
                 }
             }
-            else if ((param[1u] == 0x80u) || (param[1u] == 0x83u))
+            else if ((param[1u] == 0x80u) || (param[1u] == 0x81u) ||
+                     (param[1u] == 0x82u) || (param[1u] == 0x83u))
             {
                 if ((param[2u] == 0x01u) || (param[2u] == 0x03u))
                 {
                 }
                 else
                 {
-                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                    {
-                    }
-                    else
-                    {
-                        dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
-                    }
+                    dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
                 }
             }
             else
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
-                }
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
             }
         }
         else
@@ -1599,13 +1644,7 @@ void communcation_control_handle(uint8_t *param, uint16_t length)
     }
     else
     {
-        if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-        {
-        }
-        else
-        {
-            dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
-        }
+        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
     }
 }
 void dtc_control_handle(uint8_t *param, uint16_t length)
@@ -1616,39 +1655,18 @@ void dtc_control_handle(uint8_t *param, uint16_t length)
         {
             if (param[1u] == 0x01u)
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
-                }
+                dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
             }
             else if (param[1u] == 0x02u)
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
-                }
+                dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
             }
-            else if (param[1] == 0x81u)
-            {
-            }
-            else if (param[1] == 0x82u)
+            else if ((param[1] == 0x81u) || (param[1] == 0x82u))
             {
             }
             else
             {
-                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-                {
-                }
-                else
-                {
-                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
-                }
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
             }
         }
         else
@@ -1658,13 +1676,7 @@ void dtc_control_handle(uint8_t *param, uint16_t length)
     }
     else
     {
-        if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-        {
-        }
-        else
-        {
-            dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
-        }
+        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
     }
 }
 void diagnostic_session_handle(uint8_t *param, uint16_t length)
@@ -1673,26 +1685,14 @@ void diagnostic_session_handle(uint8_t *param, uint16_t length)
     {
         if (param[1] == 0x00u)
         {
-            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-            {
-            }
-            else
-            {
-                dfu_do_notify_response(POSITIVE, param[0], param[1]);
-            }
+            dfu_do_notify_response(POSITIVE, param[0], param[1]);
         }
         else if (param[1] == 0x80u)
         {
         }
         else
         {
-            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
-            {
-            }
-            else
-            {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
-            }
+            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
         }
     }
     else
@@ -1702,22 +1702,22 @@ void diagnostic_session_handle(uint8_t *param, uint16_t length)
 }
 
 const dfu_process_context_t dfu_process_ctx[] =
-{
-    {SERVICE_SESSION_CONTROL, session_control_handle},             // 0x10 物理寻址+功能寻址
-    {SERVICE_ECU_RESET, reset_handle},                             // 0x11 物理寻址+功能寻址
-    {SERVICE_SECURITY_ACCESS, security_access_handle},             // 0x27 物理寻址
-    {SERVICE_FIRMWARE_INFO_SYNC, firmware_info_sync_handle},       // 0x2E 物理寻址
-    {SERVICE_ROUTINE_CONTROL, routine_control_handle},             // 0x31 物理寻址
-    {SERVICE_REQUEST_DOWNLOAD, request_download_handle},           // 0x34 物理寻址
-    {SERVICE_TRANSFER_DATA, transfer_data_handle},                 // 0x36 物理寻址
-    {SERVICE_REQUEST_TRANSFER_EXIT, request_transfer_exit_handle}, // 0x37 物理寻址
-    {SERVICE_CLEAR_DTC_INFO, clear_dtc_info_handle},               // 0x14 物理寻址+功能寻址
-    {SERVICE_ASSIGN_NAD_VIA_SNPD, assign_config_word_handle},      // 0xB5
-    {SERVICE_READ_BY_IDENTIFY, read_by_identify_handle},           // 0xB2
-    {SERVICE_READ_DATA_BY_IDENTIFY, read_data_by_identify_handle}, // 0x22 物理寻址
-    {SERVICE_COMMUNCATION_CONTROL, communcation_control_handle},   // 0x28 功能寻址
-    {SERVICE_DTC_CONTROL, dtc_control_handle},                     // 0x85 功能寻址
-    {SERVICE_TESTER_PRESENT, diagnostic_session_handle},           // 0x3E 功能寻址
+    {
+        {SERVICE_SESSION_CONTROL, session_control_handle},             // 0x10 物理寻址+功能寻址
+        {SERVICE_ECU_RESET, reset_handle},                             // 0x11 物理寻址+功能寻址
+        {SERVICE_SECURITY_ACCESS, security_access_handle},             // 0x27 物理寻址
+        {SERVICE_FIRMWARE_INFO_SYNC, firmware_info_sync_handle},       // 0x2E 物理寻址
+        {SERVICE_ROUTINE_CONTROL, routine_control_handle},             // 0x31 物理寻址
+        {SERVICE_REQUEST_DOWNLOAD, request_download_handle},           // 0x34 物理寻址
+        {SERVICE_TRANSFER_DATA, transfer_data_handle},                 // 0x36 物理寻址
+        {SERVICE_REQUEST_TRANSFER_EXIT, request_transfer_exit_handle}, // 0x37 物理寻址
+        {SERVICE_CLEAR_DTC_INFO, clear_dtc_info_handle},               // 0x14 物理寻址+功能寻址
+        {SERVICE_ASSIGN_NAD_VIA_SNPD, assign_config_word_handle},      // 0xB5
+        {SERVICE_READ_BY_IDENTIFY, read_by_identify_handle},           // 0xB2
+        {SERVICE_READ_DATA_BY_IDENTIFY, read_data_by_identify_handle}, // 0x22 物理寻址
+        {SERVICE_COMMUNCATION_CONTROL, communcation_control_handle},   // 0x28 功能寻址
+        {SERVICE_DTC_CONTROL, dtc_control_handle},                     // 0x85 功能寻址
+        {SERVICE_TESTER_PRESENT, diagnostic_session_handle},           // 0x3E 功能寻址
 };
 
 #define DFU_PROCESS_STEP_MAX (sizeof(dfu_process_ctx) / sizeof(dfu_process_context_t))

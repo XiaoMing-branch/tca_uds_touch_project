@@ -21,6 +21,8 @@
 #ifndef __CUSTOM_DIAGNOSTICLLL_H__
 #define __CUSTOM_DIAGNOSTICLLL_H__
 
+#include "tcae10.h"
+
 typedef enum
 {
     LEFT_FRONT_DOOR = 0,
@@ -37,6 +39,20 @@ typedef struct
     uint8_t config_word; /* user's config word */
     uint8_t nad_info;
 } user_cfg_t __attribute__((aligned(1)));
+
+typedef struct
+{
+    int16_t key1_raw[2];
+    int16_t key1_base[2];
+    int16_t key1_diff[2];
+
+    int16_t key2_raw[2];
+    int16_t key2_base[2];
+    int16_t key2_diff[2];
+
+    int16_t noise_raw;
+    uint8_t key_val;
+} lin_touch_data;
 
 void uds_diagnostic_configword_remap_nad(void);
 

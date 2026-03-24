@@ -32,11 +32,11 @@
 static const char *TAG = "custom";
 
 #if defined APP_MATCH_BOOT
-__attribute__((section(".ARM.__at_0x00004000"))) const char g_lin_sequence_num_version[24] = "SW:1.01.B_251230_3197_01";                                                                                        /* 24 byte*/
-__attribute__((section(".ARM.__at_0x00004018"))) const char g_seres_app_software_version[21] = {'S', 'W', ':', 'E', 'H', 'I', 'S', 'F', 'L', '.', '1', '.', '3', 'C', '.', '0', '1', 0x20, 0x20, 0x20, 0x20};   /* 21 byte*/
+__attribute__((section(".ARM.__at_0x00004000"))) const char g_lin_sequence_num_version[24] = "SW:1.01.B_260313_3197_04";                                                                                        /* 24 byte*/
+__attribute__((section(".ARM.__at_0x00004018"))) const char g_seres_app_software_version[21] = {'S', 'W', ':', 'E', 'H', 'I', 'S', 'F', 'L', '.', '1', '.', '3', 'C', '.', '0', '5', 0x20, 0x20, 0x20, 0x20};   /* 21 byte*/
 #else
-const char g_lin_sequence_num_version[24] = "SW:1.01.B_251230_3197_01";                                                                                        /* 24 byte*/
-const char g_seres_app_software_version[21] = {'S', 'W', ':', 'E', 'H', 'I', 'S', 'F', 'L', '.', '1', '.', '3', 'C', '.', '0', '1', 0x20, 0x20, 0x20, 0x20};   /* 21 byte*/
+const char g_lin_sequence_num_version[24] = "SW:1.01.B_260313_3197_04";                                                                                        /* 24 byte*/
+const char g_seres_app_software_version[21] = {'S', 'W', ':', 'E', 'H', 'I', 'S', 'F', 'L', '.', '1', '.', '3', 'C', '.', '0', '5', 0x20, 0x20, 0x20, 0x20};   /* 21 byte*/
 #endif
 
 /* general defines for UDS Session*/
@@ -87,15 +87,21 @@ const char g_seres_app_software_version[21] = {'S', 'W', ':', 'E', 'H', 'I', 'S'
 #define UDS_COND_NOT_CORRECT_22 0x22u
 #define UDS_REQU_SEQU_ERROR_24 0x24u
 #define UDS_REQUEST_OUT_OF_RANGE_31 0x31u
+#define UDS_DID_SEC_ERR_33 0x33u
 #define UDS_GENERAL_PROGRAMMING_FAIL_72 0x72u
 #define UDS_REQ_CORR_REC_RESP_PEND_78 0x78u
 #define UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F 0x7Fu
+#define UDS_COND_NOT_SUPPORT_7E 0x7Eu
 
 #define CONFIGURE_WORD_STATE_INIT 0
 #define CONFIGURE_WORD_STATE_START 1
 #define CONFIGURE_WORD_STATE_ASIGN 2
 #define CONFIGURE_WORD_STATE_SAVE 3
 #define CONFIGURE_WORD_STATE_END 4
+
+#define MULT_DID_MAX            5
+
+lin_touch_data touch_data;
 
 /**
  * Note:ota dfu info struct, this should be align with bootloader
@@ -106,6 +112,14 @@ typedef struct
     uint32_t magic;
     uint32_t image_size;
 } last_dfu_info_t;
+
+typedef struct
+{
+    uint8_t did_num;
+    uint16_t data_len;
+    uint16_t did_valid_flag;
+    uint16_t did_array[MULT_DID_MAX];
+} mult_did_data_t;
 
 /**
  * @brief ota sys info
@@ -172,6 +186,9 @@ static uint8_t uds_diag_DID_chk(uint16_t ucSess)
     case 0xF180:
     case 0xF184:
     case 0x0216:
+    case 0xF190:
+    case 0xF0FA:
+    case 0x0001:
         ucRet = UDS_TRUE;
         break;
     default:
@@ -181,7 +198,7 @@ static uint8_t uds_diag_DID_chk(uint16_t ucSess)
     return ucRet;
 }
 
-static void user_read_data_by_id(uint16_t did, uint16_t *len)
+static void user_read_data_by_id(uint8_t mul_flag, uint8_t mul_len, uint16_t did, uint16_t *len)
 {
     uint8_t loc;
     static const char *seres_part_numbers[] = {"4280310-RW02"};
@@ -197,7 +214,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         *len = 12;
         for (loc = 0u; loc < 12; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_part_numbers[0][loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_part_numbers[0][loc]); /*mult did*/
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_part_numbers[0][loc]); /*single did*/
+            }
         }
         break;
     /* Seres 供应商code:3233 */
@@ -205,7 +229,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         *len = 10;
         for (loc = 0u; loc < 10; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_supplier_code[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_supplier_code[loc]); /*mult did*/
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_supplier_code[loc]); /*single did*/
+            }
         }
         break;
     /* Seres ECU name:EHIS_FL */
@@ -233,7 +264,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         }
         for (loc = 0u; loc < 10; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_ecu_name[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(seres_ecu_name[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(seres_ecu_name[loc]);
+            }
         }
         break;
     /* Seres LIN slave sequence num:SW:1.01.A_250606_3233_00 */
@@ -241,37 +279,75 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         *len = 24;
         for (loc = 0u; loc < 24; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_lin_sequence_num_version[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(g_lin_sequence_num_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_lin_sequence_num_version[loc]);
+            }
         }
         break;
     /* Seres software version*/
     case 0x0216:
         *len = 21;
 
-        /* copy seres_software_version[] */
-        for (loc = 0u; loc < 21; loc++)
+        if (mul_flag)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_seres_app_software_version[loc]);
+            /* copy seres_software_version[] */
+            for (loc = 0u; loc < 21; loc++)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(g_seres_app_software_version[loc]);
+            }
+            if (g_user_info.config_word == LEFT_FRONT_DOOR) // 左前门把手
+            {
+                diagnosticTxBuffer[mul_len + 7] = 'F';
+                diagnosticTxBuffer[mul_len + 8] = 'L';
+            }
+            else if (g_user_info.config_word == LEFT_REAR_DOOR) // 左后门把手
+            {
+                diagnosticTxBuffer[mul_len + 7] = 'R';
+                diagnosticTxBuffer[mul_len + 8] = 'L';
+            }
+            else if (g_user_info.config_word == RIGHT_FRONT_DOOR) // 右前门把手
+            {
+                diagnosticTxBuffer[mul_len + 7] = 'F';
+                diagnosticTxBuffer[mul_len + 8] = 'R';
+            }
+            else if (g_user_info.config_word == RIGHT_REAR_DOOR) // 右后门把手
+            {
+                diagnosticTxBuffer[mul_len + 7] = 'R';
+                diagnosticTxBuffer[mul_len + 8] = 'R';
+            }
         }
-        if (g_user_info.config_word == LEFT_FRONT_DOOR) // 左前门把手
+        else
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
-        }
-        else if (g_user_info.config_word == LEFT_REAR_DOOR) // 左后门把手
-        {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
-        }
-        else if (g_user_info.config_word == RIGHT_FRONT_DOOR) // 右前门把手
-        {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
-        }
-        else if (g_user_info.config_word == RIGHT_REAR_DOOR) // 右后门把手
-        {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
+            /* copy seres_software_version[] */
+            for (loc = 0u; loc < 21; loc++)
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_seres_app_software_version[loc]);
+            }
+            if (g_user_info.config_word == LEFT_FRONT_DOOR) // 左前门把手
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
+            }
+            else if (g_user_info.config_word == LEFT_REAR_DOOR) // 左后门把手
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'L';
+            }
+            else if (g_user_info.config_word == RIGHT_FRONT_DOOR) // 右前门把手
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'F';
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
+            }
+            else if (g_user_info.config_word == RIGHT_REAR_DOOR) // 右后门把手
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 7] = 'R';
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + 8] = 'R';
+            }
         }
 
         break;
@@ -282,7 +358,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         store_slow_smart_read(FLASH_DFU_INFO_ADDR, (uint8_t *)&g_dfu_info, sizeof(last_dfu_info_t));
         for (loc = 0u; loc < 10; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_dfu_info.fingerprint[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(g_dfu_info.fingerprint[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(g_dfu_info.fingerprint[loc]);
+            }
         }
         break;
     /* hardware verison info */
@@ -291,7 +374,14 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         ll_flash_read(FLASH_TYPE_NVM, FLASH_HW_VERSION_ADDR, (uint8_t *)hard_version, sizeof(hard_version));
         for (loc = 0u; loc < 8; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(hard_version[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(hard_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(hard_version[loc]);
+            }
         }
         break;
     /* bootloader verison info */
@@ -300,9 +390,60 @@ static void user_read_data_by_id(uint16_t did, uint16_t *len)
         ll_flash_read(FLASH_TYPE_NVM, FLASH_BOOT_VERSION_ADDR, (uint8_t *)boot_version, sizeof(boot_version));
         for (loc = 0u; loc < 8; loc++)
         {
-            diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(boot_version[loc]);
+            if (mul_flag)
+            {
+                diagnosticTxBuffer[mul_len + loc] = (uint8_t)(boot_version[loc]);
+            }
+            else
+            {
+                diagnosticTxBuffer[UDS_READ_BY_DID_MIN_RESP_LEN + loc] = (uint8_t)(boot_version[loc]);
+            }
         }
         break;
+    case 0xF190:
+        *len = 0;
+        break;
+    case 0xF0FA:
+        *len = 0;
+        break;
+
+    /*get raw base diff noise key value*/
+    case 0x0001:
+        *len = 27;
+        diagnosticTxBuffer[1] = (uint8_t)((touch_data.key1_raw[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[2] = (uint8_t)(touch_data.key1_raw[0] & 0xFF);
+        diagnosticTxBuffer[3] = (uint8_t)((touch_data.key1_base[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[4] = (uint8_t)(touch_data.key1_base[0] & 0xFF);
+        diagnosticTxBuffer[5] = (uint8_t)((touch_data.key1_diff[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[6] = (uint8_t)(touch_data.key1_diff[0] & 0xFF);
+
+        diagnosticTxBuffer[7] = (uint8_t)((touch_data.key1_raw[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[8] = (uint8_t)(touch_data.key1_raw[1] & 0xFF);
+        diagnosticTxBuffer[9] = (uint8_t)((touch_data.key1_base[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[10] = (uint8_t)(touch_data.key1_base[1] & 0xFF);
+        diagnosticTxBuffer[11] = (uint8_t)((touch_data.key1_diff[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[12] = (uint8_t)(touch_data.key1_diff[1] & 0xFF);
+
+        diagnosticTxBuffer[13] = (uint8_t)((touch_data.key2_raw[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[14] = (uint8_t)(touch_data.key2_raw[0] & 0xFF);
+        diagnosticTxBuffer[15] = (uint8_t)((touch_data.key2_base[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[16] = (uint8_t)(touch_data.key2_base[0] & 0xFF);
+        diagnosticTxBuffer[17] = (uint8_t)((touch_data.key2_diff[0] & 0xFF00) >> 8);
+        diagnosticTxBuffer[18] = (uint8_t)(touch_data.key2_diff[0] & 0xFF);
+
+        diagnosticTxBuffer[19] = (uint8_t)((touch_data.key2_raw[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[20] = (uint8_t)(touch_data.key2_raw[1] & 0xFF);
+        diagnosticTxBuffer[21] = (uint8_t)((touch_data.key2_base[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[22] = (uint8_t)(touch_data.key2_base[1] & 0xFF);
+        diagnosticTxBuffer[23] = (uint8_t)((touch_data.key2_diff[1] & 0xFF00) >> 8);
+        diagnosticTxBuffer[24] = (uint8_t)(touch_data.key2_diff[1] & 0xFF);
+
+        diagnosticTxBuffer[25] = (uint8_t)((touch_data.noise_raw & 0xFF00) >> 8);
+        diagnosticTxBuffer[26] = (uint8_t)(touch_data.noise_raw & 0xFF);
+
+        diagnosticTxBuffer[27] = (uint8_t)(touch_data.key_val & 0x3);
+        break;
+
     default:
         break;
     }
@@ -342,7 +483,7 @@ void uds_diagnostic_session_control(void)
             {
                 if (ucSess == 0x02)
                 {
-                    send_negative_response_message(UDS_COND_NOT_CORRECT_22); // NRC22
+                    send_negative_response_message(UDS_COND_NOT_SUPPORT_7E); // NRC7E
                 }
             }
 
@@ -450,10 +591,7 @@ void uds_diagnostic_dtc_control(void)
     {
         if (diagRxSize == 2u)
         {
-            if (diagnosticRxBuffer[1] == 0x81)
-            {
-            }
-            else if (diagnosticRxBuffer[1] == 0x82)
+            if ((diagnosticRxBuffer[1] == 0x81) || (diagnosticRxBuffer[1] == 0x82)) // 禁止肯定响应
             {
             }
             else if (diagnosticRxBuffer[1] == 0x01)
@@ -468,13 +606,7 @@ void uds_diagnostic_dtc_control(void)
             }
             else
             {
-                if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
-                {
-                }
-                else
-                {
-                    send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
-                }
+                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
             }
         }
         else
@@ -484,13 +616,7 @@ void uds_diagnostic_dtc_control(void)
     }
     else
     {
-        if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
-        {
-        }
-        else
-        {
-            send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
-        }
+        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
     }
 }
 
@@ -520,63 +646,70 @@ void uds_communction_control(void)
     {
         if (diagRxSize == 3u)
         {
-            if ((diagnosticRxBuffer[1u] == 0x00) || (diagnosticRxBuffer[1u] == 0x03))
+            if ((diagnosticRxBuffer[1u] == 0x80) || (diagnosticRxBuffer[1u] == 0x00)) // 对应用报文取消禁言
             {
                 if ((diagnosticRxBuffer[2u] == 0x01) || (diagnosticRxBuffer[2u] == 0x03))
                 {
-                    if (((door_cmd.VehicleSpeedValid == 1) && (door_cmd.VehicleSpeed < 0x36)) || (door_cmd.VehicleSpeedValid == 0))
+                    lin_configuration_RAM[1] = 0x11;
+                    lin_configuration_RAM[2] = 0x13;
+                    lin_configuration_RAM[3] = 0x14;
+                    lin_configuration_RAM[4] = 0x12;
+
+                    lin_configuration_ROM[1] = 0x11;
+                    lin_configuration_ROM[2] = 0x13;
+                    lin_configuration_ROM[3] = 0x14;
+                    lin_configuration_ROM[4] = 0x12;
+
+                    if (diagnosticRxBuffer[1u] == 0x00)
                     {
-                        diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
                         send_positive_response_message(2u);
                     }
-                    else
-                    {
-                        send_negative_response_message(UDS_COND_NOT_CORRECT_22); // NRC22
-                    }
                 }
                 else
                 {
-                    if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
-                    {
-                    }
-                    else
-                    {
-                        send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
-                    }
+                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
                 }
             }
-            else if ((diagnosticRxBuffer[1u] == 0x80) || (diagnosticRxBuffer[1u] == 0x83))
+            else if ((diagnosticRxBuffer[1u] == 0x83) || (diagnosticRxBuffer[1u] == 0x03)) // 对应用报文开始禁言
             {
                 if ((diagnosticRxBuffer[2u] == 0x01) || (diagnosticRxBuffer[2u] == 0x03))
                 {
-                    if (((door_cmd.VehicleSpeedValid == 1) && (door_cmd.VehicleSpeed < 0x36)) || (door_cmd.VehicleSpeedValid == 0))
+                    for (uint8_t i = 0; i < 4; i++)
                     {
+                        lin_configuration_RAM[1 + i] = 0xFF;
+                        lin_configuration_ROM[1 + i] = 0xFF;
                     }
-                    else
+
+                    if (diagnosticRxBuffer[1u] == 0x03)
                     {
-                        send_negative_response_message(UDS_COND_NOT_CORRECT_22); // NRC22
+                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
+                        send_positive_response_message(2u);
                     }
                 }
                 else
                 {
-                    if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
+                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                }
+            }
+            else if ((diagnosticRxBuffer[1u] == 0x82) || (diagnosticRxBuffer[1u] == 0x02))
+            {
+                if ((diagnosticRxBuffer[2u] == 0x01) || (diagnosticRxBuffer[2u] == 0x03))
+                {
+                    if (diagnosticRxBuffer[1u] == 0x02)
                     {
+                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
+                        send_positive_response_message(2u);
                     }
-                    else
-                    {
-                        send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
-                    }
+                }
+                else
+                {
+                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
                 }
             }
             else
             {
-                if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
-                {
-                }
-                else
-                {
-                    send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
-                }
+                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
             }
         }
         else
@@ -586,13 +719,7 @@ void uds_communction_control(void)
     }
     else
     {
-        if ((lin_current_rcvd_nad() == 0x7E) || (lin_current_rcvd_nad() == 0x7F))
-        {
-        }
-        else
-        {
-            send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
-        }
+        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
     }
 }
 void uds_tester_present_control(void)
@@ -654,6 +781,19 @@ void uds_diagnostic_rest(void)
                 send_negative_response_message(UDS_COND_NOT_CORRECT_22); // NRC22
             }
         }
+        else if (diagnosticRxBuffer[1u] == 0x02)
+        {
+            diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+            send_positive_response_message(2);
+        }
+        else if (diagnosticRxBuffer[1u] == 0x03)
+        {
+            diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+            send_positive_response_message(2);
+        }
+        else if ((diagnosticRxBuffer[1u] == 0x82) || (diagnosticRxBuffer[1u] == 0x83))
+        {
+        }
         else
         {
             send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
@@ -670,6 +810,7 @@ void uds_diagnostic_readdata_by_id(void)
     uint8_t positresp = UDS_FALSE;
     uint16_t msglen = 0u, datalen;
     uint16_t locdid = 0xFFFFu;
+    mult_did_data_t mult_did;
 
     msglen = diagRxSize;
 
@@ -682,29 +823,65 @@ void uds_diagnostic_readdata_by_id(void)
         if (result)
         {
             /*call the user function to process the service after all checks are correct*/
-            user_read_data_by_id(locdid, &datalen);
-            positresp = UDS_TRUE;
+            user_read_data_by_id(0, 0, locdid, &datalen);
             msglen = (datalen + UDS_READ_BY_DID_MIN_RESP_LEN);
+            if (locdid == 0x0001) /*产线测试raw不回复did*/
+            {
+                msglen = datalen + 1;
+            }
+            else
+            {
+                diagnosticTxBuffer[1u] = (uint8_t)(locdid >> 8u);
+                diagnosticTxBuffer[2u] = (uint8_t)locdid;
+            }
+            send_positive_response_message(msglen);
         }
         else
         {
-            negResponseCode = UDS_REQUEST_OUT_OF_RANGE_31;
+            send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+        }
+    }
+    else if ((msglen > UDS_READ_BY_DID_REQ_LEN) && (msglen <= ((MULT_DID_MAX * 2) + 1)) && (((msglen - 1) % 2) == 0))  // 最多5个did
+    {
+        memset(&mult_did, 0, sizeof(mult_did_data_t));
+        mult_did.did_num = (msglen - 1) / 2;
+
+        for (uint8_t i = 0; i < mult_did.did_num; i++)
+        {
+            mult_did.did_array[i] = ((uint16_t)diagnosticRxBuffer[2 * i + 1u] << 8u) + diagnosticRxBuffer[2 * i + 2u];
+            result = uds_diag_DID_chk(mult_did.did_array[i]);
+            /* DID supported */
+            if ((result) && (mult_did.did_array[i] != 0x0001))
+            {
+                mult_did.did_valid_flag |= 1 << i;
+            }
+        }
+        /*if any did is valid, response true*/
+        if (mult_did.did_valid_flag)
+        {
+            for (uint8_t i = 0; i < mult_did.did_num; i++)
+            {
+                /*this did is valid and read data*/
+                if (mult_did.did_valid_flag & (1 << i))
+                {
+                    diagnosticTxBuffer[mult_did.data_len + 1u] = (uint8_t)(mult_did.did_array[i] >> 8u);
+                    diagnosticTxBuffer[mult_did.data_len + 2u] = (uint8_t)mult_did.did_array[i];
+                    /*call the user function to process the service after all checks are correct*/
+                    user_read_data_by_id(1, (mult_did.data_len + 3u), mult_did.did_array[i], &datalen);
+                    mult_did.data_len += (datalen + 2); /*data and 2 byte did*/
+                }
+            }
+            msglen = (mult_did.data_len + 1);
+            send_positive_response_message(msglen);
+        }
+        else
+        {
+            send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
         }
     }
     else
     {
-        negResponseCode = UDS_INCOR_LEN_INVALID_FORMAT_13;
-    }
-
-    if (UDS_TRUE == positresp) /*positive response*/
-    {
-        diagnosticTxBuffer[1u] = (uint8_t)(locdid >> 8u);
-        diagnosticTxBuffer[2u] = (uint8_t)locdid;
-        send_positive_response_message(msglen);
-    }
-    else /*negative response*/
-    {
-        send_negative_response_message(negResponseCode);
+        send_negative_response_message(UDS_INCOR_LEN_INVALID_FORMAT_13); // NRC13
     }
 }
 
@@ -909,16 +1086,16 @@ void lin_handle_uds(void)
         uds_diagnostic_rest();
         break;
     case SERVICE_WRITE_DATA_BY_IDENTIFY: // 2E
+        send_negative_response_message(UDS_DID_SEC_ERR_33); // NRC33;
+        break;
     case SERVICE_REQUEST_DOWNLOAD:       // 34
     case SERVICE_TRANSFER_DATA:          // 36
     case SERVICE_REQUEST_TRANSFER_EXIT:  // 37
-        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F);
-        break;
     case SERVICE_SECURITY_ACCESS: // 27
-        send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12);
+        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F;
         break;
     default:
-        send_negative_response_message(SERVICE_NOT_SUPPORTED);
+        send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12);
         break;
     }
 }

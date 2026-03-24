@@ -23,12 +23,34 @@
 #include "app.h"
 #include "custom_diagnosticIII.h"
 #include "tc_log.h"
+#include "lin_process.h"
 
 static const char *TAG = "LIN FRAME";
 
 DoorSt_T door_st = {0};       // 门把手状态反馈信号，初始化为0
 DoorCmd_T door_cmd = {0};     // ECU对门把手控制信号，初始化为0
 extern user_cfg_t g_user_info;
+extern volatile uint8_t lin_error;
+
+void AppSetLinErrByNad(uint8_t err_flag)
+{
+    if (LEFT_FRONT_DOOR == g_user_info.config_word)
+    {
+        l_bool_wr_LI0_EHIS_FL_ResponseError(err_flag);
+    }
+    else if (LEFT_REAR_DOOR == g_user_info.config_word)
+    {
+        l_bool_wr_LI0_EHIS_RL_ResponseError(err_flag);
+    }
+    else if (RIGHT_FRONT_DOOR == g_user_info.config_word)
+    {
+        l_bool_wr_LI0_EHIS_FR_ResponseError(err_flag);
+    }
+    else if (RIGHT_REAR_DOOR == g_user_info.config_word)
+    {
+        l_bool_wr_LI0_EHIS_RR_ResponseError(err_flag);
+    }
+}
 
 /**
 * @description: 通过LIN向主机发送信号
@@ -36,6 +58,15 @@ extern user_cfg_t g_user_info;
  */
 void App_LinSendDoorState(void)
 {
+    if (lin_error != 0)
+    {
+        AppSetLinErrByNad(1);
+    }
+    else
+    {
+        AppSetLinErrByNad(0);
+    }
+
     if (l_flg_tst_LI0_EHIS_FL_State_flag())
     {
         l_flg_clr_LI0_EHIS_FL_State_flag();
@@ -49,6 +80,8 @@ void App_LinSendDoorState(void)
         l_u8_wr_LI0_EHIS_FL_SN_MajorVersB(door_st.SN_MajorVersB);
         l_u8_wr_LI0_EHIS_FL_SN_MinorVersB(door_st.SN_MinorVersB);
         l_u8_wr_LI0_EHIS_FL_SN_SupplierCod(door_st.SN_SupplierCod);
+        lin_error = 0;
+
         if (LEFT_FRONT_DOOR != g_user_info.config_word)
         {
             g_user_info.config_word = LEFT_FRONT_DOOR; // 左前门把手
@@ -68,6 +101,8 @@ void App_LinSendDoorState(void)
         l_u8_wr_LI0_EHIS_RL_SN_MajorVersB(door_st.SN_MajorVersB);
         l_u8_wr_LI0_EHIS_RL_SN_MinorVersB(door_st.SN_MinorVersB);
         l_u8_wr_LI0_EHIS_RL_SN_SupplierCod(door_st.SN_SupplierCod);
+        lin_error = 0;
+
         if (LEFT_REAR_DOOR != g_user_info.config_word)
         {
             g_user_info.config_word = LEFT_REAR_DOOR; // 左后门把手
@@ -87,6 +122,8 @@ void App_LinSendDoorState(void)
         l_u8_wr_LI0_EHIS_FR_SN_MajorVersB(door_st.SN_MajorVersB);
         l_u8_wr_LI0_EHIS_FR_SN_MinorVersB(door_st.SN_MinorVersB);
         l_u8_wr_LI0_EHIS_FR_SN_SupplierCod(door_st.SN_SupplierCod);
+        lin_error = 0;
+
         if (RIGHT_FRONT_DOOR != g_user_info.config_word)
         {
             g_user_info.config_word = RIGHT_FRONT_DOOR; // 右前门把手
@@ -106,6 +143,8 @@ void App_LinSendDoorState(void)
         l_u8_wr_LI0_EHIS_RR_SN_MajorVersB(door_st.SN_MajorVersB);
         l_u8_wr_LI0_EHIS_RR_SN_MinorVersB(door_st.SN_MinorVersB);
         l_u8_wr_LI0_EHIS_RR_SN_SupplierCod(door_st.SN_SupplierCod);
+        lin_error = 0;
+
         if (RIGHT_REAR_DOOR != g_user_info.config_word)
         {
             g_user_info.config_word = RIGHT_REAR_DOOR; // 右后门把手

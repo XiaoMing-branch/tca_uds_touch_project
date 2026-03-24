@@ -571,6 +571,78 @@ typedef struct
 T_SiErrRt SiNoiseDiffNodeInit(T_SiNoiseDiff *nd, const T_SiNoiseParaDiff *para, uint8_t dataLen, T_SiNoiseDataDiff *pdata, uint8_t noiseBufLen, T_SiNoiseData *noiseBuf);
 /** @} */
 
+/**
+* @brief        LiteDiff噪音检测器数据类型
+* @attention    不要直接操作本结构体内容
+*/
+typedef struct
+{
+    //! @cond
+    uint8_t status;                                               /*!< 检测器状态 */
+    struct
+    {
+        uint8_t ready;                                            /*!< 基线是否就绪 */
+        uint8_t locked;                                           /*!< 基线是否被锁定 */
+        uint16_t sampCnt;                                         /*!< 已经采样次数 */
+        T_SiData value;                                           /*!< 基线值 */
+        int32_t sampSumValue;                                     /*!< 采样值总和 */
+    } baseline;
+    uint16_t eliminateCnt;                                        /*!< 消抖计数器 */
+    uint32_t beginReleaseT;                                       /*!< 记录开始释放时间，单位ms */
+    uint32_t beginDetectT;                                        /*!< 记录开始检测时间，单位ms */
+    //! @endcond       //doxygen中隐藏
+} T_SiNoiseDataLiteDiff;
+
+/**
+* @brief        Diff噪音检测器算法参数
+*/
+typedef struct
+{
+    int16_t thresholdSign;                   /*!< 阈值的符号，取-1，0，1，当为0时取diff的绝对值，否则diff值乘以thresholdSign后再与detectThreshold比较--需要用户指定 */
+    struct
+    {
+        uint16_t cntThreshold;               /*!< 采样计数器阈值，到达后更新基线--需要用户指定 */
+        uint16_t firstCntThreshold;          /*!< 首次采样计数器阈值，到达后更新基线--需要用户指定 */
+        T_SiData step;                       /*!< 基线追踪器步进--需要用户指定 */
+    } baseline;       //基线
+    struct
+    {
+        uint16_t detectEliminate;           /*!< 检测消抖次数--需要用户指定 */
+        T_SiNoiseData detectThreshold;      /*!< 噪音检测阈值--需要用户指定 */
+        uint8_t releaseThreshold;           /*!< 释放阈值，范围3-9，表示：检测阈值的0.3-0.9--需要用户指定 */
+        uint8_t releaseDelayS;              /*!< 当噪音检测小于阈值后，延迟1段时间再清噪音检测标志，单位S--需要用户指定 */
+        uint8_t releaseDelayDeciS;          /*!< 当噪音检测小于阈值后，延迟1段时间再清噪音检测标志，单位0.1S--需要用户指定 */
+    } arbiter;
+    uint16_t forceReleaseTimeS;             /*!< 强制释放时间，单位为秒，设为0时表示永不释放--需要用户指定 */
+} T_SiNoiseParaLiteDiff;
+
+/**
+* @brief        Diff噪音检测器描述符
+* @details      噪音检测器原理：当diff绝对值大于阈值threshold时，认为有噪音，当diff绝对值小于释放阈值且持续releaseDelayS后认为噪音消失
+* @attention    不要直接操作本结构体内容
+*/
+typedef struct
+{
+    T_SiNoiseBase base;               /*!< 噪音检测器基类，必须放在开头 */
+    T_SiNoiseParaLiteDiff para;           /*!< 噪音检测器算法参数 */
+    uint8_t dataLen;                  /*!< 噪音检测器数据缓冲区个数 */
+    T_SiNoiseDataLiteDiff *pdata;         /*!< 噪音检测器数据 */
+} T_SiNoiseLiteDiff;
+
+/**
+* @brief    Diff噪音检测器节点描述符初始化
+* @param[in]   nd 噪音检测器节点
+* @param[in]   para 噪音检测器参数
+* @param[in]   dataLen 噪音检测器缓冲区长度
+* @param[in]   pdata 噪音检测器缓冲区
+* @param[in]   noiseBufLen 噪音检测器结果缓冲区长度
+* @param[in]   noiseBuf 噪音检测器结果缓冲区
+* @retval      SI_RT_OK 初始化成功
+* @retval      other 初始化失败
+*/
+T_SiErrRt SiNoiseLiteDiffNodeInit(T_SiNoiseLiteDiff *nd, const T_SiNoiseParaLiteDiff *para, uint8_t dataLen, T_SiNoiseDataLiteDiff *pdata, uint8_t noiseBufLen, T_SiNoiseData *noiseBuf);
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif

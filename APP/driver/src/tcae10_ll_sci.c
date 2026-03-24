@@ -582,7 +582,7 @@ ll_status_e ll_sci_baudrate_config(ll_sci_bus_e bus, uint32_t baudrate)
         else
         {
             lin_sci_reg->RX_FILTER_CFG_F.RX_FILTER_TIM = 200;
-            lin_sci_reg->ANALOG_CTRL = 7;
+            lin_sci_reg->ANALOG_CTRL = 3;
             ll_lin_rx_delay_set(bus, 3);
             TEST_CONFIG_UNLOCK();
             TEST->TEST_LIN_CTRL_F.LIN_EMC_FBNEG_EN = true;

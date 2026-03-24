@@ -1,0 +1,29 @@
+./objects/system_tcpl03x.o: \
+  ..\..\..\..\platform\devices\tcpl03x\system_tcpl03x.c \
+  ..\..\..\..\platform\devices\tcpl03x\inc\tcpl03x.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  ..\..\..\..\platform\CMSIS\Core\Include\core_cm0.h \
+  ..\..\..\..\platform\CMSIS\Core\Include\cmsis_version.h \
+  ..\..\..\..\platform\CMSIS\Core\Include\cmsis_compiler.h \
+  ..\..\..\..\platform\CMSIS\Core\Include\cmsis_armclang.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\.\reg\register.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\eflash_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\syscfg_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\crg_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\pinmux_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\tim_lite_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\print_uart_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\pwm_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\lin_sci_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\adc_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\gpio_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\iwdg_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\lin_sci1_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\asyscfg_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\test_reg_def.h \
+  ..\..\..\..\platform\drivers\tcpl03x_ll_driver\inc\reg\register_map.h \
+  ..\..\..\..\platform\devices\tcpl03x\inc\system_tcpl03x.h

@@ -76,6 +76,8 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
     static uint32_t wkupSlaveCount = 0;
 #endif
     static uint16_t wkupBreakCount = 0;          //唤醒时收到break信号数
+    static uint8_t linFirstCountFlag = 0;        //lin首个计数标志
+    static uint32_t linLastTick;                 //lin超时计数器用
 
 #if CFG_SUPPORT_LIN_SNPD
     static lin_snpd_context_t  lin_snpd_ctx =
@@ -129,6 +131,8 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
         wkupSlaveCount = TcTimeGet();
 #endif
         wkupBreakCount = lin_lld_sci_rcv_break_cnt();
+        linLastTick = TcTimeGet();
+        linFirstCountFlag = 1;
     }
 
     if (msg == MSG_TASK_TIMER)
@@ -138,7 +142,19 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
 #if LOG_INTERFACE_TYPE == LOG_INTERFACE_LIN
         Lin_PrintLogInfo();
 #endif
-        lin_lld_sci_timeout();
+
+        uint32_t curTick = TcTimeGet();
+        if (linFirstCountFlag)
+        {
+            lin_lld_sci_timeout(1);
+            linFirstCountFlag = 0;
+        }
+        else
+        {
+            lin_lld_sci_timeout(curTick - linLastTick);
+        }
+        linLastTick = curTick;
+
 #if CFG_SUPPORT_LIN_SNPD
         lin_snpd_process_handle();
 #endif
@@ -152,9 +168,9 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
 
         if (lin_goto_sleep_flg) //lin命令进入低功耗
         {
-            lin_goto_sleep_flg = 0;
             if (LinCanEnterSleep())
             {
+                lin_goto_sleep_flg = 0;
                 HaltEnter(GetHaltMode(), 0);     //进入低功耗
             }
         }
@@ -187,6 +203,7 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
     if (msg == MSG_TASK_ENTER_HALT)
     {
         linWakeupFlag = 0;
+        lin_goto_sleep_flg = 0;
 
 #if !(LIN_CUSTOM_MASTER_WKUP)
         wkupSlaveFlag = 0;
@@ -210,6 +227,8 @@ static void LinTask(uint32_t msg, void *param)    //Lin任务
         wkupSlaveCount = TcTimeGet();
 #endif
         wkupBreakCount = lin_lld_sci_rcv_break_cnt();
+        linLastTick = TcTimeGet();
+        linFirstCountFlag = 1;
     }
 }
 
