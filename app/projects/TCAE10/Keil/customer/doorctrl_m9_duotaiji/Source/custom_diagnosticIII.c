@@ -470,10 +470,10 @@ void uds_diagnostic_session_control(void)
             {
                 program_condition_check = 0;
                 /* program req_ext_program_flag && reset*/
-                if (ucSess == 0x02)
-                    g_ota_info.app_req_ext_program_flag = 1;
-                else
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
                     g_ota_info.app_req_ext_program_flag = 3;
+                else
+                    g_ota_info.app_req_ext_program_flag = 1;
                 gsysinfo_save();
                 delay1ms(1);
                 ll_wdg_enable(false);
@@ -483,7 +483,7 @@ void uds_diagnostic_session_control(void)
             {
                 if (ucSess == 0x02)
                 {
-                    send_negative_response_message(UDS_COND_NOT_SUPPORT_7E); // NRC7E
+                    send_negative_response_message(UDS_COND_NOT_CORRECT_22); // NRC22
                 }
             }
 
@@ -494,18 +494,31 @@ void uds_diagnostic_session_control(void)
             session_mode = SESSION_MODE_EXTEND;
             break;
         default:
-            send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            }
+
             break;
         }
         if ((ucSess == 0x01) || (ucSess == 0x03))
         {
-            diagnosticTxBuffer[1] = ucSess;
-            diagnosticTxBuffer[2] = (uint8_t)((P2_SERVER_MAX >> 8) & 0xFF);
-            diagnosticTxBuffer[3] = (uint8_t)(P2_SERVER_MAX & 0xFF);
-            diagnosticTxBuffer[4] = (uint8_t)((P2E_SERVER_MAX >> 8) & 0xFF);
-            diagnosticTxBuffer[5] = (uint8_t)(P2E_SERVER_MAX & 0xFF);
-            usMsgLen = 6;
-            send_positive_response_message(usMsgLen);
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                diagnosticTxBuffer[1] = ucSess;
+                diagnosticTxBuffer[2] = (uint8_t)((P2_SERVER_MAX >> 8) & 0xFF);
+                diagnosticTxBuffer[3] = (uint8_t)(P2_SERVER_MAX & 0xFF);
+                diagnosticTxBuffer[4] = (uint8_t)((P2E_SERVER_MAX >> 8) & 0xFF);
+                diagnosticTxBuffer[5] = (uint8_t)(P2E_SERVER_MAX & 0xFF);
+                usMsgLen = 6;
+                send_positive_response_message(usMsgLen);
+            }
         }
     }
     else
@@ -516,12 +529,15 @@ void uds_diagnostic_session_control(void)
 
 void uds_diagnostic_route_control(void)
 {
-
     uint16_t ucSess = 0u;
     uint8_t usMsgLen = 0u;
     negResponseCode = 0;
 
     usMsgLen = diagRxSize;
+    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+    {
+        return;
+    }
     if (UDS_DIAG_ROUTE_REQ_LEN == usMsgLen)
     {
         if ((diagnosticRxBuffer[1] == 0x01) || (diagnosticRxBuffer[1] == 0x81))
@@ -596,17 +612,35 @@ void uds_diagnostic_dtc_control(void)
             }
             else if (diagnosticRxBuffer[1] == 0x01)
             {
-                diagnosticTxBuffer[1] = 0x01;
-                send_positive_response_message(2u);
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    diagnosticTxBuffer[1] = 0x01;
+                    send_positive_response_message(2u);
+                }
             }
             else if (diagnosticRxBuffer[1] == 0x02)
             {
-                diagnosticTxBuffer[1] = 0x02;
-                send_positive_response_message(2u);
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    diagnosticTxBuffer[1] = 0x02;
+                    send_positive_response_message(2u);
+                }
             }
             else
             {
-                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+                }
             }
         }
         else
@@ -616,7 +650,13 @@ void uds_diagnostic_dtc_control(void)
     }
     else
     {
-        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
+        if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F
+        }
     }
 }
 
@@ -626,13 +666,19 @@ void uds_diagnostic_clear_dtc_info(void)
     usMsgLen = diagRxSize;
     if (usMsgLen == 0x04u)
     {
-        if ((diagnosticRxBuffer[1u] == 0xFF) && (diagnosticRxBuffer[2u] == 0xFF) && (diagnosticRxBuffer[3u] == 0xFF))
+        if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
         {
-            send_positive_response_message(1u);
         }
         else
         {
-            send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31);
+            if ((diagnosticRxBuffer[1u] == 0xFF) && (diagnosticRxBuffer[2u] == 0xFF) && (diagnosticRxBuffer[3u] == 0xFF))
+            {
+                send_positive_response_message(1u);
+            }
+            else
+            {
+                send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31);
+            }
         }
     }
     else
@@ -660,15 +706,27 @@ void uds_communction_control(void)
                     lin_configuration_ROM[3] = 0x14;
                     lin_configuration_ROM[4] = 0x12;
 
-                    if (diagnosticRxBuffer[1u] == 0x00)
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
                     {
-                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
-                        send_positive_response_message(2u);
+                    }
+                    else
+                    {
+                        if (diagnosticRxBuffer[1u] == 0x00)
+                        {
+                            diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
+                            send_positive_response_message(2u);
+                        }
                     }
                 }
                 else
                 {
-                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    }
                 }
             }
             else if ((diagnosticRxBuffer[1u] == 0x83) || (diagnosticRxBuffer[1u] == 0x03)) // 对应用报文开始禁言
@@ -681,35 +739,65 @@ void uds_communction_control(void)
                         lin_configuration_ROM[1 + i] = 0xFF;
                     }
 
-                    if (diagnosticRxBuffer[1u] == 0x03)
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
                     {
-                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
-                        send_positive_response_message(2u);
+                    }
+                    else
+                    {
+                        if (diagnosticRxBuffer[1u] == 0x03)
+                        {
+                            diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
+                            send_positive_response_message(2u);
+                        }
                     }
                 }
                 else
                 {
-                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    }
                 }
             }
             else if ((diagnosticRxBuffer[1u] == 0x82) || (diagnosticRxBuffer[1u] == 0x02))
             {
                 if ((diagnosticRxBuffer[2u] == 0x01) || (diagnosticRxBuffer[2u] == 0x03))
                 {
-                    if (diagnosticRxBuffer[1u] == 0x02)
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
                     {
-                        diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
-                        send_positive_response_message(2u);
+                    }
+                    else
+                    {
+                        if (diagnosticRxBuffer[1u] == 0x02)
+                        {
+                            diagnosticTxBuffer[1] = diagnosticRxBuffer[1u];
+                            send_positive_response_message(2u);
+                        }
                     }
                 }
                 else
                 {
-                    send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        send_negative_response_message(UDS_REQUEST_OUT_OF_RANGE_31); // NRC31
+                    }
                 }
             }
             else
             {
-                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+                }
             }
         }
         else
@@ -731,12 +819,24 @@ void uds_tester_present_control(void)
         }
         else if (diagnosticRxBuffer[1u] == 0x00)
         {
-            diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
-            send_positive_response_message(2);
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+                send_positive_response_message(2);
+            }
         }
         else
         {
-            send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            }
         }
     }
     else
@@ -754,8 +854,14 @@ void uds_diagnostic_rest(void)
         {
             if (((door_cmd.VehicleSpeedValid == 1) && (door_cmd.VehicleSpeed < 0x36)) || (door_cmd.VehicleSpeedValid == 0))
             {
-                diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
-                send_positive_response_message(2);
+                if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+                    send_positive_response_message(2);
+                }
                 for (uint8_t i = 0; i < 60; i++)
                 {
                     delay1ms(1);
@@ -783,20 +889,38 @@ void uds_diagnostic_rest(void)
         }
         else if (diagnosticRxBuffer[1u] == 0x02)
         {
-            diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
-            send_positive_response_message(2);
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+                send_positive_response_message(2);
+            }
         }
         else if (diagnosticRxBuffer[1u] == 0x03)
         {
-            diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
-            send_positive_response_message(2);
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                diagnosticTxBuffer[1u] = diagnosticRxBuffer[1u];
+                send_positive_response_message(2);
+            }
         }
         else if ((diagnosticRxBuffer[1u] == 0x82) || (diagnosticRxBuffer[1u] == 0x83))
         {
         }
         else
         {
-            send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12); // NRC12
+            }
         }
     }
     else
@@ -811,6 +935,11 @@ void uds_diagnostic_readdata_by_id(void)
     uint16_t msglen = 0u, datalen;
     uint16_t locdid = 0xFFFFu;
     mult_did_data_t mult_did;
+
+    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+    {
+        return;
+    }
 
     msglen = diagRxSize;
 
@@ -972,6 +1101,10 @@ void uds_diagnostic_assign_NAD(void)
 {
     uint8_t fuc_id;
 
+    if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+    {
+        return;
+    }
     if ((0xF3 == diagnosticRxBuffer[1u]) && (0x3F == diagnosticRxBuffer[2u]))
     {
         fuc_id = diagnosticRxBuffer[3u];
@@ -1086,16 +1219,34 @@ void lin_handle_uds(void)
         uds_diagnostic_rest();
         break;
     case SERVICE_WRITE_DATA_BY_IDENTIFY: // 2E
-        send_negative_response_message(UDS_DID_SEC_ERR_33); // NRC33;
+        if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            send_negative_response_message(UDS_DID_SEC_ERR_33); // NRC33;
+        }
         break;
     case SERVICE_REQUEST_DOWNLOAD:       // 34
     case SERVICE_TRANSFER_DATA:          // 36
     case SERVICE_REQUEST_TRANSFER_EXIT:  // 37
     case SERVICE_SECURITY_ACCESS: // 27
-        send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F;
+        if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            send_negative_response_message(UDS_SERVICE_NOT_SUPPORTED_INACTIVE_SESSION_7F); // NRC7F;
+        }
         break;
     default:
-        send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12);
+        if ((lin_current_rcvd_nad() == 0x7Eu) || (lin_current_rcvd_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            send_negative_response_message(UDS_SUBFUNC_NOT_SUPP_12);
+        }
         break;
     }
 }

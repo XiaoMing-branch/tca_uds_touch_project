@@ -362,7 +362,7 @@ static void session_control_handle(uint8_t *param, uint16_t length)
                 pal_store_read(FLASH_TYPE_NVM, FLASH_DFU_INFO_ADDR, (uint8_t *)&dfu_ctx.dfu_info, sizeof(last_dfu_info_t));
                 if (DFU_INFO_MAGIC == dfu_ctx.dfu_info.magic) // APP标志位有效的情况下，才允许复位，否则就停留在BootLoader
                 {
-                    if (param[1] == 0x81u) // 抑制正响应或功能寻址直接复位
+                    if ((param[1] == 0x81u) || (lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu)) // 抑制正响应或功能寻址直接复位
                     {
                         NVIC_SystemReset();
                     }
@@ -395,7 +395,13 @@ static void session_control_handle(uint8_t *param, uint16_t length)
             }
             if ((uds_request_info.sessionMode == DEFALUT_SESSION) && (param[1u] == 0x01u))
             {
-                dfu_session_parameter_resp(param[1u]);
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_session_parameter_resp(param[1u]);
+                }
             }
             break;
         case 0x03u:
@@ -403,11 +409,23 @@ static void session_control_handle(uint8_t *param, uint16_t length)
             {
                 uds_request_info.sessionMode = EXTEND_SESSION;
                 dfu_ctx.op_code = DFU_CMD_EXTEND_SESSION;
-                dfu_session_parameter_resp(param[1u]);
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_session_parameter_resp(param[1u]);
+                }
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
+                }
             }
             seed_cmac_succ = AS_FALSE;
             seed_00_ret = AS_FALSE;
@@ -425,17 +443,29 @@ static void session_control_handle(uint8_t *param, uint16_t length)
                 dfu_ctx.op_code = DFU_CMD_PROGRAM_SESSION;
                 uds_request_info.sessionMode = PROGRAM_SESSION;
                 dfu_ctx.boot_state = BOOT_STATE_UPGRADE;
-                dfu_session_parameter_resp(0x02u);
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_session_parameter_resp(0x02u);
+                }
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOTSUPPORTED_INACTIVESESSION); // NRC7E
+                dfu_do_notify_response(NEGATIVE, param[0u], CONDITION_NOT_CORRECT); // NRC22
             }
             seed_cmac_succ = AS_FALSE;
             seed_00_ret = AS_FALSE;
             break;
         default:
-            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+            }
             break;
         }
     }
@@ -1186,7 +1216,13 @@ static void reset_handle(uint8_t *param, uint16_t length)
     {
         if (param[1] == 0x01u)
         {
-            dfu_do_notify_response(POSITIVE, param[0], param[1]);
+            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                dfu_do_notify_response(POSITIVE, param[0], param[1]);
+            }
 
             delay_ms(50u);
             NVIC_SystemReset();
@@ -1197,14 +1233,26 @@ static void reset_handle(uint8_t *param, uint16_t length)
         }
         else if ((param[1] == 0x03u) || (param[1] == 0x02u))
         {
-            dfu_do_notify_response(POSITIVE, param[0], param[1]);
+			if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+			{
+			}
+			else
+			{
+            	dfu_do_notify_response(POSITIVE, param[0], param[1]);
+			}
         }
         else if ((param[1] == 0x83u) || (param[1] == 0x82u)) // 禁止肯定响应
         {
         }
         else
         {
-            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+			if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+			{
+			}
+			else
+			{
+            	dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+			}
         }
     }
     else
@@ -1215,7 +1263,13 @@ static void reset_handle(uint8_t *param, uint16_t length)
 
 static void clear_dtc_info_handle(uint8_t *param, uint16_t length)
 {
-    dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+    {
+    }
+    else
+    {
+        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+    }
 }
 
 static void enable_swd(void) // 使能swd接口
@@ -1614,11 +1668,23 @@ void communcation_control_handle(uint8_t *param, uint16_t length)
             {
                 if ((param[2u] == 0x01u) || (param[2u] == 0x03u))
                 {
-                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                    }
                 }
                 else
                 {
-                    dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+                    }
                 }
             }
             else if ((param[1u] == 0x80u) || (param[1u] == 0x81u) ||
@@ -1629,12 +1695,24 @@ void communcation_control_handle(uint8_t *param, uint16_t length)
                 }
                 else
                 {
-                    dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+                    if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                    {
+                    }
+                    else
+                    {
+                        dfu_do_notify_response(NEGATIVE, param[0u], REQUEST_OUT_RANGE); // NRC31
+                    }
                 }
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+                }
             }
         }
         else
@@ -1644,7 +1722,13 @@ void communcation_control_handle(uint8_t *param, uint16_t length)
     }
     else
     {
-        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+        if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+        }
     }
 }
 void dtc_control_handle(uint8_t *param, uint16_t length)
@@ -1655,18 +1739,36 @@ void dtc_control_handle(uint8_t *param, uint16_t length)
         {
             if (param[1u] == 0x01u)
             {
-                dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                }
             }
             else if (param[1u] == 0x02u)
             {
-                dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_do_notify_response(POSITIVE, param[0u], param[1u]);
+                }
             }
             else if ((param[1] == 0x81u) || (param[1] == 0x82u))
             {
             }
             else
             {
-                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+                if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+                {
+                }
+                else
+                {
+                    dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+                }
             }
         }
         else
@@ -1676,7 +1778,13 @@ void dtc_control_handle(uint8_t *param, uint16_t length)
     }
     else
     {
-        dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+        if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+        {
+        }
+        else
+        {
+            dfu_do_notify_response(NEGATIVE, param[0u], SERVICENOTSUPPORTED_INACTIVESESSION); // NRC7F
+        }
     }
 }
 void diagnostic_session_handle(uint8_t *param, uint16_t length)
@@ -1685,14 +1793,26 @@ void diagnostic_session_handle(uint8_t *param, uint16_t length)
     {
         if (param[1] == 0x00u)
         {
-            dfu_do_notify_response(POSITIVE, param[0], param[1]);
+            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                dfu_do_notify_response(POSITIVE, param[0], param[1]);
+            }
         }
         else if (param[1] == 0x80u)
         {
         }
         else
         {
-            dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+            if ((lin_get_uds_nad() == 0x7Eu) || (lin_get_uds_nad() == 0x7Fu))
+            {
+            }
+            else
+            {
+                dfu_do_notify_response(NEGATIVE, param[0u], SUBFUNCTION_NOT_SUPPORTED); // NRC12
+            }
         }
     }
     else

@@ -416,9 +416,9 @@ static void IOtouchLpKeyArbiterHook(T_SiObject *obj);
 const static T_SiNoiseExitConditionParaFastVariance noiseExitConditionVariancePara =
 {
     .channelNo = 2,                                /*!< 逻辑通道编号，--需要用户指定 */
-    .windowLen = 40,                                /*!< 窗口长度，--需要用户指定 */
-    .eliminateTimeMs = 5000,                         /*!< 消抖时间，持续一段时间低于阈值，认为可以退出--需要用户指定 */
-    .threshold = 300                          /*!< 噪音检测阈值--需要用户指定 */
+    .windowLen = 80,                                /*!< 窗口长度，--需要用户指定 */
+    .eliminateTimeMs = 2000,                         /*!< 消抖时间，持续一段时间低于阈值，认为可以退出--需要用户指定 */
+    .threshold = 250                          /*!< 噪音检测阈值--需要用户指定 */
 };
 static T_SiNoiseExitConditionFastVariance noiseExitConditionVariance = {0};
 
@@ -435,7 +435,7 @@ const static T_SiNoiseParaLiteDiff noiseDetectVariancePara =
     .arbiter =
     {
         .detectEliminate = 0,           /*!< 检测消抖次数--需要用户指定 */
-        .detectThreshold = 40,      /*!< 噪音检测阈值--需要用户指定 */
+        .detectThreshold = 50,      /*!< 噪音检测阈值--需要用户指定 */
         .releaseThreshold = 7,           /*!< 释放阈值，范围3-9，表示：检测阈值的0.3-0.9--需要用户指定 */
         .releaseDelayS = 2,              /*!< 当噪音检测小于阈值后，延迟1段时间再清噪音检测标志，单位S--需要用户指定 */
         .releaseDelayDeciS = 0          /*!< 当噪音检测小于阈值后，延迟1段时间再清噪音检测标志，单位0.1S--需要用户指定 */
@@ -662,8 +662,8 @@ void TouchConfig(T_SiAlgoObject *algo)
         },
         {
             .tran_loop = 196,        //电荷转移次数
-            .tran_time = 0x2F,                               //电荷转移时间，0x0-0xFF，对低功耗影响大
-            .chg_time = 0x2F,                                //充放电时间，0x0-0xFF，对低功耗影响大
+            .tran_time = 0x17,                               //电荷转移时间，0x0-0xFF，对低功耗影响大
+            .chg_time = 0x17,                                //充放电时间，0x0-0xFF，对低功耗影响大
             .pga =
             {
                 .enable = 0,       //pga使能
@@ -1418,6 +1418,7 @@ static void NoiseDetectVarianceHook(T_SiNoiseObject *obj, uint8_t keyNum, const 
 
 //    TC_LOG_SYMBOL_I16("nraw", noiseDetectVarianceRawDataBuf, sizeof(noiseDetectVarianceRawDataBuf));
     TC_LOG_SYMBOL_I16("nv", noiseDetectVarianceBuf, sizeof(noiseDetectVarianceBuf));
+//		TC_LOG_SYMBOL_I16("e1", &noiseExitConditionVariance.base.noiseValue, sizeof(noiseExitConditionVariance.base.noiseValue));
 #endif
 }
 #endif
